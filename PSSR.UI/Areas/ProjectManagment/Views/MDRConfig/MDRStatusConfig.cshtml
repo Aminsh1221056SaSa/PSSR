@@ -1,0 +1,178 @@
+﻿@model PSSR.ServiceLayer.MDRStatuses.MDRStatusListCombinedDto
+@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "MDR Status";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">MDR Status</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <partial name="_ValidationSummary" />
+                    <form role="form" asp-action="CreateMDRStatus" asp-controller="MDRConfig">
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label class="control-label required">Name</label>
+                            <input name="Name" type="text" class="form-control" placeholder="Enter ..." required>
+                        </div>
+                        <!-- textarea -->
+                        <div class="form-group">
+                            <label class="control-label required">Wf (%)</label>
+                            <input name="WF" type="number" min="0" max="100" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="Description" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-warning pull-right">Create</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="option-filter">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">MDR Status List</h3>
+                                    <div class="box-tools">
+                                        <form method="get">
+                                            <div class="input-group input-group-sm pull-left" style="padding-right:10px">
+
+                                                <input name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
+                                               
+                                                <input asp-for="SortFilterPageData.FilterValue" name="OrderByOptions" type="hidden">
+                                                <input asp-for="SortFilterPageData.PageNum" name="PageNum" type="hidden">
+                                                <input asp-for="SortFilterPageData.PageSize" name="PageSize" type="hidden">
+                                                <div class="input-group input-group-sm pull-right" style="width: 150px;">
+                                                    <input type="text" name="QueryFilter" asp-for="SortFilterPageData.QueryFilter" class="form-control pull-right" placeholder="Search">
+                                                    <div class="input-group-btn">
+                                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body table-responsive no-padding">
+                                    <table class="table table-hover">
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>WF(%)</th>
+                                            <th>Description</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                        @foreach (var item in Model.MDRStatuslineList)
+                                        {
+                                    <tr id="tr-@item.Id">
+                                        <td id="td1-@item.Id">@item.Name</td>
+                                        <td id="td2-@item.Id">@item.Wf</td>
+                                        <td id="td2-@item.Id">@item.Description</td>
+                                        <td><button type="button" class="btn btn-success edtit-btn btn-sm" id="dec-@item.Id" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button></td>
+                                    </tr>
+                                        }
+                                    </table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit MDR Status</h4>
+            </div>
+            <form  asp-action="UpdateMDRStatus" asp-controller="MDRConfig">
+                <input type="hidden" id="selected-mdrStatus-id" name="Id"/>
+                <div class="modal-body">
+                    <div>
+                        <!-- text input -->
+                        <div class="form-group">
+                            <label class="control-label required">Name</label>
+                            <input id="Name1" name="Name" type="text" class="form-control" placeholder="Enter ..." required>
+                        </div>
+                        <!-- textarea -->
+                        <div class="form-group">
+                            <label>Wf (%)</label>
+                            <input id="wf1" name="WF" type="number" min="0" max="100" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea name="Description" id="Description1" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="save-edit">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+
+        $('tr').dblclick(function () {
+            var id = $(this).attr('id').split('-')[1];
+            $('#modal-default').modal('show');
+            showEditModel(id);
+        })
+
+        $('.edtit-btn').on('click', function () {
+            var id = $(this).attr('id').split('-')[1];
+            showEditModel(id);
+        })
+
+        function showEditModel(id) {
+            $.ajax({
+                type: "Get",
+                url: "/poec/MDRConfig/GetMDRStatus?id=" + id + "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $('#Name1').val(data.name);
+                    $('#wf1').val(data.wf);
+                     $('#Description1').val(data.description);
+                    $('#selected-mdrStatus-id').val(data.id);
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+    });
+
+</script>

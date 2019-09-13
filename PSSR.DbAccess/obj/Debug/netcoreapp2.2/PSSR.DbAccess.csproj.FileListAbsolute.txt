@@ -1,0 +1,16 @@
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.DbAccess.deps.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.DbAccess.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.DbAccess.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\BskaGenericCoreLib.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.Common.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.DataLayer.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.DataLayer.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.Common.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\BskaGenericCoreLib.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.csprojAssemblyReference.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.csproj.CoreCompileInputs.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.AssemblyInfoInputs.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.AssemblyInfo.cs
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.csproj.CopyComplete
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.pdb

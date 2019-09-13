@@ -1,0 +1,165 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Security\\PSSR.Security.csproj": {}
+  },
+  "projects": {
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Security\\PSSR.Security.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Security\\PSSR.Security.csproj",
+        "projectName": "PSSR.Security",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Security\\PSSR.Security.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Security\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.UserSecurity\\PSSR.UserSecurity.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.UserSecurity\\PSSR.UserSecurity.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "IdentityServer4": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "IdentityServer4.AspNetIdentity": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "IdentityServer4.EntityFramework": {
+              "target": "Package",
+              "version": "[2.4.0, )"
+            },
+            "Joonasw.AspNetCore.SecurityHeaders": {
+              "target": "Package",
+              "version": "[2.9.0, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[2.2.3, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.UserSecurity\\PSSR.UserSecurity.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.UserSecurity\\PSSR.UserSecurity.csproj",
+        "projectName": "PSSR.UserSecurity",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.UserSecurity\\PSSR.UserSecurity.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.UserSecurity\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

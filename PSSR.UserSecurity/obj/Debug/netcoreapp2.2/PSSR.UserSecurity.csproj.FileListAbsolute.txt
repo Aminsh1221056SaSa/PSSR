@@ -1,0 +1,10 @@
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\bin\Debug\netcoreapp2.2\PSSR.UserSecurity.deps.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\bin\Debug\netcoreapp2.2\PSSR.UserSecurity.runtimeconfig.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\bin\Debug\netcoreapp2.2\PSSR.UserSecurity.runtimeconfig.dev.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\bin\Debug\netcoreapp2.2\PSSR.UserSecurity.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\bin\Debug\netcoreapp2.2\PSSR.UserSecurity.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\obj\Debug\netcoreapp2.2\PSSR.UserSecurity.csproj.CoreCompileInputs.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\obj\Debug\netcoreapp2.2\PSSR.UserSecurity.AssemblyInfoInputs.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\obj\Debug\netcoreapp2.2\PSSR.UserSecurity.AssemblyInfo.cs
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\obj\Debug\netcoreapp2.2\PSSR.UserSecurity.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.UserSecurity\obj\Debug\netcoreapp2.2\PSSR.UserSecurity.pdb

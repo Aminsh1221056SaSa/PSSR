@@ -1,0 +1,70 @@
+﻿@model PSSR.ServiceLayer.ActivityServices.ActivityListDetailsDto
+@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "Activity List";
+
+
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Create Activity</h3>
+                    <div class="box-tools">
+                        <div class="pull-right">
+                            <a class="modal-trigger waves-effect waves-light" data-toggle="modal" data-target="#modal1">
+                                <img src="~/dist/img/excel.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body style-10" id="tb-container" style="overflow-y:scroll">
+                    <partial name="/Views/Shared/PartialViews/Activityes/CreateForm.cshtml" model="Model" />
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Upload Excel</h4>
+                <p>Upload the Excel file which contains the activity values.</p>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="box-body">
+                        <div class="file-field input-field">
+                            <div class="btn btn-default">
+                                <span>File</span>
+                                <input type="file" id="files">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" type="button" name="action" id="upload-file">
+                    Upload
+                    <i class="fa fa-send"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+           var wh = window.innerHeight * 0.84;
+        $('#tb-container').css('height', wh + 'px');
+    });
+</script>

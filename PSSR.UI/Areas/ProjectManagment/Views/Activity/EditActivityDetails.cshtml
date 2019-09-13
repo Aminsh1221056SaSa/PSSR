@@ -1,0 +1,46 @@
+﻿@model PSSR.ServiceLayer.ActivityServices.ActivityListDetailsDto
+
+@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "Activity Edit Details";
+
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-info">
+            <div class="box-header with-border">
+                <h3 class="box-title">Edit Activity <strong>@Model.ActivityCode</strong></h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm pull-left" style="padding-right:10px">
+
+                        @if (Model.Status == PSSR.Common.ActivityStatus.NotStarted)
+                        {
+                            <form role="form" asp-action="DeleteActivity" asp-controller="Activity" method="post">
+                                <input type="hidden" value="@Model.Id" name="id" />
+                                <input type="submit" class="btn btn-danger " value="Reject" />
+                            </form>
+                        }
+                        else
+                        {
+                            <a href="@Url.Action("ActivityList","Activity")"><p class="btn btn-warning pull-right">Back to list</p></a>
+                            @*<a href="@Url.Action("ActivityList","Activity")"><p class="btn btn-info pull-right">Next</p></a>
+
+            <a href="@Url.Action("ActivityList","Activity")" ><p  style="margin-right:2px" class="btn btn-info pull-right">Previos</p></a>*@
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-body style-10" id="tb-container" style="overflow-y:scroll">
+                <partial name="~/Views/Shared/PartialViews/Activityes/CreateForm.cshtml" model="Model" />
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+           var wh = window.innerHeight * 0.84;
+        $('#tb-container').css('height', wh + 'px');
+    });
+</script>

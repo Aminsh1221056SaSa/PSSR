@@ -1,0 +1,200 @@
+﻿@model List<PSSR.ServiceLayer.ProjectServices.ProjectWBSListDto>
+@{
+    string combineReport = Model.Select(s => s.Name).Aggregate((a, b) => a + " - " + b);
+    string colDef = "";
+    if (Model.Count > 1)
+    {
+        colDef = "col-md-4";
+    }
+    else
+    {
+        colDef = "col-md-12";
+    }
+}
+
+<style>
+    div.dt-buttons {
+    position: absolute;
+    right: 0;
+    margin-top:-50px
+}
+</style>
+
+ <div id="hightable-containter">
+        <div class="col-md-12">
+            <div class="box-body">
+                <div class="row">
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <div class="@colDef progress-top">
+                                <div class="box box-success" style="margin-top:27px">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title" id="wr-tb-1-@item.TargetId">@item.Name</h3>
+
+                                        @*<div class="box-tools">
+                               <div class="input-group input-group-sm pull-right">
+                                   <p class="btn btn-warning btn-sm"><i class="fa fa-file-pdf-o"></i></p>
+                                   <p style="margin:2px" class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i></p>
+                                </div>
+                            </div>*@
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table no-margin" id="tb-des-@item.TargetId" data-name="@item.Name">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>WF %</th>
+                                                            <th>Progress %</th>
+                                                            <th>PCT %</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="body-loc-@item.TargetId"></tbody>
+                                                    <tfoot id="footLoc-@item.TargetId"></tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                        if (string.Equals(colDef, "col-md-4"))
+                        {
+                            <div class="col-md-4 progress-top">
+                                <div class="box box-danger" style="margin-top:27px">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title" id="wr-tb-1-3">@combineReport</h3>
+                                        @*<div class="box-tools">
+                                <div class="input-group input-group-sm pull-right">
+                                    <p class="btn btn-warning btn-sm"><i class="fa fa-file-pdf-o"></i></p>
+                                    <p style="margin:2px" class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i></p>
+                                </div>
+                            </div>*@
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table no-margin" id="tb-des-0" data-name="Total">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>WF %</th>
+                                                            <th>Progress %</th>
+                                                            <th>PCT %</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="body-loc-0"></tbody>
+                                                    <tfoot id="footLoc-0"></tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+
+
+                </div>
+            </div>
+            <div class="loading-one-wrap" id="descipline-summary-loading" style="margin-top:-25px;">
+                <div class="loading-one">
+                    <div class="bounceball"></div>
+                    <div class="loadertext">NOW LOADING...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+
+            <div class="box-body">
+
+                <div class="row">
+
+                    @{
+                        foreach (var item in Model)
+                        {
+                            <div class="@colDef progress-bottom">
+                                <div class="box box-success" style="margin-top:27px">
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title" id="wr-tb-2-@item.TargetId">@item.Name</h3>
+                                        @*<div class="box-tools">
+                                <div class="input-group input-group-sm pull-right">
+                                    <p class="btn btn-warning btn-sm"><i class="fa fa-file-pdf-o"></i></p>
+                                    <p style="margin:2px" class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i></p>
+                                </div>
+                            </div>*@
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table no-margin" id="tb-sys-@item.TargetId" data-name="@item.Name">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>WF %</th>
+                                                            <th>Progress %</th>
+                                                            <th>PCT %</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="body-loc-sys-@item.TargetId"></tbody>
+                                                    <tfoot id="footSys-@item.TargetId"></tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        }
+
+                        if (string.Equals(colDef, "col-md-4"))
+                        {
+                            <div class="col-md-4 progress-bottom">
+                                <div class="box box-danger" style="margin-top:27px">
+
+                                    <div class="box-header with-border">
+                                        <h3 class="box-title" id="wr-tb-2-3">@combineReport</h3>
+                                        @*<div class="box-tools">
+                                <div class="input-group input-group-sm pull-right">
+                                    <p class="btn btn-warning btn-sm"><i class="fa fa-file-pdf-o"></i></p>
+                                    <p style="margin:2px" class="btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i></p>
+                                </div>
+                            </div>*@
+                                    </div>
+                                    <div class="box-body">
+                                        <div class="row">
+                                            <div class="table-responsive">
+                                                <table class="table no-margin" id="tb-sys-0" data-name="Total">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Name</th>
+                                                            <th>WF %</th>
+                                                            <th>Progress %</th>
+                                                            <th>PCT %</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="body-loc-sys-0"></tbody>
+                                                    <tfoot id="footSys-0"></tfoot>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+            <div class="loading-one-wrap" id="system-summary-loading" style="margin-top:-25px;">
+                <div class="loading-one">
+                    <div class="bounceball"></div>
+                    <div class="loadertext">NOW LOADING...</div>
+                </div>
+            </div>
+        </div>
+    </div>

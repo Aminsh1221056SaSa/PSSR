@@ -1,0 +1,213 @@
+﻿
+@{
+    ViewData["Title"] = "DesciplinePlane";
+    Layout = "~/Views/Shared/_SecureLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="box box-warning">
+            <div class="box-header">
+                <h3 class="box-title">Plan Configuration</h3>
+                <div class="box-tools">
+                    <div class="form-group">
+                        <a href="@Url.Action("PlanWorkFlow")"><p class="btn btn-warning">Back To Gant</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+
+                <partial name="~/Views/Shared/FilterComponents/TaskFilteringView.cshtml" />
+                <div class="form-group">
+                    <div class="box-body no-padding">
+                        <table id="wbsCreatorTable" class="table table-bordered table-striped small">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>T</th>
+                                    <th>D</th>
+                                    <th>Start</th>
+                                    <th>End</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody id="model-items"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-7">
+        <div class="box box-success">
+            <h4 class="box-title" id="selected-desc">Plan</h4>
+            <div class="box-header" style="height:100px">
+
+                <div class="box-tools">
+                    <div class="col-md-12" style="background-color:#f6f6f6">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label>Start Date:</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="start-date" class="form-control pull-right datepicker" autocomplete="off">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label id="selected-desc">End Date:</label>
+                                <div class="input-group date">
+                                    <div class="input-group-addon">
+                                        <i class="fa fa-calendar"></i>
+                                    </div>
+                                    <input type="text" id="end-date" class="form-control pull-right datepicker" autocomplete="off">
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label id="selected-desc"></label>
+                                <div class="input-group">
+                                    <button class="btn btn-success" id="plan-calculate">Calculation</button>
+                                </div>
+                                <!-- /.input group -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding style-10">
+                <table id="activityGroupPlane" class="table table-bordered table-striped small">
+                    <thead>
+                        <tr>
+                            <th>Form</th>
+                            <th style="width:40px">T</th>
+                            <th>D</th>
+                            <th>Start</th>
+                            <th>Time</th>
+                            <th>End</th>
+                            <th>Time</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="model-items1"></tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+</div>
+<partial name="~/Views/Shared/PartialViews/Activityes/ActivityPlanList.cshtml" />
+
+<environment names="Development">
+    <script src="~/dist/js/api/managments/desciplinePlane.js"></script>
+    <script src="~/dist/js/api/activities/activityList.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/desciplinePlane.min.js"></script>
+    <script src="~/js/activityList.min.js"></script>
+</environment>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.datepicker').datepicker({
+            autoclose: true
+        });
+
+        $('.select2').select2();
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+
+        $('#co-1001').iCheck('check');
+
+        var _workId = 0;
+        var _locId = 0;
+        var _systemId = 0;
+        var _subSystemId = 0;
+        var _desId = 0;
+
+        desciplinePlane.init(_workId);
+
+        $('#location-tab15').on('click', function () {
+            //desciplinePlane.grantinitialization();
+        });
+
+        $('#workPackage-type').change(function () {
+            $('#model-items').empty();
+        });
+
+        $('#location-type').change(function () {
+            $('#model-items').empty();
+        });
+
+        $('#system-type').change(function () {
+            $('#model-items').empty();
+
+            var id = $(this).val();
+            _systemId = id;
+            if (parseInt(id) > 0) {
+                desciplinePlane.getProjectSubSystems(_systemId);
+            }
+        });
+
+        $('#subSystem-type').change(function () {
+            var id = $(this).val();
+            _subSystemId = id;
+
+            _workId = $('#workPackage-type').val();
+            _locId = $('#location-type').val();
+            _systemId = $('#system-type').val();
+
+            $('#tb-acSummary').empty();
+            $('#selected-desc').html("");
+            if (parseInt(id) > 0) {
+                desciplinePlane.getDesciplineGroup(_subSystemId, _systemId, _locId, _workId);
+            }
+        });
+
+        $('.wbsTypesch').on('ifChecked', function (event) {
+            var id = $('#workPackage-type').val();
+            var issubsystem = $('#co-1001').iCheck('update')[0].checked;
+            _workId = id;
+
+            $('#tb-acSummary').empty();
+            $('#selected-desc').html("");
+            if (parseInt(id) > 0) {
+                desciplinePlane.getDesciplineGroup(id, issubsystem);
+            }
+        });
+
+        $('#wbsCreatorTable').on('click', '.plan-edit-class', function () {
+            var id = $(this).attr('id').split('-')[2];
+            var desName = $(this).attr('data-name');
+            $('#selected-desc').html("Paln For : " + desName + "");
+            _desId = id;
+            desciplinePlane.getActivityGroupedByPlanDate(_workId, _locId, _subSystemId, _desId);
+        });
+
+        //calculation
+        $('#plan-calculate').on('click', function () {
+            var startDate = $('#start-date').val();
+            var endDate = $('#end-date').val();
+            desciplinePlane.SetDesciplinePlane(_workId, _locId, _subSystemId, _desId, startDate, endDate);
+        });
+
+        //activity
+        $('#activityGroupPlane').on('click', 'p.descipline-plan-class', function () {
+            var id = $(this).attr('id').split('-')[2];
+            wbsActivityList.getProjectPlanActivity(_workId, _locId, _subSystemId, _desId, id);
+        })
+    })
+</script>
+

@@ -1,0 +1,18 @@
+﻿@model ValueUnit
+@{
+    string sId = Model.Id.ToString();
+}
+<div>
+    <ul class="myTreeview collaps-open">
+        <li>
+            <a href="#"></a>
+            <a class="valueUNitNode" data-name="@Model.Name" id="val-@Model.Id" data-toggle="tooltip" title="@Model.ToString("URM",null)">
+                @Model.Name
+            </a>
+            @foreach (var childComment in Model.Childeren)
+            {
+                @Html.Partial("TreeViewPartial/ValueUnitTreeSummary", childComment)
+            }
+        </li>
+    </ul>
+</div>

@@ -1,0 +1,65 @@
+﻿@model List<IdentityServer4.Models.IdentityResource>
+@{
+    ViewData["Title"] = "ResourcesList";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+    <div class="col-sm-12 grid-margin d-flex stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Identity Resources List</h4>
+                <div class="table-responsive">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <table class="table table-hover">
+                        <thead><tr><th>Name</th><th>Enabled</th><th></th><th></th></tr></thead>
+                        @if (Model.Count() == 0)
+                        {
+                            <tr><td colspan="7" class="text-center">Not any Identity Resource</td></tr>
+                        }
+                        else
+                        {
+                            foreach (var api in Model)
+                            {
+                                <tr>
+                                    <td>@api.Name</td>
+                                    <td>@api.Enabled</td>
+                                    @if (api.Enabled)
+                                    {
+                                        <td>
+                                            <form asp-action="DisableResource" asp-route-apiName="@api.Name" method="post">
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-warning">
+                                                    Disable
+                                                </button>
+                                            </form>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td>
+                                            <form asp-action="EnableResource" asp-route-apiName="@api.Name" method="post">
+                                                <button type="submit"
+                                                        class="btn btn-sm btn-success">
+                                                    Enable
+                                                </button>
+                                            </form>
+                                        </td>
+                                    }
+
+                                    <td>
+                                        <form asp-action="DeleteResource" asp-route-apiName="@api.Name" method="post">
+                                            <button type="submit"
+                                                    class="btn btn-sm btn-danger">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
+                    <a class="btn btn-primary" asp-action="CreateIdentityResource">Create</a>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,74 @@
+﻿
+<div class="box box-danger">
+    <div>
+        <div class="form-group">
+            <div class="col-sm-4">
+                <label class="control-label">Sort By</label>
+                <select name="OrderByOptions" id="OrderByOptions"
+                       asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.PunchServices.QueryObjects.OrderByOptions>()"
+                        class="form-control sort-filter-width"></select>
+            </div>
+            <div class="col-sm-4">
+                <label class="control-label">Filter Type</label>
+                <select name="FilterBy" id="FilterBy"
+                       asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.PunchServices.QueryObjects.PunchFilterBy>()"
+                        class="form-control sort-filter-width" onchange="BookList.filterByHasChanged(this)"></select>
+            </div>
+            <div class="col-sm-4 dim-filter-value" id="filter-value-group">
+                <label class="control-label">Filter By</label>
+                <select name="FilterValue"
+                        id="filter-value-dropdown"
+                        class="form-control sort-filter-width"
+                        disabled>
+                    <option>Select filter type...</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"></h3>
+                        <div class="box-tools">
+                            <input id="prevCheckState" name="prevCheckState" type="hidden">
+                            <div class="col-md-3">
+                                <input type="number" id="pg-num" name="PageNum"
+                                       class="form-control page-control-width page-num-input">
+                                <span id="current-page" class="num-pages-text">of</span>
+                            </div>
+                            <div class="col-md-3">
+                                <select id="pg-size-dropdown" name="PageSize" class="form-control form-control page-control-width"></select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="input-group input-group-sm">
+                                    <input type="text" id="queryFilter" name="table_search" class="form-control pull-right" placeholder="Search">
+                                    <div class="input-group-btn">
+                                        <button id="search-activity" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box-body table-responsive no-padding style-10" id="pusummary-lst" style="overflow-y:auto">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Type</th>
+                                <th>Orginated Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tb-punchSummary"></tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

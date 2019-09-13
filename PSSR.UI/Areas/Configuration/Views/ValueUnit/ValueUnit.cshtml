@@ -1,0 +1,175 @@
+﻿@model PSSR.ServiceLayer.ValueUnits.ValueUnitListCombinedDto
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "System PreRequest";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <div class="box box-warning">
+            <div class="box-header with-border">
+                <h3 class="box-title">Descipline</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <form role="form" asp-action="CreateValueUnit" asp-controller="ValueUnit">
+                    <input type="hidden" name="ParentId" id="val-parnetId" />
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label class="control-label required">Name</label>
+                        <input name="Name" type="text" class="form-control" placeholder="Enter ..." required>
+                    </div>
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Related Math Type To Parent Unit</label>
+                        <select name="MathType"
+                                asp-items="Html.GetEnumSelectList<PSSR.Common.UnitMathType>()"
+                                class="form-control sort-filter-width" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Math Num</label>
+                        <input value="0" name="MathNum" type="number" class="form-control" />
+                    </div>
+
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-warning pull-right">Create</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="box box-success">
+            <div class="option-filter">
+                <div class="box-header">
+
+                    <div class="form-inline">
+                        <h3 class="box-title  pull-left" id="parent-show">Selected Parent:</h3>
+                        <a class="btn btn-app pull-left" id="btn-refresh">
+                            <i class="fa fa-repeat"></i> Refresh
+                        </a>
+                    </div>
+
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-body" style="padding-top:20px">
+                @await Component.InvokeAsync("ValuUnitTree")
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Form Dictionary</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="hidden" id="selected-desipline-id" />
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input id="Name1" type="text" class="form-control" placeholder="Enter ..." required>
+                    </div>
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Description</label>
+                        <textarea id="Description1" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-edit">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+
+        $('.select2').select2();
+        $('tr').dblclick(function () {
+            var id = $(this).attr('id').split('-')[1];
+            $('#modal-default').modal('show');
+            showEditModel(id);
+        })
+
+        $('.edtit-btn').on('click', function () {
+            var id = $(this).attr('id').split('-')[1];
+            showEditModel(id);
+        })
+
+        $('#save-edit').on('click', function () {
+            var id = $('#selected-desipline-id').val();
+            var name = $('#Name1').val();
+            var desc = $('#Description1').val();
+            var model = { 'id': id, 'name': name, 'description': desc };
+            $.ajax({
+                type: "Post",
+                url: "/poec/Descipline/UpdateDescipline",
+                data: JSON.stringify(model),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $("#td1-" + id).html(name);
+                    $("#td2-" + id).html(desc);
+                    $('#modal-default').modal('toggle');
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+
+        $('.valueUNitNode').on('click', function () {
+            var id = $(this).attr('id').split('-')[1];
+            var name = $(this).attr('data-name');
+            $('#parent-show').html('Selected Parent:' + name);
+            $('#val-parnetId').val(id);
+        });
+
+        $('#btn-refresh').on('click', function () {
+            $('#parent-show').html('Selected Parent:');
+            $('#val-parnetId').val('');
+        });
+
+        function showEditModel(id) {
+            $.ajax({
+                type: "Get",
+                url: "/poec/Descipline/GetDescipline?id=" + id + "",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $('#Name1').val(data.title);
+                    $('#Description1').val(data.description);
+                    $('#selected-desipline-id').val(data.desciplineId);
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+    });
+</script>
+

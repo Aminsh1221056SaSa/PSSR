@@ -1,0 +1,326 @@
+﻿@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "Work BreakDown Structure";
+}
+<link rel="stylesheet" href="~/dist/css/jsgantt.css" />
+<link rel="stylesheet" href="~/dist/css/wbsStyle.css" />
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li class="active"><a href="#tab_1" data-toggle="tab" id="location-tab1">WBS</a></li>
+                <li><a href="#tab_2" data-toggle="tab" id="location-tab2">WF</a></li>
+                <li><a href="#tab_3" data-toggle="tab" id="location-tab3">Progress</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_1">
+                    <partial name="~/Views/Shared/PartialViews/WbsConfigs/CreateWBSTree.cshtml" />
+                </div>
+                <div class="tab-pane" id="tab_2">
+                    <partial name="~/Views/Shared/PartialViews/WbsConfigs/WBSWFConfig.cshtml" />
+                </div>
+                <div class="tab-pane" id="tab_3">
+                    <partial name="~/Views/Shared/PartialViews/WbsConfigs/WBSActivityWFCalculate.cshtml" />
+                </div>
+            </div>
+            <!-- /.tab-content -->
+        </div>
+    </div>
+</div>
+
+<partial name="~/Views/Shared/PartialViews/WbsConfigs/WbsActivityModalList.cshtml" />
+<partial name="~/Views/Shared/PartialViews/WbsConfigs/WBSWFCalculateModal.cshtml" />
+
+<script src="~/dist/js/grant/customGrant.js"></script>
+<environment names="Development">
+    <script src="~/dist/js/api/managments/wbsWfConfig.js"></script>
+    <script src="~/dist/js/api/managments/activityWbsWftableView.js"></script>
+    <script src="~/dist/js/api/managments/wbsTreeConfig.js"></script>
+    <script src="~/dist/js/api/activities/activityList.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/wbsWfConfig.min.js"></script>
+    <script src="~/js/activityWbsWftableView.min.js"></script>
+    <script src="~/js/activityList.min.js"></script>
+    <script src="~/js/wbsTreeConfig.min.js"></script>
+</environment>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        var wbstypesReal = [1001, 1002, 1003, 1004, 1005];
+        var _currentTab = 1;
+
+        var wh = window.innerHeight * 0.69;
+        var twh = window.innerHeight * 0.45;
+        $('#show-line').css('height', '0px');
+        $('#GanttChartDIV').css('height', wh + 'px');
+        $('#model-items').css('height', twh + 'px');
+        $('#tbgrantwf').css('height', wh + 'px');
+        $('#tbgrantprogressItem').css('height', wh + 'px');
+
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+
+        $('#tbgrantwf').on('keypress', '.wbs-input-wf', function (e) {
+            if (e.which == 13) {
+                var obj = $(this);
+                WBSWfConfig.updatewbswf(obj)
+            }
+        });
+
+        //var selector = $(this).data("target");
+        //$(selector).removeClass('in col-md-4');
+
+        //$('#customDrawer-right').removeClass('out');
+        $('#customDrawer-right').addClass('out');
+        $('#wbsItemDrawer').addClass('in');
+        $('#btnrighting').hide();
+
+        $('#btnrighting').on('click', function () {
+            $('#customDrawer-right').addClass('out');
+            $('#wbsItemDrawer').addClass('in');
+            $('#btnLefting').show();
+            $('#btnrighting').hide();
+        });
+
+        $('#btnLefting').on('click', function () {
+            $('#customDrawer-right').removeClass('out');
+            $('#wbsItemDrawer').removeClass('in');
+            $('#btnrighting').show();
+            $('#btnLefting').hide();
+        });
+
+        $('#sh-1001').iCheck('check');
+        $('#show-on-tree').show();
+        WBSTreeConfig.init(wbstypesReal);
+
+        $('#location-tab1').on('click', function () {
+            var lineShow = $('#sh-1002').iCheck('update')[0].checked;
+
+            if (lineShow) {
+                $('#first-li-wbs-real').empty();
+                WBSTreeConfig.getProjectwbsTree(wbstypesReal);
+                $('#GanttChartDIV').css('height', '0px');
+                $('#show-line').css('height', wh + 'px');
+            }
+            else
+            {
+                document.getElementById('GanttChartDIV').remove();
+
+                var content = $('#tbgrantwfCrator');
+                content.append('<div style="position:relative" class="gantt" id="GanttChartDIV"></div>');
+                _currentTab = 1;
+                $('#first-li-wbs').empty();
+                WBSTreeConfig.init(wbstypesReal);
+                $('#show-line').css('height', '0px');
+                $('#GanttChartDIV').css('height', wh + 'px');
+            }
+        });
+
+        $('#location-tab2').on('click', function () {
+            initwbsactivitywfTable();
+        });
+
+
+        function initwbsactivitywfTable() {
+             document.getElementById('GanttChartDIV').remove();
+
+            var content = $('#tbgrantwf');
+            content.append('<div style="position:relative" class="gantt" id="GanttChartDIV"></div>');
+            _currentTab = 2;
+            WBSWfConfig.init();
+        }
+        //wf calculation
+
+        $('#calculate-wf-btn').on('click', function () {
+            $('#cal-1001').iCheck('check');
+            $('#modal-wbs-wfCalculation').modal('show');
+        });
+
+        $('#ac-wbs-wf-cal').on('click', function () {
+            var calType = 1001;
+            if ($('#cal-1002').iCheck('update')[0].checked) {
+                calType = 1002;
+            }
+            else if ($('#cal-1003').iCheck('update')[0].checked) {
+                calType = 1003;
+            }
+            WBSWfActivityConfig.updateAllActivityWbsWf(calType);
+        });
+
+
+        $('#location-tab3').on('click', function () {
+
+            document.getElementById('GanttChartDIV').remove();
+
+            if (document.getElementById('GanttChartDIV') != null) {
+                document.getElementById('GanttChartDIV').remove();
+            }
+
+            var content = $('#tbgrantprogressItem');
+
+            content.append('<div style="position:relative" class="gantt" id="GanttChartDIV"></div>');
+            _currentTab = 3;
+            //var toProgress = $('#pr-1002').iCheck('update')[0].checked;
+            WBSWfActivityConfig.init(true);
+            wbsActivityList.init();
+        });
+
+        window.lastChildClick = function (element) {
+            if (_currentTab == 3 || _currentTab==2) {
+                wbsActivityList.lastwbsChildClick(element);
+            }
+        };
+
+        //create tree
+        $('.wbsTypesch').on('ifChecked', function (event) {
+            var co = $(this).attr('id').split('-')[0];
+            //if (co === 'pr') {
+
+            //    //var toProgress = $('#pr-1002').iCheck('update')[0].checked;
+            //    WBSWfActivityConfig.init(true);
+            //}
+            //else
+            if (co === 'sh') {
+                var id = $(this).attr('id').split('-')[1];
+                if (id === '1002') {
+                    $('#GanttChartDIV').empty();
+                    WBSTreeConfig.getProjectwbsTree(wbstypesReal);
+
+                    $('#show-line').css('height', wh + 'px');
+                    $('#GanttChartDIV').css('height', '0px');
+                    $('#show-on-tree').hide();
+                    $('#show-on-line').show();
+                }
+                else if (id === '1001') {
+                    $('#first-li-wbs-real').empty();
+                    WBSTreeConfig.init(wbstypesReal);
+                    $('#show-line').css('height', '0px');
+                    $('#GanttChartDIV').css('height', wh + 'px');
+                    $('#show-on-tree').show();
+                    $('#show-on-line').hide();
+                }
+            }
+            else {
+                var id = $(this).attr('id').split('-')[1];
+                wbstypesReal.push(parseInt(id));
+                if ($('#sh-1002').iCheck('update')[0].checked == true) {
+                    if (wbstypesReal.indexOf(id) == -1) {
+                        $('#first-li-wbs-real').empty();
+                        WBSTreeConfig.getProjectwbsTree(wbstypesReal);
+                    }
+                }
+            }
+        });
+
+        $('.wbsTypesch').on('ifUnchecked', function (event) {
+            var co = $(this).attr('id').split('-')[0];
+            if (co === 'pr') {
+                var toProgress = $('#pr-1002').iCheck('update')[0].checked;
+                WBSWfActivityConfig.init(toProgress);
+            }
+            else if (co === 'sh') {
+                //nothing
+            }
+            else {
+                var id = $(this).attr('id').split('-')[1];
+                var rid = parseInt(id);
+                if (wbstypesReal.indexOf(rid) > -1) {
+                    var index = wbstypesReal.indexOf(rid);
+                    wbstypesReal.splice(index, 1);
+                    $('#first-li-wbs-real').empty();
+                    WBSTreeConfig.getProjectwbsTree(wbstypesReal);
+                }
+            }
+        });
+
+        $('#wbs-type').change(function () {
+            var id = $(this).val();
+            $('#model-items').empty();
+            if (id == 1002) {
+                WBSTreeConfig.getProjectWorks();
+            }
+            else if (id == 1003) {
+
+                WBSTreeConfig.getProjectLocation();
+            }
+            else if (id == 1004) {
+
+                WBSTreeConfig.getProjectDesciplines();
+            }
+            else if (id == 1005) {
+
+                WBSTreeConfig.getProjectSystems();
+            }
+            else if (id == 1006) {
+
+                WBSTreeConfig.getProjectSubSystems();
+            }
+        });
+
+        $('.treeWbs').on('click', 'a.drop-wbs', function () {
+            var id = $(this).attr('id');
+            var wbsCode = $(this).attr('data-wbsCode');
+            WBSTreeConfig.showEditWbsNode(id, wbsCode);
+        });
+
+        $('.treeWbs').on('click', '.sh-subsystem', function () {
+            var id = $(this).attr('data-sbId').split('-')[1];
+            $('#first-li-wbs1').empty();
+            WBSTreeConfig.getSystemWBsTree(wbstypesReal, id);
+
+            $('#modal-default-subSystemView').modal('show');
+        });
+
+        $('#save-wbs-Change').on('click', function () {
+            WBSTreeConfig.editWbsCode();
+        });
+
+        $('#save-wbs-delete').on('click', function () {
+            WBSTreeConfig.deleteWbsCode();
+        });
+
+        //print
+        $('#btn-line-print').on('click', function () {
+            var pContent = 'show-line';
+            printContent(pContent);
+        });
+
+        function printContent(printContent) {
+
+            var divToPrint = document.getElementById('show-line');
+            var mywindow = window.open('', 'new div', 'height=400,width=600');
+            mywindow.document.write('<html><head><title>WBS Line</title>');
+            mywindow.document.write('<link rel="stylesheet" href="/dist/css/wbsStyle.css"/> <style type="text/css" media="print"> @@page{ size: landscape; margin: 0;}</style>');
+            mywindow.document.write('</head><style> .treeWbs {zoom:85%} .treeWbs{width:auto;height:2000px;overflow:visible}</style><body style="width:200%;">');
+            mywindow.document.write(divToPrint.innerHTML);
+            mywindow.document.write('</body></html>');
+            mywindow.document.close();
+            mywindow.focus();
+            setTimeout(function () { mywindow.print(); }, 1000);
+
+            ///setTimeout(function(){mywindow.close();},10);
+        }
+
+        //drop
+        $(".drop-wbs").droppable({
+            drop: WBSTreeConfig.dropwbs()
+        });
+
+
+        document.addEventListener("drop", function (event) {
+            event.preventDefault();
+            if (event.target.className == "droptarget") {
+                document.getElementById("demo").style.color = "";
+                event.target.style.border = "";
+                var data = event.dataTransfer.getData("Text");
+                event.target.appendChild(document.getElementById(data));
+            }
+        });
+
+    });
+</script>
+

@@ -1,0 +1,126 @@
+﻿
+@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "Project Dashboard";
+}
+
+<section class="content">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- Widget: user widget style 1 -->
+            <div class="box box-widget widget-user-2">
+                <!-- Add the bg color to the header using any of the bg-* classes -->
+                <div class="widget-user-header bg-navy">
+                    <div class="widget-user-image">
+                        <img class="img-circle" src="~/dist/img/logo.jpeg" alt="User Avatar">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username" id="pr-d-0"></h3>
+                    <h5 class="widget-user-desc ">Pars Oil Energy</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <div class="col-md-12">
+                        <div class="box" style="margin-top:27px">
+                            <div class="box-header with-border">
+                                <h3 class="box-title"></h3>
+                                <div class="box-tools pull-right">
+                                    <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                  
+                                    <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <div class="row">
+                                    <div id="globalChart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs" id="tab-header"></ul>
+            <div data-pathUrl="@Url.Action("WorkPackageDetails","Dashboard")" class="tab-content" id="tab-body">
+
+            </div>
+            <!-- /.tab-content -->
+        </div>
+
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li><a href="#tab_1" data-toggle="tab" id="descipline-tab1">Descipline Reports</a></li>
+                <li><a href="#tab_2" data-toggle="tab" id="system-tab2">System Reports</a></li>
+                <li><a href="#tab_3" data-toggle="tab" id="wbs-tab3">WBS Reports</a></li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="tab_1">
+                    <partial name="~/Views/Shared/PartialViews/Reports/DesciplineReport.cshtml" />
+                </div>
+
+                <div class="tab-pane" id="tab_2">
+                    <partial name="~/Views/Shared/PartialViews/Reports/SystemReport.cshtml" />
+                </div>
+                <div class="tab-pane" id="tab_23">
+                </div>
+            </div>
+            <!-- /.tab-content -->
+        </div>
+
+
+    </div>
+</section>
+
+<environment names="Development">
+    <script src="~/dist/js/api/projectDashboard.js"></script>
+    <script src="~/dist/js/api/workPackageReport.js"></script>
+    <script src="~/dist/js/api/desciplineReport.js"></script>
+    <script src="~/dist/js/api/projectSystemReports.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/projectDashboard.min.js"></script>
+    <script src="~/js/workPackageReport.min.js"></script>
+    <script src="~/js/desciplineReport.min.js"></script>
+    <script src="~/js/projectSystemReports.min.js"></script>
+</environment>
+
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+        projectDashboard.init();
+        projectDashboard.globalChart();
+
+        $('#descipline-tab1').on('click', function () {
+            initDesciplineReport();
+        });
+
+        $('#system-tab2').on('click', function () {
+            projectSystemReport.paintingSystemActivityBarStatus();
+            projectSystemReport.paintingSystemActivityBarCondition();
+            projectSystemReport.getSystemCounter();
+            projectSystemReport.getSystemDoneActivity();
+        });
+
+        $('#tab-header').on('click', '.tab-header-wf', function () {
+            var id = $(this).attr('data-id').split('-')[1];
+            workPackageReport.getWorkPackageContent(id);
+            workPackageReport.getWorkPackageReport(id);
+            workPackageReport.getSystemWorkPackageReport(id);
+        });
+
+
+        function initDesciplineReport() {
+
+            //descipline reports
+            desciplineReport.paintingDesciplineActivityBarStatus();
+            desciplineReport.paintingDesciplineActivityBarCondition();
+            desciplineReport.getDesciplineCounter();
+            desciplineReport.getDesciplineDoneActivity();
+        }
+    });
+</script>

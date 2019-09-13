@@ -1,0 +1,373 @@
+﻿@model Int64
+@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "Activity Edit";
+
+}
+
+<link rel="stylesheet" href="~/dist/css/wbsStyle.css" />
+
+<div class="row">
+    <div class="col-md-4" style="padding-right:0px">
+        <partial name="/Views/Shared/PartialViews/Activityes/ActivtitySummaryList.cshtml" model="1" />
+    </div>
+    <div class="col-md-8">
+        <div class="box">
+            <div class="box-header  with-border">
+                <h3 style="padding-left:27px" class="box-title text-blue" id="selected-activity-c"></h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm pull-right">
+                        <a href="@Url.Action("ActivityList","Activity")"><p style="margin:2px" class="btn btn-warning">Back To List</p></a>
+                        <a href="#"><p style="margin:2px" class="btn btn-danger" id="add-punch-show" data-toggle="modal" data-target="#modal-default-Addpunch">Add Punch</p></a>
+                        <a href="#" id="ac-doc-show"><p style="margin:2px" class="btn btn-success">Upload Form</p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body style-10" id="tb-container" style="overflow-y:auto;overflow-x:hidden">
+                <div class="col-md-10" style="padding-left:2px;padding-right:2px">
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="box-header with-border">
+                                <div class="col-md-4">
+                                    <label>Progress</label>
+                                    <div class="form-group">
+                                        <div class="progress-group">
+                                            <span class="progress-text" id="ac-st-prtx"></span>
+                                            <span class="progress-number"><b></b></span>
+                                            <div class="progress sm">
+                                                <div class='progress-bar' id="ac-st-prPr"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group form-inline">
+                                        <label>Status</label>
+                                        <h4 class="text text-blue" id="cr-st-ac"></h4>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+
+                                    <div class="form-group">
+                                        <label>Condition</label>
+                                        <h4 class="text text-yellow" id="cr-st-co"></h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-body">
+                                <partial name="~/Views/Shared/PartialViews/Activityes/ActivitySummaryDetails.cshtml" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="box box-info">
+                            <div class="nav-tabs-custom" style="margin-top:5px">
+                                <ul class="nav nav-tabs">
+                                    <li class="active"><a href="#tab_1" data-toggle="tab">Status History</a></li>
+                                    <li><a href="#tab_2" data-toggle="tab" id="punch-tab2">Punchs</a></li>
+                                    <li><a href="#tab_3" data-toggle="tab" id="punch-tab3">Forms</a></li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="tab_1">
+                                        <partial name="~/Views/Shared/PartialViews/Activityes/ActivityHistoryList.cshtml" />
+                                    </div>
+                                    <div class="tab-pane" id="tab_2">
+                                        <partial name="~/Views/Shared/PartialViews/Activityes/ActivityPunchList.cshtml" />
+                                    </div>
+                                    <div class="tab-pane" id="tab_3">
+                                        <partial name="~/Views/Shared/PartialViews/Activityes/ActivityDocumentList.cshtml" />
+                                    </div>
+                                </div>
+                                <!-- /.tab-content -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2" style="padding-left:2px;padding-right:5px">
+                    <div class="box box-success">
+                        <div class="box-header with-border">
+                            <h4 class="box-title" style="font-size:15px">WBS Tree</h4>
+                        </div>
+
+                        <div class="box-body" style="padding:5px">
+                            <div class="treeWbs">
+                                <ul style="left:-20px">
+                                    <li id="first-li-wbs">
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default-Addpunch">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Add Punches</h4>
+            </div>
+            <div class="modal-body">
+                <partial name="~/Views/Shared/PartialViews/Punches/EditablePunchDetails.cshtml" />
+            </div>
+            <div class="modal-footer">
+                <div class="form-group" id="punch-edit-btns-pane">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="save-punch" style="display:none">Save</button>
+                    <button type="button" class="btn btn-primary" id="edit-punch" style="display:none">Save Edit</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-default-punchModify">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Punch Modify</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="col-md-12">
+                        <div class="col-md-8">
+                            <partial name="~/Views/Shared/PartialViews/Punches/PunchGoModify.cshtml" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary" id="save-go-punch">Save</button>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-Ac-Document">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Upload Documents</h4>
+            </div>
+            <form asp-action="CreateMainDocumentFile" enctype="multipart/form-data">
+                <input type="hidden" id="ac-document-id" name="ActivityId" />
+                <div class="modal-body">
+                    <div class="col-md-12">
+                        <div class="file-field input-field">
+                            <div class="btn btn-default">
+                                <label class="required">File</label>
+                                <input class="form-control" type="file" name="file" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input name="Description" type="text" class="form-control" placeholder="Enter ..." required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<environment names="Development">
+    <script src="~/dist/js/api/activities/activityEdit.js"></script>
+    <script src="~/dist/js/api/activities/activitySummary.js"></script>
+    <script src="~/dist/js/api/activities/activityPunch.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/activityEdit.min.js"></script>
+    <script src="~/js/activitySummary.min.js"></script>
+    <script src="~/js/activityPunch.min.js"></script>
+</environment>
+
+<script type="text/javascript">
+
+    document.addEventListener("DOMContentLoaded",
+    function (event) {
+        BookList.initialise('1', '1',
+            '@Url.Action("GetFilterSearchContent")');
+    });
+
+    $(document).ready(function () {
+        var wh = window.innerHeight * 0.83;
+        var lwh = window.innerHeight * 0.65;
+
+        $('#tb-container').css('height', wh + 'px');
+        $('#acsummary-lst').css('height', lwh + 'px');
+
+        $("#ac-status option[value='4']").remove();
+
+          $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+          });
+
+        var cacId = '@Model';
+
+        $('#edit-ac-st').hide();
+        $('#ac-holdBy').prop('disabled', true);
+
+        $('.datepicker').datepicker({
+            autoclose: true
+        });
+
+        activityEdit.init(cacId);
+        activitySummary.init();
+        activitySummary.getActivitySummary();
+        activitySummary.getActivityDetails(cacId);
+        activityPunch.getallPunches();
+        activityPunch.getallPunchCategory();
+
+        $('#ac-st-save').on('click', function () {
+            $('#first-li-wbs').empty();
+            var id = $('#ac-st-id').val();
+
+            activityEdit.UpdateActivityStatus(id, activitySummary);
+        });
+
+        $('#ac-conditon').change(function () {
+            var id = $(this).val();
+
+            if (id == 3002) {
+                 $('#ac-holdBy').prop('disabled', false);;
+            }
+            else
+            {
+                 $('#ac-holdBy').prop('disabled', true);
+            }
+        });
+
+         $('#ac-status').change(function () {
+             var val = $(this).val();
+              var con = $('#ac-conditon').val();
+            activitySummary.initDropDownonStatus(val,con);
+         });
+
+        $('#punch-tab2').on('click', function () {
+            var id = $('#ac-st-id').val();
+            activityPunch.getActivityPunchs(id);
+        });
+
+
+        $('#ac-doc-show').on('click', function () {
+             var id = $('#ac-st-id').val();
+            $('#ac-document-id').val(id);
+            $('#modal-Ac-Document').modal('show');
+        });
+
+        $('#activityDocTable').on('click','.activity-doc-class', function () {
+            var docId = $(this).attr('data-docId');
+            window.location = '/ProjectManagment/Activity/DownloadDocumentFile?documentId=' + docId;
+        });
+
+        $('#tb-acSummary').on('click', 'p.edtit-summary-btn', function () {
+            $('#first-li-wbs').empty();
+             var oldid = $('#ac-st-id').val();
+            var id = $(this).attr('id').split('-')[2];
+            activityEdit.init(id);
+            activitySummary.getActivityDetails(id);
+            activityPunch.getActivityPunchs(id);
+            var newUrl = location.href.replace("id=" + oldid, "id=" + id);
+             window.history.pushState({"html":"","pageTitle":""},"", newUrl);
+        });
+
+        //filtering
+
+        $('#OrderByOptions').change(function () {
+            activitySummary.getActivitySummary();
+        });
+
+        $('#filter-value-dropdown').change(function () {
+            activitySummary.getActivitySummary();
+        });
+
+        $('#pg-size-dropdown').on('change', function () {
+            activitySummary.getActivitySummary();
+        });
+
+        $('#pg-num').on('change', function () {
+            activitySummary.getActivitySummary();
+        });
+
+        $('#search-activity').on('click', function () {
+            activitySummary.getActivitySummary();
+        });
+
+        //punch
+
+        $('#punch-activity').on('click', '.edtit-punch-btn', function () {
+            var id = $(this).attr('id').split('-')[2];
+            activityPunch.getpunchDetails(id);
+            $('#modal-default-Addpunch').modal('show');
+        });
+
+
+        $('#save-punch').on('click', function () {
+            var id = $('#ac-st-id').val();
+             activityPunch.savePunch(id,activitySummary);
+        });
+
+        $('#edit-punch').on('click', function () {
+            var acId = $('#ac-st-id').val();
+            var id = $(this).attr('data-editid');
+            activityPunch.editPunch(id, acId);
+        });
+
+        $('#punch-activity').on('click', '.delete-punch-btn', function () {
+            var acid = $('#ac-st-id').val();
+            var id = $(this).attr('id').split('-')[2];
+            activityPunch.deletePunch(id, acid,activitySummary);
+        });
+
+         $('#punch-activity').on('click', '.go-punch-btn', function () {
+             var id = $(this).attr('id').split('-')[2];
+            activityPunch.showGoPunchModal(id);
+         });
+
+        $('#save-go-punch').on('click', function ()
+        {
+            var id = $(this).attr('data-gopunch-id');
+            var acid = $('#ac-st-id').val();
+            activityPunch.editPUnchGo(id, acid,activitySummary);
+        });
+
+        $('#add-punch-show').on('click', function ()
+        {
+            $('#punch-type-dropdown').attr('disabled', false);
+            $('#activitySelect').attr('disabled', true);
+            $('#save-punch').css('display', 'block');
+            $('#edit-punch').css('display', 'none');
+        });
+
+    })
+</script>

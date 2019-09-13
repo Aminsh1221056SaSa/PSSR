@@ -1,0 +1,302 @@
+// Configure bundling and minification for the project.
+// More info at https://go.microsoft.com/fwlink/?LinkId=808241
+[
+  //{
+  //  "outputFileName": "wwwroot/css/site.min.css",
+  //  // An array of relative input file paths. Globbing patterns supported
+  //  "inputFiles": [
+  //    "wwwroot/dist/lib/bootstrap3/dist/css/bootstrap.css",
+  //    "wwwroot/dist/lib/bootstrap-datepicker/dist/css/bootstrap-datepicker.css",
+  //    "wwwroot/dist/lib/datatables.net-bs/css/dataTables.bootstrap.css",
+  //    "wwwroot/dist/lib/datatables.net-bs/css/buttons.dataTables.min.css",
+  //    "wwwroot/dist/lib/datatables.net-bs/css/colReorder.dataTables.min.css",
+
+  //    "wwwroot/dist/lib/bootstrap-wysihtml5/bootstrap3-wysihtml5.css",
+  //    "wwwroot/dist/lib/font-awesome/css/font-awesome.min.css",
+
+  //    "wwwroot/dist/lib/Ionicons/css/ionicons.css",
+  //    "wwwroot/dist/lib/jvectormap/jquery-jvectormap-1.2.2.css",
+  //    "wwwroot/dist/lib/select2/dist/css/select2.css",
+
+  //    "wwwroot/dist/css/AdminLTE.css",
+  //    "wwwroot/dist/css/skins/_all-skins.min.css",
+  //    "wwwroot/dist/css/about.css",
+  //    "wwwroot/dist/css/site.css"
+  //  ]
+  //},
+  //{
+  //  "outputFileName": "wwwroot/js/jqueryBundle.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/dist/lib/jquery/dist/jquery.js",
+  //    "wwwroot/dist/lib/jquery-validation/dist/jquery.validate.js",
+  //    "wwwroot/dist/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": true
+  //  }
+  //},
+  //{
+  //  "outputFileName": "wwwroot/js/libraryBundle.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/dist/lib/jquery-ui/jquery-ui.min.js",
+  //    "wwwroot/dist/lib/datatables.net/js/jquery.dataTables.min.js",
+
+  //    "wwwroot/dist/lib/jvectormap/jquery-jvectormap-1.2.2.js",
+  //    "wwwroot/dist/lib/jvectormap/jquery-jvectormap-world-mill-en.js",
+  //    "wwwroot/dist/lib/bootstrap3/dist/js/bootstrap.js",
+
+  //    "wwwroot/dist/lib/bootstrap-datepicker/dist/js/bootstrap-datepicker.js",
+  //    "wwwroot/dist/lib/bootstrap-colorpicker/dist/js/bootstrap-colorpicker.js",
+  //    "wwwroot/dist/lib/datatables.net-bs/js/dataTables.bootstrap.js",
+
+  //    "wwwroot/dist/lib/jquery-slimscroll/jquery.slimscroll.js",
+  //    "wwwroot/dist/lib/select2/dist/js/select2.js",
+  //    "wwwroot/dist/lib/fastclick/lib/fastclick.js",
+
+  //    "wwwroot/dist/lib/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.js",
+  //    "wwwroot/dist/lib/iCheck/icheck.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": true
+  //  }
+  //},
+  //{
+  //  "outputFileName": "wwwroot/js/appBundle.min.js",
+  //  "inputFiles": [
+  //    "wwwroot/dist/js/adminlte.js",
+  //    "wwwroot/dist/js/demo.js",
+  //    "wwwroot/dist/js/loggingDisplay.js",
+  //    "wwwroot/dist/js/bookList.js",
+  //    "wwwroot/dist/js/myTreeviewScript.js"
+  //  ],
+  //  // Optionally specify minification options
+  //  "minify": {
+  //    "enabled": true
+  //  }
+  //},
+  {
+    "outputFileName": "wwwroot/js/managerDashboard.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/dashbords/managerDashboard.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/userinfoDashbord.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/dashbords/userinfoDashbord.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/activityEdit.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/activities/activityEdit.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/activityPunch.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/activities/activityPunch.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/activitySummary.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/activities/activitySummary.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/activityWbsWftableView.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/managments/activityWbsWftableView.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/desciplinePlane.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/managments/desciplinePlane.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/desciplineReport.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/desciplineReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/mdrDocumentDetails.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/mdrDocumentDetails.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/projectDashboard.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/dashbords/projectDashboard.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/projectSystemReports.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/projectSystemReports.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/punchListSummary.min.js",
+    "inputFiles": [
+
+      "wwwroot/dist/js/api/activities/punchListSummary.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/realTimeWbsTree.min.js",
+    "inputFiles": [
+
+      "wwwroot/dist/js/api/managments/realTimeWbsTree.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/activityList.min.js",
+    "inputFiles": [
+
+      "wwwroot/dist/js/api/activities/activityList.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/wbsTreeConfig.min.js",
+    "inputFiles": [
+
+      "wwwroot/dist/js/api/managments/wbsTreeConfig.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/wbsWfConfig.min.js",
+    "inputFiles": [
+
+      "wwwroot/dist/js/api/managments/wbsWfConfig.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/workPackageReport.min.js",
+    "inputFiles": [
+
+      "wwwroot/dist/js/api/reports/workPackageReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/workPackageStepReport.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/workPackageStepReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/planWorkFlow.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/managments/planWorkFlow.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/dailyClearPunchReport.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/dailyClearPunchReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/punchCategoryReport.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/punchCategoryReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/dailyTaskFormTypeReport.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/dailyTaskFormTypeReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/statusReport.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/reports/statusReport.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  //data tables
+  {
+    "outputFileName": "wwwroot/js/activityDataTable.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/activities/activityDataTable.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  }
+]

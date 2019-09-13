@@ -1,0 +1,63 @@
+﻿<div class="box box-success">
+    <div class="box-header">
+        <input type="hidden" id="next-status-id" name="StatusId" />
+        <input type="hidden" id="next-status-code" name="Code" />
+        <input type="hidden" id="next-status-mdrId" name="MdrId" />
+        <input type="hidden" id="next-status-type" name="Type" />
+        <input name="NextStatus" id="mdr-nextstatus-Desc" type="hidden" />
+        <div class="col-md-12">
+            <div class="form-group col-md-4">
+                <label class="text-info">Last Status:</label>
+                <p id="mdr-status-issuance"></p>
+            </div>
+            <div class="form-group col-md-4">
+                <label class="text-info">Next Status:</label>
+                <p id="mdr-nextstatus-Desc-desc"></p>
+            </div>
+            <div class="form-group col-md-4" id="confirm-contractor-doc">
+                <label>
+                    @Html.CheckBox("IsConfirmContractor", false, new { @class = "flat-red wbsTypesch", @id = "contractor-confirm-1006" })
+
+                    Confirm By Contracator
+                </label>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group col-md-4">
+                <label class="text-info">Unclear Comment Count:</label>
+                <p id="mdr-unClear-count"></p>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label class="text-info">Last Comment Date:</label>
+                <p id="mdr-Comment-lastDate"></p>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <div class="form-group col-md-7">
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea name="Description" id="issuance-description" class="form-control" rows="4" placeholder="Enter ..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group col-md-4">
+                <label for="exampleInputFile" class="control-label required">Choose Native Files</label>
+                <input type="file" name="NativeFiles" multiple required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="exampleInputFile" class="control-label required">Choose PDF Files</label>
+                <input type="file" name="PDFFiles" multiple required>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="exampleInputFile" class="control-label">Choose Attachment Files</label>
+                <input type="file" name="AttachMentFiles" multiple>
+            </div>
+        </div>
+
+    </div>
+</div>

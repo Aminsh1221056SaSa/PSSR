@@ -1,0 +1,442 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.API\\PSSR.API.csproj": {}
+  },
+  "projects": {
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.API\\PSSR.API.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.API\\PSSR.API.csproj",
+        "projectName": "PSSR.API",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.API\\PSSR.API.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.API\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.ServiceLayer\\PSSR.ServiceLayer.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.ServiceLayer\\PSSR.ServiceLayer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            },
+            "IdentityServer4.AccessTokenValidation": {
+              "target": "Package",
+              "version": "[2.7.0, )"
+            },
+            "Microsoft.AspNet.WebApi.Versioning": {
+              "target": "Package",
+              "version": "[3.0.1, )"
+            },
+            "Microsoft.AspNetCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Microsoft.AspNetCore.Razor.Design": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Swashbuckle.AspNetCore.Swagger": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUi": {
+              "target": "Package",
+              "version": "[4.0.1, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Common\\PSSR.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Common\\PSSR.Common.csproj",
+        "projectName": "PSSR.Common",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Common\\PSSR.Common.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Common\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj",
+        "projectName": "PSSR.DataLayer",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Common\\PSSR.Common.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Common\\PSSR.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj",
+        "projectName": "PSSR.DbAccess",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[4.9.4, )"
+            },
+            "EFCore.BulkExtensions": {
+              "target": "Package",
+              "version": "[2.6.1, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Logic\\PSSR.Logic.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Logic\\PSSR.Logic.csproj",
+        "projectName": "PSSR.Logic",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Logic\\PSSR.Logic.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Logic\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj"
+              },
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Autofac": {
+              "target": "Package",
+              "version": "[4.9.4, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.ServiceLayer\\PSSR.ServiceLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.ServiceLayer\\PSSR.ServiceLayer.csproj",
+        "projectName": "PSSR.ServiceLayer",
+        "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.ServiceLayer\\PSSR.ServiceLayer.csproj",
+        "packagesPath": "C:\\Users\\i.am.a.m.i.n\\.nuget\\packages\\",
+        "outputPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.ServiceLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\i.am.a.m.i.n\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DataLayer\\PSSR.DataLayer.csproj"
+              },
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.DbAccess\\PSSR.DbAccess.csproj"
+              },
+              "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Logic\\PSSR.Logic.csproj": {
+                "projectPath": "D:\\projects\\myProjects\\selfs\\PSSR\\PSSR\\PSSR.Logic\\PSSR.Logic.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Autofac": {
+              "target": "Package",
+              "version": "[4.9.4, )"
+            },
+            "JqueryDataTables.ServerSide.AspNetCoreWeb": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http": {
+              "target": "Package",
+              "version": "[2.2.2, )"
+            },
+            "Microsoft.AspNetCore.Mvc": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[2.2.6, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.2, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    }
+  }
+}

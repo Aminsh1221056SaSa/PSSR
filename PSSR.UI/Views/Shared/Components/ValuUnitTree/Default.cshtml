@@ -1,0 +1,9 @@
+﻿@model IEnumerable<PSSR.DataLayer.EfClasses.Management.ValueUnit>
+@{
+    var items = Model.Where(s => s.Parent == null);
+}
+
+@foreach (var item in items)
+{
+    <partial name="TreeViewPartial/ValueUnitTreeSummary" model="item"/>
+}

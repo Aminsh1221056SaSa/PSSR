@@ -1,0 +1,383 @@
+﻿
+@{
+    ViewData["Title"] = "ManagerDashboard";
+    Layout = "~/Views/Shared/_SecureLayout.cshtml";
+}
+
+<style>
+   
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, 
+.col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, 
+.col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, 
+.col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9,
+.col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, 
+.col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+
+</style>
+<section class="content">
+    <div class="row">
+        <div class="box box-widget widget-user-2 style-10" style="overflow-y:scroll" id="hightable-containter">
+            <div class="col-md-12">
+                <!-- Widget: user widget style 1 -->
+                <div class="widget-user-header bg-navy" style="padding:11px">
+                    <div class="widget-user-image">
+                        <img class="img-circle" src="~/dist/img/logo.jpeg" alt="User Avatar" style="width:66px;height:66px">
+                    </div>
+                    <!-- /.widget-user-image -->
+                    <h3 class="widget-user-username" id="pr-d-0"></h3>
+                    <h5 class="widget-user-desc">Pars Oil Energy</h5>
+                </div>
+                <div class="box-footer no-padding">
+                    <div class="col-md-5">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs" id="w1-header"></ul>
+                            <div class="tab-content" id="w1-body">
+                                <div class="loading-one-wrap" id="precom-chart-loading" style="display:none;">
+                                    <div class="loading-one">
+                                        <div class="bounceball"></div>
+                                        <div class="loadertext">NOW LOADING...</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="col-md-12" style=" height: 260px; margin: 25px auto">
+                            <table id="RFCCheckerTable" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr style=" height: 40px; margin: 0 auto">
+                                        <th>Document</th>
+                                        <th>T</th>
+                                        <th>D</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="model-managerMdr"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="nav-tabs-custom">
+                            <ul class="nav nav-tabs" id="w2-header"></ul>
+                            <div class="tab-content" id="w2-body">
+                                <div class="loading-one-wrap" id="com-chart-loading" style="display:none;">
+                                    <div class="loading-one">
+                                        <div class="bounceball"></div>
+                                        <div class="loadertext">NOW LOADING...</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.tab-content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div>
+                    <div>
+                        <div class="col-md-5">
+                            <div class="bg-olive">
+                                <div class="text-center">
+                                    <a asp-area="ProjectManagment" asp-controller="Activity" asp-action="ActivityList" asp-route-WorkPackageId="dummyDate" id="wd-1" style="cursor:pointer"><p id="wd-title-1"></p></a>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="col-md-12">
+                                    <div class="box-footer no-padding" style="min-height:50px">
+                                        <div class="loading-one-wrap" id="w1-actual-loading" style="display:none">
+                                            <div class="loading-one">
+                                                <div class="bounceball"></div>
+                                                <div class="loadertext">NOW LOADING...</div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <ul class="nav nav-stacked" id="w1-actual-report"></ul>
+                                        </div>
+
+                                        <div class="col-md-6">
+                                            <div class="col-md-12">
+                                                <ul class="nav nav-stacked" id="w1-plane-report"></ul>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="col-md-12">
+
+                                        <div class="box">
+                                            <!-- Add the bg color to the header using any of the bg-* classes -->
+                                            <div class="bg-blue">
+
+                                                <div class="text-center">HookUp Plan</div>
+                                            </div>
+                                            <div class="box-footer no-padding">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="col-md-6">
+                                            <div class="box">
+                                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                                <div class="bg-light-blue">
+
+                                                    <div class="text-center">% Actual HookUp</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="box">
+                                                <!-- Add the bg color to the header using any of the bg-* classes -->
+                                                <div class="bg-light-blue">
+                                                    <div class="text-center">% Plan HookUp</div>
+                                                </div>
+                                                <div class="col-md-12" style="height:166px"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="col-md-12">
+                                <div>
+                                    <div>
+                                        <div style="background-color:#aa850c">
+                                            <div class="text-center">Subsystem Plan</div>
+                                        </div>
+                                        <div class="box">
+                                            <div class="box-footer no-padding">
+                                                <div class="col-md-12">
+                                                    <div class="nav nav-stacked">
+                                                        <table class="table table-bordered table-striped" style="font-size:11px">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th>RFC Checker</th>
+                                                                    <th>T</th>
+                                                                    <th>D</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="DACCheckerTable"></tbody>
+                                                            <tfoot id="DACCheckerTable-footer">
+                                                               
+                                                            </tfoot>
+                                                        </table>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="box">
+                                    <div class="box-footer no-padding">
+                                        <div style="background-color:#eaca09">
+                                            <div class="text-center">Ready For StartUp</div>
+                                        </div>
+                                        <div class="box-footer no-padding">
+                                            <div class="col-md-12">
+                                                <table id="RFCCheckerTable" class="table table-bordered table-striped" style="font-size:11px">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>RFS Checker</th>
+                                                            <th>T</th>
+                                                            <th>D</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="systemRFCTable"></tbody>
+                                                    <tfoot id="systemRFCTable-footer"></tfoot>
+                                                </table>
+                                            </div>
+                                            <div class="col-md-12" style="height:92px"></div>
+                                        </div>
+                                        <div class="box-footer no-padding">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div>
+                                <div class="bg-orange">
+                                    <div class="text-center"><a asp-area="ProjectManagment" asp-controller="Activity" asp-action="ActivityList" asp-route-WorkPackageId="dummyDate" id="wd-2" style="cursor:pointer"><p id="wd-title-2"></p></a></div>
+                                </div>
+                                <div>
+                                    <div class="col-md-12">
+                                        <div class="box">
+                                            <div class="box-footer no-padding" style="min-height:50px">
+                                                <div class="loading-one-wrap" id="w2-actual-loading" style="display:none">
+                                                    <div class="loading-one">
+                                                        <div class="bounceball"></div>
+                                                        <div class="loadertext">NOW LOADING...</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <ul class="nav nav-stacked" id="w2-actual-report"></ul>
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <div class="col-md-12">
+                                                        <ul class="nav nav-stacked" id="w2-plane-report"></ul>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="box">
+                                            <div class="box-footer no-padding">
+                                                <div class="col-md-12">
+                                                    <table class="table table-bordered table-striped">
+                                                        <thead>
+                                                            <tr>
+                                                                <th></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><p>Prestart Up</p></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Punch C</p></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Start Up</p></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Stabilizing</p></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><p>Performance Test</p></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <div class="box-footer no-padding">
+                    <div class="col-md-4">
+                        <ul class="nav nav-stacked">
+                            <li><a>start of contract <span class="pull-right badge bg-blue" id="pr-d-1"></span></a></li>
+                            <li><a>Cut of date <span class="pull-right badge bg-aqua" id="pr-d-2"></span></a></li>
+                            <li><a>Elapsed Duration <span class="pull-right badge bg-green" id="pr-d-3"></span></a></li>
+                            <li><a>Remained Duration <span class="pull-right badge bg-red" id="pr-d-4"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-5"></div>
+                    <div class="col-md-3">
+                        <ul class="nav nav-stacked">
+                            <li><a asp-action="ProjectSystem" asp-controller="ProjectSystem" asp-area="ProjectManagment">Total Systems<span class="pull-right badge bg-red" id="pr-d-6"></span></a></li>
+                            <li><a asp-action="SubSystem" asp-controller="SubSystem" asp-area="ProjectManagment">Total Subsystems <span class="pull-right badge bg-yellow" id="pr-d-7"></span></a></li>
+                            <li><a asp-action="ActivityList" asp-controller="Activity" asp-area="ProjectManagment">Total Tasks <span class="pull-right badge bg-orange-active" id="pr-d-8"></span></a></li>
+                        </ul>
+                    </div>
+                    <div class="col-md-1"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade" id="modal-details-Deschart">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Chart Details</h4>
+            </div>
+            <input type="hidden" id="cu-workDes-id" />
+            <input type="hidden" id="cu-des-id" />
+            <div class="modal-body">
+                <div id='desciplineStatusComDetails' style='height: 430px; margin: 0 auto'></div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<div class="modal fade" id="modal-details-Stepchart">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Chart Details</h4>
+            </div>
+            <input type="hidden" id="cu-workSt-id" />
+            <input type="hidden" id="cu-wst-id" />
+            <div class="modal-body">
+                <div id='workPackageStepStatusComDetails' style='height: 430px; margin: 0 auto'></div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<environment names="Development">
+    <script src="~/dist/js/api/dashbords/managerDashboard.js"></script>
+    <script src="~/dist/js/api/reports/workPackageReport.js"></script>
+    <script src="~/dist/js/api/reports/workPackageStepReport.js"></script>
+    <script src="~/dist/js/api/reports/desciplineReport.js"></script>
+    <script src="~/dist/js/api/reports/projectSystemReports.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/managerDashboard.min.js"></script>
+    <script src="~/js/workPackageReport.min.js"></script>
+    <script src="~/js/workPackageStepReport.min.js"></script>
+    <script src="~/js/desciplineReport.min.js"></script>
+    <script src="~/js/projectSystemReports.min.js"></script>
+</environment>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+      
+        managerDashboard.init(desciplineReport,workPackageStepReport);
+
+        $('#w1-header').on('click', '.tab-header-w1', function () {
+            var id = $(this).attr('data-id').split('-')[2];
+            var workId = $('#wd-1').attr('data-workId');
+            var content = "desciplineStatusPreCom-" + id + "";
+            desciplineReport.paintingDesciplineActivityBarStatus(workId, id, content);
+            $('#cu-workDes-id').val(workId);
+            $('#cu-des-id').val(id);
+        });
+
+        $('#w2-header').on('click', '.tab-header-w2', function () {
+            var id = $(this).attr('data-id').split('-')[2];
+            var workId = $('#wd-2').attr('data-workId');
+            var content = "desciplineStatusCom-" + id + "";
+            workPackageStepReport.paintingWorkStepActivityBarStatus(workId, id, content);
+
+            $('#cu-workSt-id').val(workId);
+            $('#cu-wst-id').val(id);
+        });
+
+         setCHeight(0.88,'hightable-containter');
+    });
+</script>
+
+

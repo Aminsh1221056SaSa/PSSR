@@ -1,0 +1,56 @@
+﻿@model IdentityServer4.Models.ApiResource
+
+@{
+    ViewData["Title"] = "CreateApi";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Api Resources</h4>
+                <div class="table-responsive">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <form asp-action="CreateApi">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Api Name</label>
+                                        <input asp-for="Name" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">Display Name</label>
+                                        <input asp-for="DisplayName" class="form-control" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input type="submit" value="Create" class="btn btn-warning" />
+                                        <a asp-action="ApiResources" class="btn btn-info">Cancel</a>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label asp-for="Description" class="control-label"></label>
+                                        <input asp-for="Description" class="form-control" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label">User Claims</label>
+                                        <select asp-for="UserClaims" class="js-example-basic-IdentityResources w-100"
+                                                data-placeholder="Add User Claim" id="select-userClaims"
+                                                style="width: 100%;color:black"></select>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

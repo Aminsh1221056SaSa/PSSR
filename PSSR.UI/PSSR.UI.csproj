@@ -1,0 +1,48 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <TypeScriptToolsVersion>3.3</TypeScriptToolsVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="BuildBundlerMinifier" Version="3.0.415" />
+    <PackageReference Include="EPPlus" Version="4.5.3.1" />
+    <PackageReference Include="FreeSpire.XLS" Version="9.2.1" />
+    <PackageReference Include="IdentityModel" Version="4.0.0" />
+    <PackageReference Include="Microsoft.AspNet.WebApi.Versioning" Version="3.0.4" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
+    <PackageReference Include="NetBarcode" Version="1.0.7" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="4.0.1" />
+  </ItemGroup>
+
+ 
+  <ItemGroup>
+    <ProjectReference Include="..\PSSR.DataLayer\PSSR.DataLayer.csproj" />
+    <ProjectReference Include="..\PSSR.DbAccess\PSSR.DbAccess.csproj" />
+    <ProjectReference Include="..\PSSR.ServiceLayer\PSSR.ServiceLayer.csproj" />
+    <ProjectReference Include="..\PSSR.UserSecurity\PSSR.UserSecurity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BskaGenericCoreLib">
+      <HintPath>..\..\..\Custom API\BskaGenericCoreLib\BskaGenericCoreLib\bin\Debug\netstandard2.0\BskaGenericCoreLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+ 
+
+</Project>

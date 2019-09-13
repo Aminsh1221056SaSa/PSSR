@@ -1,0 +1,260 @@
+﻿@{
+    Layout = "_SecureLayout";
+    ViewData["Title"] = "Dashboard";
+}
+<link rel="stylesheet" href="~/dist/css/wbsStyle.css" />
+<section class="content" style="background:#FFF">
+    <div class="row">
+        <partial name="~/Views/Shared/PartialViews/WbsConfigs/WBSRealTimeTree.cshtml" />
+    </div>
+</section>
+
+<script src="~/dist/js/jsgantt.js"></script>
+<script src="~/dist/js/signalr.min.js"></script>
+
+<script type='text/javascript'>
+
+    document.addEventListener('DOMContentLoaded', function () {
+        var connection = new signalR.HubConnectionBuilder()
+            .withUrl('/WBSRoadMap')
+            .build();
+
+        connection.on('activityProgressChanged', function (message) {
+            var encodedMsg = message;
+            var g = JSON.parse(encodedMsg);
+            alert(g);
+        });
+        connection.start()
+            .then(function () {
+                console.log('connection started');
+            })
+            .catch(error => {
+                console.error(error.message);
+            });
+    });
+
+    $(document).ready(function () {
+         $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+     //real time Tree
+        var wbstypes = [1001, 1002, 1003];
+        getProjectwbsTree();
+
+         $('.wbsTypesch').on('ifChecked', function (event) {
+            var co = $(this).attr('id').split('-')[0];
+            if (co === 'ph') {
+                var id = $(this).attr('id').split('-')[1];
+                 var rid = parseInt(id);
+                wbstypes.push(rid);
+                    $('#first-li-wbs').empty();
+                 getProjectwbsTree();
+            }
+         });
+
+         $('.wbsTypesch').on('ifUnchecked', function (event) {
+            var co = $(this).attr('id').split('-')[0];
+            if (co === 'ph') {
+                var id = $(this).attr('id').split('-')[1];
+                var rid = parseInt(id);
+                if (wbstypes.indexOf(rid) > -1) {
+                    var index = wbstypes.indexOf(rid);
+                    wbstypes.splice(index, 1);
+                    $('#first-li-wbs').empty();
+                    getProjectwbsTree();
+                }
+            }
+         });
+
+        function getProjectwbsTree() {
+            $('#progress-wbs-loading').show();
+
+            $.ajax({
+                type: "Get",
+                url: "/poec/Dashboard/GetProjectWBSTreeToProgress?toProgress=true",
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $.each(data, function (i, val) {
+                        createProjectNode(val.Name, val.Id, val.WBSCode, val.Progress);
+                        recuresiveChilds(val.Childeren);
+                        $('#progress-wbs-loading').hide();
+                    });
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+
+    function recuresiveChilds(child) {
+        $.each(child, function (j, item) {
+            if (wbstypes.indexOf(item.Type) > -1)
+            {
+                var objParent = $("#node-" + item.ParentId + "");
+                createTrWBSModel(item.Name, item.Id, item.WBSCode, objParent, item.Progress);
+                if (item.Childeren.length) {
+                    recuresiveChilds(item.Childeren);
+                }
+            }
+        });
+    }
+
+    function createProjectNode(name, id, wbsCode, progress) {
+        var targetId = "node-" + id;
+        var $li = $('#first-li-wbs');
+        var $a = $("<a id='" + targetId + "' data-wbsCode='" + wbsCode + "' class='drop-wbs'></a>");
+
+        var sn1 = 'bg-red';
+        var widthStyle = "width:" + progress + "%";
+
+        if (progress <= 0) {
+            sn1 = 'bg-red';
+        }
+        else if (progress > 0 && progress <= 25) {
+            sn1 = 'bg-orange';
+        }
+        else if (progress > 25 && progress <= 50) {
+            sn1 = 'bg-yellow';
+        }
+        else if (progress > 50 && progress <= 90) {
+            sn1 = 'bg-aqua';
+        }
+        else if (progress > 90) {
+            sn1 = 'bg-green';
+        }
+
+        var $mDiv = $("<div class='info-box " + sn1 + "'></div>");
+
+        var $sDiv = $("<div  class='info-box-content'></div>");
+        var $sSpan = $("<span class='info-box-text' style=font-size:11px>" + name + "</span>");
+        var $tStapn = $("<span class='info-box-number'>" + wbsCode + "</span>");
+
+        $sDiv.append($sSpan);
+        $sDiv.append($tStapn);
+
+        var $pDiv = $("<div class='progress'></div>");
+        var $chDiv = $("<div class='progress-bar' style='" + widthStyle + "'></div>");
+        $pDiv.append($chDiv);
+        $sDiv.append($pDiv);
+
+        var $chSpan = $("<span class='progress-description'>" + progress + "% </span >");
+        $sDiv.append($chSpan);
+
+        $mDiv.append($sDiv);
+        $a.append($mDiv);
+        
+        $li.append($a);
+    }
+
+        function createTrWBSModel(name, id, wbsCode, dropItem, progress) {
+
+            var targetId = "node-" + id;
+
+            var newParent = $(dropItem).parent();
+
+            if (newParent.children('ul').length) {
+                var parentUl = newParent.children('ul').first();
+
+                var $li = $("<li></li>");
+                var $a = $("<a id='" + targetId + "' data-wbsCode='" + wbsCode + "' class='drop-wbs'></a>");
+
+                var sn1 = 'bg-red';
+                var widthStyle = "width:" + progress + "%";
+
+                if (progress <= 0) {
+                    sn1 = 'bg-red';
+                }
+                else if (progress > 0 && progress <= 25) {
+                    sn1 = 'bg-orange';
+                }
+                else if (progress > 25 && progress <= 50) {
+                    sn1 = 'bg-yellow';
+                }
+                else if (progress > 50 && progress <= 90) {
+                    sn1 = 'bg-aqua';
+                }
+                else if (progress > 90) {
+                    sn1 = 'bg-green';
+                }
+
+                var $mDiv = $("<div class='info-box " + sn1 + "'></div>");
+
+                var $sDiv = $("<div  class='info-box-content'></div>");
+                var $sSpan = $("<span class='info-box-text' style=font-size:11px>" + name + "</span>");
+                var $tStapn = $("<span class='info-box-number'>" + wbsCode + "</span>");
+
+                $sDiv.append($sSpan);
+                $sDiv.append($tStapn);
+
+                var $pDiv = $("<div class='progress'></div>");
+                var $chDiv = $("<div class='progress-bar' style='" + widthStyle + "'></div>");
+                $pDiv.append($chDiv);
+                $sDiv.append($pDiv);
+
+                var $chSpan = $("<span class='progress-description'>" + progress + "% </span >");
+                $sDiv.append($chSpan);
+
+                $mDiv.append($sDiv);
+                $a.append($mDiv);
+
+                $li.append($a);
+                parentUl.append($li);
+            }
+            else {
+                var $ul = $("<ul></ul>");
+                var $li = $("<li></li>");
+                var $a = $("<a id='" + targetId + "' class='drop-wbs' data-wbsCode='" + wbsCode + "'></a>");
+
+                var sn1 = 'bg-red';
+                var widthStyle = "width:" + progress + "%";
+
+                if (progress <= 0) {
+                    sn1 = 'bg-red';
+                }
+                else if (progress > 0 && progress <= 25) {
+                    sn1 = 'bg-orange';
+                }
+                else if (progress > 25 && progress <= 50) {
+                    sn1 = 'bg-yellow';
+                }
+                else if (progress > 50 && progress <= 90) {
+                    sn1 = 'bg-aqua';
+                }
+                else if (progress > 90 && progress <= 100) {
+                    sn1 = 'bg-green';
+                }
+
+                var $mDiv = $("<div class='info-box " + sn1 + "'></div>");
+
+                var $sDiv = $("<div  class='info-box-content'></div>");
+                var $sSpan = $("<span class='info-box-text' style=font-size:11px>" + name + "</span>");
+                var $tStapn = $("<span class='info-box-number'>" + wbsCode + "</span>");
+
+                $sDiv.append($sSpan);
+                $sDiv.append($tStapn);
+
+                var $pDiv = $("<div class='progress'></div>");
+                var $chDiv = $("<div class='progress-bar' style='" + widthStyle + "'></div>");
+                $pDiv.append($chDiv);
+                $sDiv.append($pDiv);
+
+                var $chSpan = $("<span class='progress-description'>" + progress + "% </span >");
+                $sDiv.append($chSpan);
+
+                $mDiv.append($sDiv);
+                $a.append($mDiv);
+
+                $li.append($a);
+                $ul.append($li);
+
+                newParent.append($ul);
+            }
+        }
+
+          setCHeight(0.82,'hightable-containter');
+    });
+</script>
+
+

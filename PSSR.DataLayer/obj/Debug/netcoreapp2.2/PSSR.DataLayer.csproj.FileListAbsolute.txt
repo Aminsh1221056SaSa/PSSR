@@ -1,0 +1,16 @@
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.DataLayer.deps.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.DataLayer.runtimeconfig.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.DataLayer.runtimeconfig.dev.json
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.DataLayer.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.DataLayer.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\BskaGenericCoreLib.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.Common.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\PSSR.Common.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\bin\Debug\netcoreapp2.2\BskaGenericCoreLib.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.csprojAssemblyReference.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.csproj.CoreCompileInputs.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.AssemblyInfoInputs.cache
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.AssemblyInfo.cs
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.csproj.CopyComplete
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.dll
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DataLayer\obj\Debug\netcoreapp2.2\PSSR.DataLayer.pdb

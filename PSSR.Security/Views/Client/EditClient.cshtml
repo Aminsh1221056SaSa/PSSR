@@ -1,0 +1,95 @@
+﻿@model IdentityServer4.Models.Client
+
+@{
+    ViewData["Title"] = "EditClient";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Add Client</h4>
+                <div class="table-responsive">
+                    <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                    <form asp-action="EditClient">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <input type="hidden" asp-for="ClientId" />
+                       <div class="container">
+                           <div class="row">
+                               <div class="col-md-4">
+                                   <div class="form-group">
+                                       <label class="control-label">Clien Name</label>
+                                       <input asp-for="ClientName" class="form-control" />
+                                   </div>
+                                   <div class="form-group">
+                                       <label asp-for="Description" class="control-label"></label>
+                                       <input asp-for="Description" class="form-control" />
+                                   </div>
+                                  
+                                   <div class="form-group">
+                                       <input type="submit" value="Edit" class="btn btn-warning" />
+                                       <a asp-action="ClientList" class="btn btn-info">Cancel</a>
+                                   </div>
+                               </div>
+                               <div class="col-md-4">
+                                   <div class="form-group">
+                                       <label class="control-label">Redirect Uris</label>
+                                       <select asp-for="RedirectUris" class="js-example-basic-IdentityResources w-100"
+                                               data-placeholder="Select Grant Type" id="select-redirectUrls"
+                                               style="width: 100%;color:black"></select>
+                                   </div>
+
+                                   <div class="form-group">
+                                       <label class="control-label">Post Logout Redirect Uris</label>
+                                       <select asp-for="PostLogoutRedirectUris" class="js-example-basic-IdentityResources w-100"
+                                               data-placeholder="Select Grant Type" id="select-PostLogoutRedirectUris"
+                                               style="width: 100%;color:black"></select>
+                                   </div>
+                               </div>
+                               <div class="col-md-4">
+                                   <div class="form-group">
+                                       <div class="form-check">
+                                           <label class="form-check-label">
+                                               <input asp-for="AllowOfflineAccess" /> Allow Offline Access
+                                               <i class="input-helper"></i>
+                                           </label>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="form-check">
+                                           <label class="form-check-label">
+                                               <input asp-for="AlwaysSendClientClaims" /> Always Send Client Claims
+                                               <i class="input-helper"></i>
+                                           </label>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="form-check">
+                                           <label class="form-check-label">
+                                               <input class="form-check-input" asp-for="RequireConsent" /> Require Consent
+                                               <i class="input-helper"></i>
+                                           </label>
+                                       </div>
+                                   </div>
+                                   <div class="form-group">
+                                       <div class="form-check">
+                                           <label class="form-check-label">
+                                               <input asp-for="AlwaysIncludeUserClaimsInIdToken" /> Always Include User Claims In Id Token
+                                               <i class="input-helper"></i>
+                                           </label>
+                                       </div>
+
+                                   </div>
+
+
+                               </div>
+
+                           </div>
+                       </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

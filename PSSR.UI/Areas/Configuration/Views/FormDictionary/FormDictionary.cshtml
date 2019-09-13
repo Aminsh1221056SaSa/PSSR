@@ -1,0 +1,454 @@
+﻿@model PSSR.ServiceLayer.FormDictionaryServices.FormDictionaryListCombinedDto
+@inject Microsoft.AspNetCore.Hosting.IHostingEnvironment _enviroment
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "System PreRequest";
+
+     var DesciplineList = new SelectList(Model.DesciplineList, "Id", "Title");
+     var WorkPackageList = new SelectList(Model.WorkPackageList, "Id", "Title");
+}
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Form Dictionary</h3>
+                    <div class="box-tools">
+                        <div class="pull-right">
+                            <a class="modal-trigger waves-effect waves-light" data-toggle="modal" data-target="#modal1">
+                                <img src="~/dist/img/excel.png" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <partial name="_ValidationSummary" />
+                    <form role="form" asp-action="CreateFormDictionary" asp-controller="FormDictionary" enctype="multipart/form-data">
+                        <!-- text input -->
+                        <div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label required">Code</label>
+                                <input min="3" name="Code" type="text" class="form-control" placeholder="Enter ..." required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label required">Type</label>
+                                <select name="Type"
+                                        asp-items="Html.GetEnumSelectList<PSSR.Common.FormDictionaryType>()"
+                                        class="form-control sort-filter-width" required></select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label required">Station Type</label>
+                                <select name="WorkPackageId"
+                                        asp-items="WorkPackageList"
+                                        class="form-control sort-filter-width" required></select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label required">Priority</label>
+                                    <input type="number" min="1" name="Priority" class="form-control" placeholder="Enter ..." value="1" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label required">Man Hours</label>
+                                <input name="Mh" class="form-control" placeholder="Enter ..." value="1" required />
+                            </div>
+
+                            <div class="form-group col-md-6">
+                                <label class="control-label required">Desciplines</label>
+                                <select asp-items="DesciplineList" name="AvailableDesciplines" class="form-control select2" multiple="multiple" data-placeholder="Select Desciplines"
+                                        style="width: 100%;"></select>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" name="Description" class="form-control" placeholder="Enter ..." />
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputFile" class="control-label required">File input</label>
+                            <input type="file" name="File">
+                            <p class="help-block">Upload Form Dictionary's Document.</p>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-warning pull-right">Create</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="option-filter">
+                    <form id="sort-filter-form" class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <div class="col-sm-3">
+                                    <label class="control-label">Sort By</label>
+                                    <select asp-for="SortFilterPageData.OrderByOptions" name="OrderByOptions"
+                                            asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.FormDictionaryServices.QueryObjects.OrderByOptions>()"
+                                            class="form-control sort-filter-width"
+                                            onchange="BookList.sendForm(this)"></select>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">Filter Type</label>
+                                    <select asp-for="SortFilterPageData.FilterBy" name="FilterBy"
+                                            asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.FormDictionaryServices.QueryObjects.FormDictionaryFilterBy>()"
+                                            class="form-control sort-filter-width"
+                                            onchange="BookList.filterByHasChanged(this)"></select>
+                                </div>
+                                <div class="col-sm-3 dim-filter-value" id="filter-value-group">
+                                    <label class="control-label">Filter By</label>
+                                    <select asp-for="SortFilterPageData.FilterValue" name="FilterValue"
+                                            id="filter-value-dropdown"
+                                            class="form-control sort-filter-width"
+                                            disabled
+                                            onchange="BookList.sendForm(this)">
+                                        <option>Select filter type...</option>
+                                    </select>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <label class="control-label">Page</label>
+                                    <div>
+                                        <input asp-for="SortFilterPageData.PageNum" name="PageNum"
+                                               class="form-control page-control-width page-num-input"
+                                               onchange="BookList.sendForm(this)">
+                                        <span class="num-pages-text">of @Model.SortFilterPageData.NumPages</span>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <label class="control-label">Page&nbsp;Size</label>
+                                    <select asp-for="SortFilterPageData.PageSize" name="PageSize"
+                                            asp-items="Model.SortFilterPageData.PageSizes.Select(x => new SelectListItem {Text = x.ToString(), Value = x.ToString()})"
+                                            class="form-control page-control-width"
+                                            onchange="BookList.sendForm(this)"></select>
+                                </div>
+                            </div>
+                        </div>
+                        <input id="PrevCheckState" name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
+                        @*@Html.Hidden("PrevCheckState", @Model.SortFilterPageData.PrevCheckState) -- this didn't work for some reason*@
+                    </form>
+                    <br />
+                </div>
+
+                <div>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="box">
+                                <div class="box-header">
+                                    <h3 class="box-title">Form Dictionary List</h3>
+                                    <div class="box-tools">
+                                        <form method="get">
+                                            <div class="input-group input-group-sm pull-left" style="padding-right:10px">
+
+                                                <input name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
+                                                <input asp-for="SortFilterPageData.OrderByOptions" name="OrderByOptions" type="hidden">
+                                                <input asp-for="SortFilterPageData.FilterBy" name="OrderByOptions" type="hidden">
+                                                <input asp-for="SortFilterPageData.FilterValue" name="OrderByOptions" type="hidden">
+                                                <input asp-for="SortFilterPageData.PageNum" name="PageNum" type="hidden">
+                                                <input asp-for="SortFilterPageData.PageSize" name="PageSize" type="hidden">
+                                                <div class="input-group input-group-sm pull-right" style="width: 150px;">
+                                                    <input type="text" name="QueryFilter" asp-for="SortFilterPageData.QueryFilter" class="form-control pull-right" placeholder="Search">
+                                                    <div class="input-group-btn">
+                                                        <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                                <!-- /.box-header -->
+                                <div class="box-body table-responsive no-padding">
+                                    <table class="table fixedHeadertable table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Code</th>
+                                                <th>Type</th>
+                                                <th>Station</th>
+                                                <th>Desciplines</th>
+                                                <th>Priority</th>
+                                                <th>Mh</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="style-10" id="hightable-containter">
+                                            @foreach (var item in Model.FormDictioanrylineList)
+                                            {
+                                                bool haveFile = true;
+                                                var formDocPath = System.IO.Path.Combine($"{_enviroment.ContentRootPath}/wwwroot/exceldocuments");
+                                                var fromPathXls = System.IO.Path.Combine(formDocPath, $"{item.Code}.xls");
+
+                                                if (!System.IO.File.Exists(fromPathXls))
+                                                {
+                                                    fromPathXls = System.IO.Path.Combine(formDocPath, $"{item.Code}.xlsx");
+                                                    if (!System.IO.File.Exists(fromPathXls))
+                                                    {
+                                                        haveFile = false;
+                                                    }
+                                                }
+                                                <tr id="tr-@item.Id">
+                                                    <td id="td1-@item.Id">@item.Code</td>
+                                                    <td>@item.Type</td>
+                                                    <td>@item.WrokPackageName</td>
+                                                    <td>@string.Join(",", item.Desciplines)</td>
+                                                    <td>@item.Priority</td>
+                                                    <td id="td2-@item.Id">@item.Mh</td>
+                                                    <td>
+                                                        @if (haveFile)
+                                                        {
+                                                            <a href="@Url.Action("DowanloadExcelFile","FormDictionary",new { id=item.Id})" rel="nofollow"><p class="pdfview btn btn-success btn-sm"><i class="fa fa-file-excel-o"></i></p></a>
+                                                        }
+                                                        <button type="button" class="btn btn-info btn-sm edtit-btn" id="dec-@item.Id" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button>
+                                                    </td>
+                                                </tr>
+                                   }
+                                        </tbody></table>
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Form Dictionary</h4>
+            </div>
+            <form  asp-action="UpdateFormDictionary" asp-controller="FormDictionary" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div>
+                        <input type="hidden" name="Id" id="selected-formDic-id" />
+                        <div class="box-body">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Code</label>
+                                    <input id="Code1" name="Code" type="text" class="form-control" placeholder="Enter ..." disabled>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Priority</label>
+                                        <input type="number" name="Priority" min="1" id="Priority1" class="form-control" placeholder="Enter ..." />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Man Hours</label>
+                                        <input name="Mh" id="mh1" class="form-control" placeholder="Enter ..." />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <input type="text" name="Description" id="Description1" class="form-control" placeholder="Enter ..." />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleInputFile" class="control-label required">File input</label>
+                                    <input type="file" name="File" id="file1">
+                                    <p class="help-block">Upload Form Dictionary's Document.</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" id="save-edit">Save changes</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4>Upload Excel</h4>
+                <p>Upload the Excel file which contains the forms dictionary values.</p>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="box-body">
+                        <div class="file-field input-field">
+                            <div class="btn btn-default">
+                                <span>File</span>
+                                <input type="file" id="files">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" type="button" name="action" id="upload-file">
+                    Upload
+                    <i class="fa fa-send"></i>
+                </button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+         $('.select2').select2();
+        $('tr').dblclick(function () {
+            var id = $(this).attr('id').split('-')[1];
+            $('#modal-default').modal('show');
+            showEditModel(id);
+        })
+
+        $('.edtit-btn').on('click', function () {
+            var id = $(this).attr('id').split('-')[1];
+            showEditModel(id);
+        })
+
+        //$('#save-edit').on('click', function () {
+        //    var id = $('#selected-formDic-id').val();
+        //    var code = $('#Code1').val();
+        //    var desc = $('#Description1').val();
+        //    var priority = $('#Priority1').val();
+        //    var file = $('#file1');
+        //    var inputFile = file[0].files[0];
+
+        //    var model = { 'id': id, 'code': code, 'description': desc, 'priority': priority, 'File': inputFile };
+            
+        //            $('#modal-default').modal('toggle');
+        //        $('#modal-default-overlay').modal('show');
+        //    $.ajax({
+        //        type: "Post",
+        //        url: "/poec/FormDictionary/UpdateFormDictionary",
+        //        data: JSON.stringify(model),
+        //        contentType: 'application/json; charset=utf-8',
+        //        dataType: "json",
+        //        success: function (data, status, jqXHR) {
+        //            $("#td1-" + id).html(code);
+        //            $("#td2-" + id).html(desc);
+        //                $('#modal-default-overlay').modal('toggle');
+        //        },
+        //        error: function (jqXHR, status) {
+        //            console.log(jqXHR);
+        //        }
+        //    });
+        //});
+
+        function showEditModel(id) {
+            $.ajax({
+                type: "Get",
+                url: "/poec/FormDictionary/GetFormDictionary?id=" + id + "",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $('#Code1').val(data.code);
+                    $('#Description1').val(data.description);
+                    $('#Priority1').val(data.priority);
+                      $('#mh1').val(data.mh);
+                    $('#selected-formDic-id').val(data.id);
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+
+        $('.pdfview').on('click', function () {
+            var id = $(this).attr('id').split('-')[1];
+            $.ajax({
+                type: "Get",
+                url: "/poec/FormDictionary/GetPdfPathFIle?id=" + id + "",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    window.open(data.value, '_blank', 'fullscreen=yes');
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+
+        $('#upload-file').on('click', function () {
+            var formData = new FormData();
+            formData.append('file', $('#files')[0].files[0]);
+           
+            $('#modal-default-overlay').modal('show');
+
+            $.ajax({
+                type: "Post",
+                url: "/poec/FormDictionary/UploadExcel",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (data, status, jqXHR) {
+                    $('#modal-default-overlay').modal('toggle');
+                    if (data.key == 200) {
+                        $('#modal1').modal('toggle');
+                        location.reload();
+                    }
+                    else {
+                        $('#global-error-message').html(data.value);
+                        $('#modal-danger').modal('show');
+                    }
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+
+        function downLoadFile(data,type) {
+            var blob = new Blob([data], { type: type.toString() });
+            var url = window.URL.createObjectURL(blob);
+            var pwa = window.open(url);
+            if (!pwa || pwa.closed || typeof pwa.closed == 'undefined') {
+                console.log('Please disable your Pop-up blocker and try again');
+            }
+        }
+         setCHeight(0.60,'hightable-containter');
+    });
+
+     document.addEventListener("DOMContentLoaded",
+         function (event) {
+                BookList.initialise('@Model.SortFilterPageData.FilterBy', '@Model.SortFilterPageData.FilterValue',
+                    '@Url.Action("GetFilterSearchContent")');
+            });
+</script>

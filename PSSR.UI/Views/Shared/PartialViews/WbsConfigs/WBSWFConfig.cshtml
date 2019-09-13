@@ -1,0 +1,29 @@
+﻿
+<div class="row">
+    <div class="col-md-12">
+        <div class="box box-warning">
+            <div class="box-header" style="padding:6px">
+                <h3 class="box-title"></h3>
+                <div class="box-tools">
+                    <div class="input-group input-group-sm">
+                        <p style="margin:2px" class="btn btn-warning" id="calculate-wf-btn">Wf Calculate&nbsp;<i class="fa fa-calculator"></i></p>
+                        <a asp-controller="Report" asp-action="WbsExportWFToActivity"><p style="margin:2px" class="btn btn-success"><i class="fa fa-file-excel-o"></i></p></a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="tablewbswf style-10" id="tbgrantwf" style="overflow-y:auto">
+                    <div style="position:relative" class="gantt" id="GanttChartDIV">
+                        <div class="loading-one-wrap" id="wbs-wfconfig-loading">
+                            <div class="loading-one">
+                                <div class="bounceball"></div>
+                                <div class="loadertext">NOW LOADING...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

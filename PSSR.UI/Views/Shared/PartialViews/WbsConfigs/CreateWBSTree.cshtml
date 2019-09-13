@@ -1,0 +1,180 @@
+﻿
+    <div class="row">
+        <div class="col-md-12">
+            <div class="customdrawer" id="wbsItemDrawer">
+                <div class="box box-warning">
+                    <div class="box-header">
+                        <h3 class="box-title"><strong></strong> Levels</h3>
+                        <div class="box-tools">
+                            <div class="form-inline">
+                                <label class="control-label">Type</label>
+                                <select name="StationType" id="wbs-type"
+                                        asp-items="Html.GetEnumSelectList<PSSR.Common.WBSType>()"
+                                        class="form-control sort-filter-width"></select>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body" style="padding:0;padding-top:10px">
+                        <div class="form-group">
+                            <div class="box-body no-padding">
+                                <table id="wbsCreatorTable" class="table table-bordered table-striped fixedHeadertable">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="model-items" style="overflow-y:auto" class="style-10"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </div>
+
+            <div id="drawer-btn" style="width:1%;float:left;padding:2px;padding-top:10%;margin-left:5px">
+                <div id="btnrighting">
+                    <p data-target="#wbsItemDrawer" class="btn btn-info text-center" style="max-width:12px;padding:0; padding-top:12px; height:50px">></p>
+                </div>
+                <div id="btnLefting">
+                    <p data-target="#wbsItemDrawer" class="btn btn-info text-center" style="max-width:12px;padding:0; padding-top:12px; height:50px"><</p>
+                </div>
+            </div>
+
+            <div id="customDrawer-right">
+                <div class="box box-success">
+                    <div class="box-header with-border" style="padding:0">
+                        <div class="box-title" style="font-size:13px">
+                            <div class="box-tools">
+                                <div class="form-group">
+                                    <label>
+                                        <input type="radio" name="gender" class="flat-red wbsTypesch" id="sh-1001">
+                                        Show Table
+                                    </label>
+                                    <label>
+                                        <input type="radio" name="gender" class="flat-red wbsTypesch" id="sh-1002">
+                                        Show Tree
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-tools">
+                            <div class="form-group">
+
+                                <div id="show-on-line" style="display:none">
+                                    @*<label>
+                                        <input type="checkbox" class="flat-red wbsTypesch" id="ch-1006">
+                                        SubSystem
+                                    </label>*@
+                                    <button class="btn btn-success" id='btn-line-print'><i class="fa fa-print"></i></button>
+                                </div>
+                                <div id="show-on-tree" style="display:none">
+                                    <a asp-controller="Report" asp-action="WbsExportWF"><p style="margin:2px" class="btn btn-success"><i class="fa fa-file-excel-o"></i></p></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div>
+                            <div class="loading-one-wrap" id="wbs-creator-loading" style="display:none">
+                                <div class="loading-one">
+                                    <div class="bounceball"></div>
+                                    <div class="loadertext">NOW LOADING...</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="show-Tree">
+                            <div class="tablewbswf " id="tbgrantwfCrator">
+                                <div style="position:relative;overflow-y:auto" class="gantt treeWbs style-10" id="GanttChartDIV"></div>
+                            </div>
+                        </div>
+                        <div class="style-10"   id="show-line" style="overflow:auto">
+                            <div class="treeWbs">
+                                <ul style="left:-20px">
+                                    <li id="first-li-wbs-real">
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+             
+            </div>
+        </div>
+    </div>
+
+<div>
+    <input type="hidden" id="selected-wbs-targetid" />
+    <input type="hidden" id="selected-wbs-name" />
+    <input type="hidden" id="drop-wbs-id" />
+</div>
+
+<div class="modal fade" id="modal-default-wbsDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="wbs-edit-title">Edit WBS Item </h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="hidden" id="delete-wbs-id" />
+
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>WBs Code</label>
+                        <input name="Wbscodeedit1" id="Wbscodeedit1" type="text" class="form-control" placeholder="Enter ..." disabled />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Calculation Type</label>
+                        <select name="CalType" id="calType"
+                                asp-items="Html.GetEnumSelectList<PSSR.Common.WfCalculationType>()"
+                                class="form-control sort-filter-width"></select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-left" id="save-wbs-delete">Delete</button>
+
+                    <button type="submit" class="btn btn-primary" id="save-wbs-Change">Save Edit</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-default-subSystemView">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">SubSystems</h4>
+            </div>
+            <div class="modal-body" style="height:300px">
+                <div>
+                    <div class="col-md-12">
+                        <div class="treeWbs">
+                            <ul>
+                                <li id="first-li-wbs1">
+
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

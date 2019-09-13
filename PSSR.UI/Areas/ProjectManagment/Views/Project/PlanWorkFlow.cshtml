@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewData["Title"] = "PlanWorkFlow";
+    Layout = "~/Views/Shared/_SecureLayout.cshtml";
+}
+
+<link rel="stylesheet" href="~/dist/css/jsgantt.css" />
+
+<div class="col-md-12">
+    <div class="row">
+        <div class="box box-danger">
+            <div class="box-header with-border">
+                <div class="box-title">
+                    <div class="box-tools">
+                        <div class="btn-group">
+                            <button type="button" style="width:80px" class="btn btn-danger btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                                <i style="font-size:16px;color:#FFF;" class="fa fa-wrench"></i>
+                            </button>
+                            <partial name="~/Views/Shared/FilterComponents/TaskGroupingFilterView.cshtml" />
+                        </div>
+
+                        <a href="@Url.Action("DesciplinePlane","Project")">
+                            <p type="button" style="width:80px" class="btn btn-warning">
+                                Add Plan
+                            </p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="box-body">
+                <div class="tablewbsplane style-10" id="tablewbsplane" style="overflow-y:auto;overflow-x:hidden">
+                    <div class="loading-one-wrap" id="nothing-plan" style="display:none">
+                        <div class="loading-one">
+                            <div class="bounceball"></div>
+                            <div class="loadertext">NOW LOADING...</div>
+                        </div>
+                    </div>
+                    <div style="position:relative" class="gantt" id="GanttChartDIV"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/dist/js/grant/jsgantt.js"></script>
+<environment names="Development">
+    <script src="~/dist/js/api/managments/planWorkFlow.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/planWorkFlow.min.js"></script>
+</environment>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        var wh = window.innerHeight * 0.72;
+        $('#tablewbsplane').css('height', wh+'px');
+        $('input[type="checkbox"].flat-red, input[type="radio"].flat-red').iCheck({
+            checkboxClass: 'icheckbox_flat-green',
+            radioClass: 'iradio_flat-green'
+        });
+
+        $('#gr-1000').iCheck('check');
+        $('#gr-1001').iCheck('check');
+        $('#gr-1003').iCheck('check');
+        $('#gr-1004').iCheck('check');
+        $('#gr-1002').iCheck('check');
+
+        $('#nothing-plan').show();
+        planWorkFlow.grantinitialization();
+
+        $('#grant-filter').on('click', function () {
+            $('#nothing-plan').show();
+            planWorkFlow.grantinitialization();
+        });
+
+    })
+</script>
+

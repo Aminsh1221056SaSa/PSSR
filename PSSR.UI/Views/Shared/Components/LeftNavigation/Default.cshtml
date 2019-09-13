@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Http
+@model PSSR.UI.Helpers.Navigation.NavigationMenu
+@inject IHttpContextAccessor UserHttpContext
+@{
+    var currentUser = UserHttpContext.HttpContext.User.GetCurrentUserDetails();
+}
+
+@foreach (var menuItem in Model.MenuItems)
+{
+    if (currentUser.Roles.Intersect(menuItem.SelectedRoles).Any())
+    {
+        if (menuItem.IsNested)
+        {
+            <li class="treeview">
+                <a>
+                    <i class="@menuItem.MaterialIcon"></i> <span>@menuItem.DisplayName</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @foreach (var subMenuItem in menuItem.Childeren.OrderBy(p => p.Sequence).ToList())
+                    {
+                        if (currentUser.Roles.Intersect(subMenuItem.SelectedRoles).Any())
+                        {
+                            <li><a href="@subMenuItem.Link"><i class="@subMenuItem.MaterialIcon"></i>@subMenuItem.DisplayName</a></li>
+                        }
+                    }
+                </ul>
+            </li>
+        }
+        else
+        {
+            <li class="treeview">
+                <a>
+                    <i class="@menuItem.MaterialIcon"></i> <span>@menuItem.DisplayName</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @if (currentUser.Roles.Intersect(menuItem.SelectedRoles).Any())
+                    {
+                    <li><a href="@menuItem.Link"><i class="@menuItem.MaterialIcon"></i>@menuItem.DisplayName</a></li>
+                    }
+                </ul>
+            </li>
+        }
+    }
+
+}

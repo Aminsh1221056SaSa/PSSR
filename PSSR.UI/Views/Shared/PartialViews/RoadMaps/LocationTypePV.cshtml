@@ -1,0 +1,228 @@
+﻿<div class="content">
+    <div class="row">
+        <div class="col-md-4">
+            <div  class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Locations</h3>
+                </div>
+
+                <div class="box-body">
+                    <div>
+                        <div class="form-group">
+                            <label class="control-label required">Name</label>
+                            <input id="lName" name="Name" type="text" class="form-control" placeholder="Enter ..." required/>
+                        </div>
+
+                        <div class="box-footer">
+                            <button type="submit" class="btn btn-success pull-right" id="location-create">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="box box-warning">
+                <div class="box-header">
+                    <h3 class="box-title">Location List</h3>
+                    <div class="box-tools">
+                        <div class="input-group input-group-sm" style="width: 150px;">
+                            <input type="text" id="location-query" name="table_search" class="form-control pull-right" placeholder="Search">
+                            <div class="input-group-btn">
+                                <button type="submit" id="location-search" class="btn btn-default"><i class="fa fa-search"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="tb-locationType"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="modal-default-locationedit">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Location...</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="edit-location-id" />
+
+                <div class="form-group">
+                    <label>Name</label>
+                    <input id="lName1" name="Name" type="text" class="form-control" placeholder="Enter ..." required>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-edit-loc">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+
+        var isloaded = false;
+
+        $('#location-tab').on('click', function () {
+            if (!isloaded) {
+                getLocations();
+                isloaded = true;
+            }
+        });
+
+         $('#location-search').on('click', function () {
+            getLocations();
+         });
+
+        function getLocations() {
+            $('#tb-locationType').empty();
+            var query = $('#location-query').val();
+
+            $.ajax({
+                type: "Get",
+                url: "/poec/WorkPackage/GetLocations?query=" + query,
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $.each(data, function (i, val) {
+                        createTr(val);
+                    });
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+
+        $('#location-create').on('click', function () {
+            $('#modal-default-overlay').modal('show');
+            var name = $('#lName').val();
+            var wf = $('#lWf').val();
+            var roadMapval = $('#lroadMapId').val();
+
+            var model = {
+                'Title': name, 'Wf': wf, 'ProjectRoadMapId': roadMapval
+            };
+
+            $.ajax({
+                type: "Post",
+                url: "/poec/WorkPackage/CreateLocation",
+                data: JSON.stringify(model),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $('#modal-default-overlay').modal('toggle');
+                    if (data.key == 200) {
+                        if (data.model != null) {
+                            createTr(data.model);
+                        }
+                    }
+                    else
+                    {
+                        $('#global-error-message').html(data.value);
+                        $('#modal-danger').modal('show');
+                    }
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+
+        function createTr(model) {
+            var tr = $("<tr id='tr-'"+model.id+"></tr>");
+            tr.append("<td>" + model.title + "</td>");
+            tr.append("<td><button type='button' class='btn btn-info btn-sm edtit-btn-loc' data-name=" + model.title + " id='locedit-" + model.id + "' ><i class='fa fa-edit'></i></button></td>");
+             tr.append("<td><button type='button' class='btn btn-danger btn-sm delete-btn-loc' id='locdelete-" + model.id + "' ><i class='fa fa-trash'></i></button></td>");
+
+            $('#tb-locationType').append(tr);
+        }
+
+        
+        $('#tb-locationType').on('click', '.edtit-btn-loc', function () {
+            var id = $(this).attr('id').split('-')[1];
+            var name = $(this).attr('data-name');
+            $('#edit-location-id').val(id);
+
+            $('#lName1').val(name);
+            $('#modal-default-locationedit').modal('show');
+        });
+
+        $('#save-edit-loc').on('click', function () {
+            var id=    $('#edit-location-id').val();
+            var name = $('#lName1').val();
+            var model = { 'Id': id, 'Title': name };
+
+            $('#modal-default-locationedit').modal('toggle');
+             $('#modal-default-overlay').modal('show');
+             $.ajax({
+                type: "PUT",
+                url: "/poec/WorkPackage/UpdateLocation",
+                data: JSON.stringify(model),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                 success: function (data, status, jqXHR) {
+                    $('#modal-default-overlay').modal('toggle');
+                    if (data.key == 200) {
+                        getLocations();
+                    }
+                    else
+                    {
+                        $('#global-error-message').html(data.value);
+                        $('#modal-danger').modal('show');
+                    }
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+
+        $('#tb-locationType').on('click', '.delete-btn-loc', function () {
+            var id = $(this).attr('id').split('-')[1];
+              $('#modal-default-overlay').modal('show');
+             $.ajax({
+                type: "Delete",
+                url: "/poec/WorkPackage/DeleteLocation/"+id+"",
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                 success: function (data, status, jqXHR) {
+                    $('#modal-default-overlay').modal('toggle');
+                    if (data.key == 200) {
+                        getLocations();
+                    }
+                    else
+                    {
+                        $('#global-error-message').html(data.value);
+                        $('#modal-danger').modal('show');
+                    }
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+    });
+</script>

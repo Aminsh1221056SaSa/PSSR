@@ -1,0 +1,261 @@
+﻿@model PSSR.ServiceLayer.WorkPackageSteps.WorkPackageStepListCombinedDto
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "WorkPackage Step";
+
+    var WorkPackageList = new SelectList(ViewBag.WorkPackages as List<PSSR.ServiceLayer.RoadMapServices.WorkPackageListDto>, "Id", "Title");
+}
+<div class="row">
+    <div class="col-md-4">
+        <div class="box box-warning">
+            <div class="box-body">
+                <partial name="_ValidationSummary" />
+                <form role="form" asp-action="CreateWorkPackageStep" asp-controller="WorkPackageStep">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label class="control-label required">Title</label>
+                        <input min="3" name="Title" type="text" class="form-control" placeholder="Enter ..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label required">Station Type</label>
+                        <select name="WorkPackageId"
+                                asp-items="WorkPackageList"
+                                class="form-control sort-filter-width" required></select>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input type="text" name="Description" class="form-control" placeholder="Enter ..." />
+                        </div>
+                    </div>
+
+                    <div class="box-footer">
+                        <button type="submit" class="btn btn-warning pull-right">Create</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="box box-success">
+            <div class="option-filter">
+                <form id="sort-filter-form" class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div class="col-sm-3">
+                                <label class="control-label">Sort By</label>
+                                <select asp-for="SortFilterPageData.OrderByOptions" name="OrderByOptions"
+                                        asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.WorkPackageSteps.QueryObjects.OrderByOptions>()"
+                                        class="form-control sort-filter-width"
+                                        onchange="BookList.sendForm(this)"></select>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Filter Type</label>
+                                <select asp-for="SortFilterPageData.FilterBy" name="FilterBy"
+                                        asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.WorkPackageSteps.QueryObjects.WorkPackageStepFilterBy>()"
+                                        class="form-control sort-filter-width"
+                                        onchange="BookList.filterByHasChanged(this)"></select>
+                            </div>
+                            <div class="col-sm-3 dim-filter-value" id="filter-value-group">
+                                <label class="control-label">Filter By</label>
+                                <select asp-for="SortFilterPageData.FilterValue" name="FilterValue"
+                                        id="filter-value-dropdown"
+                                        class="form-control sort-filter-width"
+                                        disabled
+                                        onchange="BookList.sendForm(this)">
+                                    <option>Select filter type...</option>
+                                </select>
+                            </div>
+
+                            <div class="col-sm-2">
+                                <label class="control-label">Page</label>
+                                <div>
+                                    <input asp-for="SortFilterPageData.PageNum" name="PageNum"
+                                           class="form-control page-control-width page-num-input"
+                                           onchange="BookList.sendForm(this)">
+                                    <span class="num-pages-text">of @Model.SortFilterPageData.NumPages</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-2">
+                                <label class="control-label">Page&nbsp;Size</label>
+                                <select asp-for="SortFilterPageData.PageSize" name="PageSize"
+                                        asp-items="Model.SortFilterPageData.PageSizes.Select(x => new SelectListItem {Text = x.ToString(), Value = x.ToString()})"
+                                        class="form-control page-control-width"
+                                        onchange="BookList.sendForm(this)"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <input id="PrevCheckState" name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
+                    @*@Html.Hidden("PrevCheckState", @Model.SortFilterPageData.PrevCheckState) -- this didn't work for some reason*@
+                </form>
+                <br />
+            </div>
+
+            <div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="box">
+                            <div class="box-header">
+                                <h3 class="box-title">Workpackage Step List</h3>
+                                <div class="box-tools">
+                                    <form method="get">
+                                        <div class="input-group input-group-sm pull-left" style="padding-right:10px">
+
+                                            <input name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
+                                            <input asp-for="SortFilterPageData.OrderByOptions" name="OrderByOptions" type="hidden">
+                                            <input asp-for="SortFilterPageData.FilterBy" name="OrderByOptions" type="hidden">
+                                            <input asp-for="SortFilterPageData.FilterValue" name="OrderByOptions" type="hidden">
+                                            <input asp-for="SortFilterPageData.PageNum" name="PageNum" type="hidden">
+                                            <input asp-for="SortFilterPageData.PageSize" name="PageSize" type="hidden">
+                                            <div class="input-group input-group-sm pull-right" style="width: 150px;">
+                                                <input type="text" name="QueryFilter" asp-for="SortFilterPageData.QueryFilter" class="form-control pull-right" placeholder="Search">
+                                                <div class="input-group-btn">
+                                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <!-- /.box-header -->
+                            <div class="box-body table-responsive no-padding">
+                                <table class="table fixedHeadertable table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Title</th>
+                                            <th>Work Package</th>
+                                            <th>Description</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="hightable-containter">
+                                        @foreach (var item in Model.WorkStepList)
+                                        {
+                                            <tr id="tr-@item.Id">
+                                                <td id="td1-@item.Id">@item.Title</td>
+                                                <td>@item.WorkPackageName</td>
+                                                <td id="td2-@item.Id">@item.Description</td>
+                                                <td><button type="button" class="btn btn-success btn-sm edtit-btn" id="dec-@item.Id" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Edit Work Package Step</h4>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <input type="hidden" id="selected-formDic-id" />
+                    <div class="box-body">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input id="Code1" type="text" class="form-control" placeholder="Enter ..." required>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <input type="text" id="Description1" class="form-control" placeholder="Enter ..." />
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="save-edit">Save changes</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script type='text/javascript'>
+    $(document).ready(function () {
+         $('.select2').select2();
+        $('tr').dblclick(function () {
+            var id = $(this).attr('id').split('-')[1];
+            $('#modal-default').modal('show');
+            showEditModel(id);
+        })
+
+        $('.edtit-btn').on('click', function () {
+            var id = $(this).attr('id').split('-')[1];
+            showEditModel(id);
+        })
+
+        $('#save-edit').on('click', function () {
+            var id = $('#selected-formDic-id').val();
+            var code = $('#Code1').val();
+            var desc = $('#Description1').val();
+
+            var model = { 'id': id, 'Title': code, 'description': desc };
+
+                    $('#modal-default').modal('toggle');
+                $('#modal-default-overlay').modal('show');
+            $.ajax({
+                type: "Post",
+                url: "/poec/WorkPackageStep/UpdateWorkPackageStep",
+                data: JSON.stringify(model),
+                contentType: 'application/json; charset=utf-8',
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $("#td1-" + id).html(code);
+                    $("#td2-" + id).html(desc);
+                        $('#modal-default-overlay').modal('toggle');
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        });
+
+        function showEditModel(id) {
+            $.ajax({
+                type: "Get",
+                url: "/poec/WorkPackageStep/GetWorkPackageStep?id=" + id + "",
+
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data, status, jqXHR) {
+                    $('#Code1').val(data.title);
+                    $('#Description1').val(data.description);
+                    $('#selected-formDic-id').val(data.id);
+                },
+                error: function (jqXHR, status) {
+                    console.log(jqXHR);
+                }
+            });
+        }
+           setCHeight(0.60,'hightable-containter');
+    });
+
+     document.addEventListener("DOMContentLoaded",
+         function (event) {
+                BookList.initialise('@Model.SortFilterPageData.FilterBy', '@Model.SortFilterPageData.FilterValue',
+                    '@Url.Action("GetFilterSearchContent")');
+            });
+</script>

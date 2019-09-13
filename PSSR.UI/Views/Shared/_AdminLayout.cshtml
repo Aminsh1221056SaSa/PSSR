@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "_AdminLayout";
+    Layout = "~/Views/Shared/_MasterLayout.cshtml";
+}
+
+<div>
+    <div class="content-wrapper">
+        
+        <section style="padding-right:10px;padding-top:5px;padding-left:10px;">
+            @RenderBody()
+            @RenderSection("Scripts", required: false)
+        </section>
+    </div>
+</div>
+
