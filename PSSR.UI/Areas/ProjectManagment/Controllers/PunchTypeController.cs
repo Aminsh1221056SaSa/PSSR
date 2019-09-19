@@ -67,7 +67,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchTypeListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetAllPunchTypes()
         {
@@ -85,7 +85,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchTypeListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchTypes([FromQuery] int id)
         {
@@ -160,7 +160,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         //[ValidateAntiForgeryToken]
         public IActionResult UpdatePunchType([FromBody] PunchTypeDto model,

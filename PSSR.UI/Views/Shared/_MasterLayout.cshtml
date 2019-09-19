@@ -1,25 +1,31 @@
-﻿@inject PSSR.UI.Helpers.CashHelper.IAdminNavigationHelper adminNavigationCache
-
-@{
-    var currentUser = Context?.User?.GetCurrentUserDetails();
-}
+﻿
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>POEC</title>
+    <title>APSE</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <environment names="Development">
         <link href="~/dist/lib/fontawesome-free/css/all.min.css" rel="stylesheet">
+        <link href="~/dist/lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
+        <link href="~/dist/lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="~/dist/lib/datatables.net-bs/css/colReorder.dataTables.min.css" />
+        <link rel="stylesheet" href="~/dist/lib/datatables.net-bs/css/dataTables.bootstrap.min.css" />
+        <link rel="stylesheet" href="~/dist/lib/datatables.net-bs/css/buttons.dataTables.min.css" />
+
         <link href="~/dist/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
         <link href="~/dist/lib/typicons.font/typicons.css" rel="stylesheet">
         <link href="~/dist/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+        <link href="~/dist/lib/lightslider/css/lightslider.min.css" rel="stylesheet">
+        <link href="~/dist/lib/select2/css/select2.min.css" rel="stylesheet">
 
         <!-- azia CSS -->
-        <link rel="stylesheet" href="~/dist/css/azia.css">
+        <link rel="stylesheet" href="~/dist/css/azia.css" />
+        <link rel="stylesheet" href="~/dist/css/site.css" />
     </environment>
     @*<environment names="Staging,Production">
         <link rel="stylesheet" href="~/dist/lib/iCheck/all.css">
@@ -33,27 +39,51 @@
    
 <environment names="Development">
     <script src="~/dist/lib/jquery/jquery.min.js"></script>
+    <script src="~/dist/lib/jquery-validation-1.19.1/dist/jquery.validate.min.js"></script>
+
+    <script src="~/dist/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/dist/lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
+    <script src="~/dist/lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/dist/lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
+
+    <script src="~/dist/lib/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="~/dist/lib/datatables.net/js/dataTables.buttons.min.js"></script>
+    <script src="~/dist/lib/datatables.net/js/dataTables.colReorder.min.js"></script>
+
+    <script src="~/dist/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/dist/js/buttons.colVis.min.js"></script>
+    <script src="~/dist/lib/datatables.net/js/buttons.flash.js"></script>
+    <script src="~/dist/js/jszip.min.js"></script>
+    <script src="~/dist/lib/pdfmake/build/pdfmake.min.js"></script>
+    <script src="~/dist/lib/pdfmake/build/vfs_fonts.js"></script>
+    <script src="~/dist/js/buttons.html5.min.js"></script>
+
     <script src="~/dist/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="~/dist/lib/ionicons/ionicons.js"></script>
+    <script src="~/dist/lib/jquery.maskedinput/jquery.maskedinput.js"></script>
+    <script src="~/dist/lib/spectrum-colorpicker/spectrum.js"></script>
     <script src="~/dist/lib/jquery.flot/jquery.flot.js"></script>
     <script src="~/dist/lib/jquery.flot/jquery.flot.resize.js"></script>
     <script src="~/dist/lib/jqvmap/jquery.vmap.min.js"></script>
     <script src="~/dist/lib/jqvmap/maps/jquery.vmap.world.js"></script>
     <script src="~/dist/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/dist/lib/lightslider/js/lightslider.min.js"></script>
+    <script src="~/dist/lib/select2/js/select2.min.js"></script>
+    <script src="~/dist/lib/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
+    <script src="~/dist/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 
     <script src="~/dist/js/azia.js"></script>
     <script src="~/dist/js/dashboard.sampledata.js"></script>
-
     <!-- ChartJS -->
 </environment>
-    
+<environment names="Staging,Production">
+  
+</environment>
 
 </head>
-<body class="az-light az-body">
-    <div>
-        @RenderBody()
-    </div>
-    
+<body class="az-body az-body-sidebar">
+    @RenderBody()
+
     <script>
         $(function () {
             'use strict'
@@ -62,6 +92,20 @@
                 e.preventDefault();
                 $(this).parent().toggleClass('show');
                 $(this).parent().siblings().removeClass('show');
+            })
+
+                ('.az-toggle').on('click', function () {
+                    $(this).toggleClass('on');
+                })
+
+            $('.az-nav-tabs .tab-link').on('click', function (e) {
+                e.preventDefault();
+                $(this).addClass('active');
+                $(this).parent().siblings().find('.tab-link').removeClass('active');
+
+                var target = $(this).attr('href');
+                $(target).addClass('active');
+                $(target).siblings().removeClass('active');
             })
 
             $(document).on('click touchstart', function (e) {
@@ -303,7 +347,6 @@
                 borderColor: '#fff',
                 hoverOpacity: .85
             });
-
         });
     </script>
     @RenderSection("Scripts", required: false)

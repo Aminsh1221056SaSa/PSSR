@@ -10,7 +10,7 @@
     function Initialization(desciplineReport, workPackageStepReport) {
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/ManagerDashboardInitializationW1",
+            url: "/APSE/Dashboard/ManagerDashboardInitializationW1",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -59,7 +59,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetProjectMDRSummary",
+            url: "/APSE/Dashboard/GetProjectMDRSummary",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -136,7 +136,7 @@
         $('#w1-actual-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetActivityDetailsByWorkPackage?workPackageId=" + workPackageId +"&groupType="+1 ,
+            url: "/APSE/Dashboard/GetActivityDetailsByWorkPackage?workPackageId=" + workPackageId +"&groupType="+1 ,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -284,7 +284,7 @@
         $('#w2-actual-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetActivityDetailsByWorkPackage?workPackageId=" + workPackageId + "&groupType=" + 2,
+            url: "/APSE/Dashboard/GetActivityDetailsByWorkPackage?workPackageId=" + workPackageId + "&groupType=" + 2,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

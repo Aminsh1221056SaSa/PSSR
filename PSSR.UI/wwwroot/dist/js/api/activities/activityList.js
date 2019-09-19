@@ -19,7 +19,7 @@
     function getProjectwbsWfTreeActivity(lasId) {
         $.ajax({
             type: "Get",
-            url: "/poec/WBS/GetProjectWBSActivityTree?parentId=" + lasId,
+            url: "/APSE/WBS/GetProjectWBSActivityTree?parentId=" + lasId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -41,7 +41,7 @@
         $('#modal-default-overlay').modal('toggle');
         $.ajax({
             type: "Get",
-            url: "/poec/Project/GetProjectPlanActivity?workPackageId=" + workId + "&locationId=" + locId + "&subsystemId=" + subsystemId + "&desciplineId=" + deciplineId + "&formId=" + formId,
+            url: "/APSE/Project/GetProjectPlanActivity?workPackageId=" + workId + "&locationId=" + locId + "&subsystemId=" + subsystemId + "&desciplineId=" + deciplineId + "&formId=" + formId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

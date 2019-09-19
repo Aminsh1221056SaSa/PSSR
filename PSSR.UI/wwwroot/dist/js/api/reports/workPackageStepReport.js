@@ -11,7 +11,7 @@
         $('#com-chart-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskStatusPreCommByWorkStep?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=true",
+            url: "/APSE/Dashboard/TaskStatusPreCommByWorkStep?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=true",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -105,7 +105,7 @@
        
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskStatusPreCommByWorkStep?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=false",
+            url: "/APSE/Dashboard/TaskStatusPreCommByWorkStep?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=false",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

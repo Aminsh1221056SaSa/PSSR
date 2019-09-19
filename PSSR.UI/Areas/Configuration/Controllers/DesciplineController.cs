@@ -86,7 +86,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(DesciplineListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDescipline([FromQuery] int id)
         {
@@ -99,7 +99,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(DesciplineListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDesciplineList()
         {
@@ -113,7 +113,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateDescipline([FromBody] DesciplineDto model,
             [FromServices]IActionService<IUpdateDesciplineAction> service)

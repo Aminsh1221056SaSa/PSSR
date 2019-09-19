@@ -218,7 +218,7 @@
                 $('#modal-default-overlay').modal('show');
             $.ajax({
                 type: "Post",
-                url: "/poec/WorkPackageStep/UpdateWorkPackageStep",
+                url: "/APSE/WorkPackageStep/UpdateWorkPackageStep",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -236,7 +236,7 @@
         function showEditModel(id) {
             $.ajax({
                 type: "Get",
-                url: "/poec/WorkPackageStep/GetWorkPackageStep?id=" + id + "",
+                url: "/APSE/WorkPackageStep/GetWorkPackageStep?id=" + id + "",
 
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

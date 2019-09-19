@@ -148,7 +148,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ClearPunchReportDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDailyTaskFormTypeReport([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate, [FromQuery]int workId)
         {
@@ -167,7 +167,7 @@ namespace PSSR.UI.Controllers
         #region punch report
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ClearPunchReportDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDailyPunchClearReport([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate)
         {
@@ -183,7 +183,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchCategoryReportDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchCategoryReport([FromQuery] DateTime fromDate, [FromQuery] DateTime toDate)
         {
@@ -202,7 +202,7 @@ namespace PSSR.UI.Controllers
         #region status report
       
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchCategoryReportDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetStatusReport([FromQuery] int workId)
         {

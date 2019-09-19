@@ -81,7 +81,7 @@ namespace PSSR.UI.Controllers
         //api
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<ProjectListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetallCurrentUserprojects()
         {
@@ -108,7 +108,7 @@ namespace PSSR.UI.Controllers
             }
         }
 
-        [HttpGet("poec/[controller]/[action]")]
+        [HttpGet("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectWBSListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectWBSTreeToProgress([FromQuery] bool toProgress)
         {
@@ -127,7 +127,7 @@ namespace PSSR.UI.Controllers
 
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectDashboardViewModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ProjectDashboardInitialization()
         {
@@ -145,7 +145,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectDashboardViewModel), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ManagerDashboardInitializationW1()
         {
@@ -165,7 +165,7 @@ namespace PSSR.UI.Controllers
         #region work Package
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ManagerDashboardWorkPackageReport), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityDetailsByWorkPackage([FromQuery] int workPackageId, [FromQuery] int groupType)
         {
@@ -182,7 +182,7 @@ namespace PSSR.UI.Controllers
 
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<WFReportList>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDesciplineWorkPackageReport(int wId)
         {
@@ -198,7 +198,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<WFReportList>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetSystemWorkPackageReport(int wId)
         {
@@ -214,7 +214,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<WFReportList>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetWorkPackageStepProgress(int wId)
         {
@@ -234,7 +234,7 @@ namespace PSSR.UI.Controllers
         #region mdrs
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<MDRSummaryDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectMDRSummary()
         {
@@ -258,7 +258,7 @@ namespace PSSR.UI.Controllers
         //activity chatrs
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetGlobalActivityDoneChart()
         {
@@ -274,7 +274,7 @@ namespace PSSR.UI.Controllers
         //system charts
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskStatusBySystem()
         {
@@ -287,7 +287,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskConditionBySystem()
         {
@@ -300,7 +300,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PieChartsListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskCounterBySystem()
         {
@@ -313,7 +313,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskDoneBySystem()
         {
@@ -328,7 +328,7 @@ namespace PSSR.UI.Controllers
         //descipline charts
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskStatusPreCommByDesciplines([FromQuery] int workPackageId, [FromQuery] int locationId, [FromQuery] bool total)
         {
@@ -344,7 +344,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskConditionByDesciplines()
         {
@@ -357,7 +357,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PieChartsListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskCounterByDesciplines()
         {
@@ -370,7 +370,7 @@ namespace PSSR.UI.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskDoneByDesciplines()
         {
@@ -385,7 +385,7 @@ namespace PSSR.UI.Controllers
         //workpackagestep charts
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(BarChartDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> TaskStatusPreCommByWorkStep([FromQuery] int workPackageId, [FromQuery] int locationId, [FromQuery] bool total)
         {

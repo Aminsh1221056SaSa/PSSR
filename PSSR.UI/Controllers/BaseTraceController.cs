@@ -11,7 +11,7 @@ using PSSR.ServiceLayer.Logger;
 namespace PSSR.UI.Controllers
 {
 
-    //[Authorize]
+    [Authorize]
     public abstract class BaseTraceController : Controller
     {
         protected void SetupTraceInfo()

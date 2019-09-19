@@ -85,7 +85,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(CustomOptionModel<PunchSortFilterPageOptions, PunchListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> PunchListSummary([FromQuery] string filterByOption, [FromQuery] string sortByOption
             , [FromQuery] string filterValue, [FromQuery]int pageNum, [FromQuery]int pageSize, [FromQuery] string query = "", [FromQuery]string prevCheckState = "")
@@ -101,7 +101,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchEditableListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityPunchs(long activityId)
         {
@@ -114,7 +114,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchEditableListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchGoDetails(long punchId)
         {
@@ -127,7 +127,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchDetails(long punchId)
         {
@@ -140,7 +140,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ActivityStatusHistoryListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchDocuments(long punchId)
         {
@@ -183,7 +183,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult AddPUnchToActivity([FromBody] Logic.Punches.PunchDto model,
         [FromServices]IActionService<Logic.Punches.IPlacePunchAction> service,
@@ -212,7 +212,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdatePUnchToActivity([FromBody] Logic.Punches.PunchDto model,
          [FromServices]IActionService<Logic.Punches.IUpdatePunchDbAccess> service)
@@ -230,7 +230,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdatePUnchGo([FromBody] Logic.Punches.PunchGoDto model,
          [FromServices]IActionService<Logic.Punches.IUpdatePunchGoAction> service,
@@ -261,7 +261,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpDelete]
-        [Route("poec/[controller]/[action]/{id}")]
+        [Route("APSE/[controller]/[action]/{id}")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult DeletePunch(long id,[FromServices]IActionService<Logic.Punches.IDeletePunchAction> service
             , [FromServices]IActionService<IUpdateActivityProgressDeleteAction> activityProgressService)
@@ -319,7 +319,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UploadExcel(IFormFile file,
           [FromServices]IActionService<IPlcaePunchBulkAction> service,

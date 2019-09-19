@@ -6,11 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.4.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
     <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Versioning" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
     <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="4.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUi" Version="4.0.1" />
@@ -18,6 +20,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PSSR.ServiceLayer\PSSR.ServiceLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BskaGenericCoreLib">
+      <HintPath>..\..\..\Custom API\BskaGenericCoreLib\BskaGenericCoreLib\bin\Debug\netstandard2.0\BskaGenericCoreLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

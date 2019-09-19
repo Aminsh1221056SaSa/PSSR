@@ -85,7 +85,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/WBS/GetProjectWBSTree",
+            url: "/APSE/WBS/GetProjectWBSTree",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -176,7 +176,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/WBS/GetProjectWBSTree/",
+            url: "/APSE/WBS/GetProjectWBSTree/",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -312,7 +312,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
 
         $.ajax({
             type: "Post",
-            url: "/poec/WBS/CreateProjectWBS",
+            url: "/APSE/WBS/CreateProjectWBS",
             data: JSON.stringify(model),
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -344,7 +344,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
         var intId = parseInt(systemId);
         $.ajax({
             type: "Get",
-            url: "/poec/WBS/GetProjectWBSTree/",
+            url: "/APSE/WBS/GetProjectWBSTree/",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -459,7 +459,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
     function getProjectWorks() {
         $.ajax({
             type: "Get",
-            url: "/poec/WorkPackage/GetRoadMaps",
+            url: "/APSE/WorkPackage/GetRoadMaps",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -479,7 +479,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/WorkPackage/GetLocations",
+            url: "/APSE/WorkPackage/GetLocations",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -498,7 +498,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
     function getProjectDesciplines() {
         $.ajax({
             type: "Get",
-            url: "/poec/Descipline/GetDesciplineList",
+            url: "/APSE/Descipline/GetDesciplineList",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -517,7 +517,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
     function getProjectSystems() {
         $.ajax({
             type: "Get",
-            url: "/poec/ProjectSystem/GetProjectSystems",
+            url: "/APSE/ProjectSystem/GetProjectSystems",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -536,7 +536,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
     function getProjectSubSystems() {
         $.ajax({
             type: "Get",
-            url: "/poec/SubSystem/GetProjectSubSystems",
+            url: "/APSE/SubSystem/GetProjectSubSystems",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -617,7 +617,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
         $('#modal-default-overlay').modal('show');
         $.ajax({
             type: "Get",
-            url: "/poec/WBS/GetProjectWBS?wbsId=" + splitId,
+            url: "/APSE/WBS/GetProjectWBS?wbsId=" + splitId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -649,7 +649,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
 
         $.ajax({
             type: "PUT",
-            url: "/poec/WBS/EditProjectWBS",
+            url: "/APSE/WBS/EditProjectWBS",
             data: JSON.stringify(model),
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -678,7 +678,7 @@ var WBSTreeConfig = WBSTreeConfig || (function () {
         $('#modal-default-overlay').modal('show');
         $.ajax({
             type: "Delete",
-            url: "/poec/WBS/DeleteProjectWBS/"+id+"",
+            url: "/APSE/WBS/DeleteProjectWBS/"+id+"",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

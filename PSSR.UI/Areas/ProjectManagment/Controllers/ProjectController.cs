@@ -63,7 +63,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         //
        
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<DesciplinePlanModelDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetDesciplineActivityGroupList([FromQuery] int workPackageId, [FromQuery] int locationId, [FromQuery] int systemId, 
             [FromQuery] int subsystemId)
@@ -77,7 +77,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(FormDicPlanModelDto), (int)HttpStatusCode.OK)]
 
         public async Task<IActionResult> GetFormDictionaryGroupedByPlanDate(int workId, int locationId, int subSystemId, int desId)
@@ -91,7 +91,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<PlanActivityDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectPlanActivity(int workPackageId, int locationId, long subsystemId, int desciplineId,long formid)
         {
@@ -104,7 +104,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<HirecharyPlaneDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPlanHirechary([FromQuery]string filterTypes)
         {

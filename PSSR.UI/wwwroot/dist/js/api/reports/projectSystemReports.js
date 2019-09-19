@@ -19,7 +19,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskStatusBySystem",
+            url: "/APSE/Dashboard/TaskStatusBySystem",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -37,7 +37,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskConditionBySystem",
+            url: "/APSE/Dashboard/TaskConditionBySystem",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -55,7 +55,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskCounterBySystem",
+            url: "/APSE/Dashboard/TaskCounterBySystem",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -72,7 +72,7 @@
     function getSystemDoneActivity() {
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskDoneBySystem",
+            url: "/APSE/Dashboard/TaskDoneBySystem",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

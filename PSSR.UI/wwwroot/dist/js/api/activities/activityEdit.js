@@ -14,7 +14,7 @@
     function initialization(activityId) {
         $.ajax({
             type: "Get",
-            url: "/poec/Activity/GetActivityWBSTree?activityWBsId=" + activityId,
+            url: "/APSE/Activity/GetActivityWBSTree?activityWBsId=" + activityId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -86,7 +86,7 @@
 
         $.ajax({
             type: "PUT",
-            url: "/poec/activity/UpdateActivityStatus",
+            url: "/APSE/activity/UpdateActivityStatus",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
             dataType: "json",
@@ -115,7 +115,7 @@
     function getActivityStatus(activityId) {
         $.ajax({
             type: "Get",
-            url: "/poec/activity/GetActivityStatusHistory?activityId=" + activityId,
+            url: "/APSE/activity/GetActivityStatusHistory?activityId=" + activityId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -134,7 +134,7 @@
     function getActivityDocuments(activityId) {
         $.ajax({
             type: "Get",
-            url: "/poec/activity/GetActivityDocuments?activityId=" + activityId,
+            url: "/APSE/activity/GetActivityDocuments?activityId=" + activityId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -154,7 +154,7 @@
         var model = { 'Id': id, 'Status': status, 'HoldBy': holdBy, 'Progress': progress, 'Condition': condition };
         $.ajax({
             type: "PUT",
-            url: "/poec/activity/CreateMainDocumentFile",
+            url: "/APSE/activity/CreateMainDocumentFile",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
             dataType: "json",

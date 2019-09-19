@@ -45,8 +45,16 @@ namespace PSSR.UI.Helpers.CashHelper
                 item.SelectedRoles = rstring;
             });
 
-            var itemsDto = _mapper.Map<IEnumerable<NavigationMenuType>, IEnumerable<NavigationMenuItem>>(itemTypes.Where(s => s.Parent == null));
-
+            //var itemsDto = _mapper.Map<IEnumerable<NavigationMenuType>, IEnumerable<NavigationMenuItem>>(itemTypes.Where(s => s.Parent == null));
+            var itemsDto = itemTypes.Select(s => new NavigationMenuItem
+            {
+                DisplayName=s.DisplayName,
+                Link=s.Link,
+                MaterialIcon=s.MaterialIcon,
+                SelectedRoles=s.SelectedRoles,
+                Sequence=s.Sequence,
+               
+            });
             mItems.MenuItems = itemsDto.ToList();
             var items= JsonConvert.SerializeObject(mItems);
             await _cache.SetStringAsync(NavigationCacheName, items);

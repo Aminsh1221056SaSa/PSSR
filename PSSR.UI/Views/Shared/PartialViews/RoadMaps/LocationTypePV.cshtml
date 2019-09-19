@@ -102,7 +102,7 @@
 
             $.ajax({
                 type: "Get",
-                url: "/poec/WorkPackage/GetLocations?query=" + query,
+                url: "/APSE/WorkPackage/GetLocations?query=" + query,
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (data, status, jqXHR) {
@@ -128,7 +128,7 @@
 
             $.ajax({
                 type: "Post",
-                url: "/poec/WorkPackage/CreateLocation",
+                url: "/APSE/WorkPackage/CreateLocation",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -179,7 +179,7 @@
              $('#modal-default-overlay').modal('show');
              $.ajax({
                 type: "PUT",
-                url: "/poec/WorkPackage/UpdateLocation",
+                url: "/APSE/WorkPackage/UpdateLocation",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -205,7 +205,7 @@
               $('#modal-default-overlay').modal('show');
              $.ajax({
                 type: "Delete",
-                url: "/poec/WorkPackage/DeleteLocation/"+id+"",
+                url: "/APSE/WorkPackage/DeleteLocation/"+id+"",
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                  success: function (data, status, jqXHR) {

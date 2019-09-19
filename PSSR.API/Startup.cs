@@ -9,6 +9,11 @@ using PSSR.API.Helper;
 using PSSR.DataLayer.EfCode;
 using AutoMapper;
 using System.Security.Claims;
+using Autofac;
+using BskaGenericCoreLib.Configuration;
+using PSSR.API.App_Start;
+using Autofac.Extensions.DependencyInjection;
+using System;
 
 namespace PSSR.API
 {
@@ -28,7 +33,7 @@ namespace PSSR.API
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             var section = Configuration.GetSection("AppSettings");
             var apSetting = section.Get<ApplicationSettings>();
@@ -47,6 +52,17 @@ namespace PSSR.API
                    options.RequireHttpsMetadata = false;
                    options.ApiName = apSetting.OilApiName;
                });
+
+            services.AddCors(options =>
+            {
+                // this defines a CORS policy called "default"
+                options.AddPolicy("default", policy =>
+                {
+                    policy.WithOrigins("https://localhost:44349")
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             services.AddAuthorization(options =>
             {
@@ -74,6 +90,22 @@ namespace PSSR.API
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen(SwaggerHelper.ConfigureSwaggerGen);
             services.AddAutoMapper();
+
+            var containerBuilder = new ContainerBuilder();
+
+            #region GenericBizRunner parts
+            // Need to call AddAutoMapper to set up the mappings any GenericAction From/To Biz Dtos
+            //GenericBizRunner has two AutoFac modules that can register all the services needed
+            //This one is the simplest, as it sets up the link to the application's DbContext
+            containerBuilder.RegisterModule(new BskaGenericDiModule<EfCoreContext>());
+            //Now I use the ServiceLayer AutoFac module that registers all the other DI items, such as my biz logic
+            containerBuilder.RegisterModule(new UIModule());
+            #endregion
+
+            containerBuilder.Populate(services);
+            var container = containerBuilder.Build();
+
+            return new AutofacServiceProvider(container);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -88,6 +120,7 @@ namespace PSSR.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            app.UseCors("default");
             app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseSwagger(SwaggerHelper.ConfigureSwagger);

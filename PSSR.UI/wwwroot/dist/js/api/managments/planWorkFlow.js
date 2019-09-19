@@ -56,7 +56,7 @@ var planWorkFlow = planWorkFlow || (function () {
         }
         $.ajax({
             type: "Get",
-            url: "/poec/Project/GetPlanHirechary?filterTypes=" + filterTypes,
+            url: "/APSE/Project/GetPlanHirechary?filterTypes=" + filterTypes,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

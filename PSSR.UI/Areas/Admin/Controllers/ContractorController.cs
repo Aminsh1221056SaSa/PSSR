@@ -2,10 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PSSR.DataLayer.EfCode;
-using PSSR.ServiceLayer.ContractorServices.Concrete;
 using PSSR.Logic.Contractors;
-using BskaGenericCoreLib;
-using PSSR.UI.Helpers;
 using PSSR.ServiceLayer.ContractorServices;
 using PSSR.UI.Controllers;
 using PSSR.UI.Helpers.CashHelper;
@@ -15,9 +12,9 @@ using Microsoft.Extensions.Options;
 using System.Net;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Web.Http;
-using PSSR.UI.Helpers.Security;
 using Microsoft.AspNetCore.Authorization;
-using PSSR.DataLayer.EfClasses.Person;
+using System.Collections.Generic;
+using PSSR.ServiceLayer.Utils;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -43,68 +40,75 @@ namespace PSSR.UI.Areas.Admin.Controllers
 
         [Authorize(Policy = "dataEventRecordsAdmin")]
         // GET: /<controller>/
-        public async Task<IActionResult> Contractor(ContractorSortFilterPageOptions options)
+        public IActionResult Contractor()
         {
-            var contractorService = new ListContractorService(_context);
-            var contractors =await contractorService.SortFilterPage(options);
-            SetupTraceInfo();           //Thsi makes the logging display work
-            var viewModel = new ContractorListCombinedDto(options, contractors);
-            await _masterDataCache.CreateMasterDataCacheAsync(User.GetCurrentUserDetails().Name, viewModel);
-            return View(viewModel);
+            return View();
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
-        [ProducesResponseType(typeof(ContractorListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetContractor([FromQuery] int contractorid)
+        [Route("APSE/[controller]/[action]")]
+        [ProducesResponseType(typeof(List<ContractorListDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetContractors()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}Admin/GetContractor?contractorid={contractorid}",
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}Contractor/GetContractors",
                 authorizationToken: accessToken);
 
             return new ObjectResult(content);
         }
 
-        //
-        [Authorize(Policy = "dataEventRecordsAdmin")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateContractor(ContractorDto model,
-            [FromServices]IActionService<IPlaceContractorAction> service)
+        [HttpGet]
+        [Route("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ContractorListDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetContractor(int id)
         {
-            var contractor = service.RunBizAction<Contractor>(model);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            if (!service.Status.HasErrors)
-            {
-                SetupTraceInfo();
-                return RedirectToAction("Contractor");
-            }
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}Contractor/GetContractor/{id}",
+                authorizationToken: accessToken);
 
-            service.Status.CopyErrorsToModelState(ModelState, model);
-            var viewModel = await _masterDataCache.GetMasterDataCacheAsync<ContractorSortFilterPageOptions>(User.GetCurrentUserDetails().Name);
-            SetupTraceInfo();       //Used to update the logs
-            return View("Contractor", viewModel);
+            return new ObjectResult(content);
         }
 
-        [Authorize(Policy = "dataEventRecordsAdmin")]
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateContractor(ContractorDto model,
-            [FromServices]IActionService<IUpdateContractorAction> service)
+        [Route("APSE/[controller]/[action]")]
+        [ProducesResponseType(typeof(ResultResponseDto<string,int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateContractor([FromBody] ContractorDto model)
         {
-            service.RunBizAction(model);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            if (!service.Status.HasErrors)
-            {
-                SetupTraceInfo();
-                return RedirectToAction("Contractor");
-            }
+            var response = await _clientService.PostAsync($"{_settings.Value.OilApiAddress}Contractor/CreateContractor",model,
+                authorizationToken: accessToken);
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
+        }
 
-            service.Status.CopyErrorsToModelState(ModelState, model);
-            var viewModel = await _masterDataCache.GetMasterDataCacheAsync<ContractorSortFilterPageOptions>(User.GetCurrentUserDetails().Name);
-            SetupTraceInfo();       //Used to update the logs
-            return View("Contractor",viewModel);
+        [HttpPut]
+        [Route("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ResultResponseDto<string,int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateContractor(int id,[FromBody] ContractorDto model)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var response = await _clientService.PutAsync($"{_settings.Value.OilApiAddress}Contractor/UpdateContractor/{id}", model,
+                authorizationToken: accessToken);
+
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
+        }
+
+        [HttpDelete("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteContractor(int id)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var response = await _clientService.DeleteAsync($"{_settings.Value.OilApiAddress}Contractor/DeleteContractor/{id}",
+                authorizationToken: accessToken);
+
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
         }
     }
 }

@@ -66,7 +66,7 @@ namespace PSSR.UI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProject([FromQuery]Guid projectId)
         {

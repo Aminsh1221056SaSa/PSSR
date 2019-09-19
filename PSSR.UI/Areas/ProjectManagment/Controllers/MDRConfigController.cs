@@ -68,7 +68,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(MDRStatusListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetMDRStatus([FromQuery] int id)
         {

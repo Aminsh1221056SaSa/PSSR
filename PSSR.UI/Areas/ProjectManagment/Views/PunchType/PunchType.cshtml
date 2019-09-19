@@ -158,7 +158,7 @@
             var model = { 'id': id, 'name': name, 'description': desc };
             $.ajax({
                 type: "Post",
-                url: "/poec/PunchType/UpdatePunchType",
+                url: "/APSE/PunchType/UpdatePunchType",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -176,7 +176,7 @@
         function showEditModel(id) {
             $.ajax({
                 type: "Get",
-                url: "/poec/PunchType/GetPunchType?id=" + id + "",
+                url: "/APSE/PunchType/GetPunchType?id=" + id + "",
 
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

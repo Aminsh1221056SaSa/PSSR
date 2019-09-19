@@ -96,7 +96,7 @@
             var query = $('#workPackage-query').val();
             $.ajax({
                 type: "Get",
-                url: "/poec/WorkPackage/GetRoadMaps?query=" + query,
+                url: "/APSE/WorkPackage/GetRoadMaps?query=" + query,
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (data, status, jqXHR) {
@@ -117,7 +117,7 @@
             var model = { 'Name': name};
             $.ajax({
                 type: "Post",
-                url: "/poec/WorkPackage/CreateRoadMap",
+                url: "/APSE/WorkPackage/CreateRoadMap",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -170,7 +170,7 @@
              $('#modal-default-overlay').modal('show');
              $.ajax({
                 type: "PUT",
-                url: "/poec/WorkPackage/UpdateRoadMap",
+                url: "/APSE/WorkPackage/UpdateRoadMap",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -197,7 +197,7 @@
               $('#modal-default-overlay').modal('show');
              $.ajax({
                 type: "Delete",
-                url: "/poec/WorkPackage/DeleteWorkPackage/"+id+"",
+                url: "/APSE/WorkPackage/DeleteWorkPackage/"+id+"",
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                  success: function (data, status, jqXHR) {

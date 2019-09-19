@@ -96,7 +96,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectSystemListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectSystem([FromQuery] int id)
         {
@@ -109,7 +109,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectMapDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectSystems()
         {
@@ -129,7 +129,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         //
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateProjectSystem([FromBody] ProjectSystemDto model,
            [FromServices]IActionService<IUpdateSystemAction> service)
@@ -151,7 +151,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UploadExcel(IFormFile file,
          [FromServices]IActionService<IPlcaeSystemBulkAction> service)

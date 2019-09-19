@@ -38,11 +38,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Admin\Models\" />
+    <Folder Include="Areas\Admin\Views\AdminConfig\" />
+    <Folder Include="Areas\Configuration\Models\" />
+    <Folder Include="Areas\ProjectManagment\Models\" />
+    <Folder Include="Filters\" />
+    <Folder Include="Hubs\" />
+    <Folder Include="Models\Logger\" />
+    <Folder Include="wwwroot\activityDocuemnts\" />
+    <Folder Include="wwwroot\js\" />
+    <Folder Include="wwwroot\mdrdocuments\e4577a84-2e35-4963-f115-08d6dcd67cba\" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Reference Include="BskaGenericCoreLib">
       <HintPath>..\..\..\Custom API\BskaGenericCoreLib\BskaGenericCoreLib\bin\Debug\netstandard2.0\BskaGenericCoreLib.dll</HintPath>
     </Reference>
   </ItemGroup>
-
- 
-
+  
 </Project>

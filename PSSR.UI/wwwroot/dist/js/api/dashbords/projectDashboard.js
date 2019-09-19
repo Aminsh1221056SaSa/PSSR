@@ -21,7 +21,7 @@
     function initialization() {
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/ProjectDashboardInitialization",
+            url: "/APSE/Dashboard/ProjectDashboardInitialization",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -77,7 +77,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/ProjectDashboardInitialization",
+            url: "/APSE/Dashboard/ProjectDashboardInitialization",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -105,7 +105,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/WorkPackage/GetLocations",
+            url: "/APSE/WorkPackage/GetLocations",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -129,7 +129,7 @@
         $('#gchart-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetGlobalActivityDoneChart",
+            url: "/APSE/Dashboard/GetGlobalActivityDoneChart",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

@@ -31,7 +31,7 @@ namespace PSSR.ServiceLayer.ContractorServices.Concrete
 
         public async Task<IEnumerable<ContractorListDto>> GetAllContractors()
         {
-            return await _context.Contractors.Select(s => new ContractorListDto
+            return await _context.Contractors.OrderByDescending(s => s.UpdatedDate).Select(s => new ContractorListDto
             {
                 Id = s.Id,
                 Name = s.Name,

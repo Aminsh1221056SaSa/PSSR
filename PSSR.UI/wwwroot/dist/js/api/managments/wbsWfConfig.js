@@ -46,7 +46,7 @@ var WBSWfConfig = WBSWfConfig || (function () {
     function getProjectwbsWfTree() {
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetProjectWBSTreeToProgress?toProgress=false",
+            url: "/APSE/Dashboard/GetProjectWBSTreeToProgress?toProgress=false",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -112,7 +112,7 @@ var WBSWfConfig = WBSWfConfig || (function () {
 
         $.ajax({
             type: "PUT",
-            url: "/poec/WBS/EditProjectWBSWF",
+            url: "/APSE/WBS/EditProjectWBSWF",
             data: JSON.stringify(model),
             contentType: 'application/json; charset=utf-8',
             dataType: "json",

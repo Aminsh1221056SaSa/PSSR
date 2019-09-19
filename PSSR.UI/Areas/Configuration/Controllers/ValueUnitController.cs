@@ -50,7 +50,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<ValueUnitListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetValueUnits()
         {

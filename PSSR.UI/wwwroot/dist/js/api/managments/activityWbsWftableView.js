@@ -63,7 +63,7 @@ var WBSWfActivityConfig = WBSWfActivityConfig || (function () {
         $('#wbs-wfCalculate-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetProjectWBSTreeToProgress?toProgress=" + toProgress + "",
+            url: "/APSE/Dashboard/GetProjectWBSTreeToProgress?toProgress=" + toProgress + "",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -93,7 +93,7 @@ var WBSWfActivityConfig = WBSWfActivityConfig || (function () {
 
         $.ajax({
             type: "PUT",
-            url: "/poec/WBS/UpdateAllActivityWf",
+            url: "/APSE/WBS/UpdateAllActivityWf",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             data: JSON.stringify(model),

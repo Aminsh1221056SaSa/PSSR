@@ -207,7 +207,7 @@
             $('#modal-default-overlay').modal('show');
             $.ajax({
                 type: "PUT",
-                url: "/poec/PunchCategory/UpdatePunchCategory",
+                url: "/APSE/PunchCategory/UpdatePunchCategory",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -224,7 +224,7 @@
         function showEditModel(id) {
             $.ajax({
                 type: "Get",
-                url: "/poec/PunchCategory/GetPunchCategory?id=" + id + "",
+                url: "/APSE/PunchCategory/GetPunchCategory?id=" + id + "",
 
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

@@ -1,10 +1,17 @@
-﻿body {
+﻿
+body {
     overflow-y: hidden;
+}
+.lst-datatablecontainer{
+    overflow-y:auto
 }
 
 .dataTables_scrollBody {
     overflow: hidden !important;
 }
+    .dataTables_scrollBody table {
+        margin-left: 0px;
+    }
 .container{
-    width:100%
+    max-width:100%
 }

@@ -34,7 +34,7 @@
         container.empty();
         $.ajax({
             type: "Get",
-            url: "/poec/ActivityPunch/PunchListSummary?filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal
+            url: "/APSE/ActivityPunch/PunchListSummary?filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal
                 + "&pageNum=" + pgNum + "&pageSize=" + pgSize + "&query=" + query + "&prevCheckState=" + prevCheckState,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",

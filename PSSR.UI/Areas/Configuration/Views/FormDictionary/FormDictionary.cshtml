@@ -355,7 +355,7 @@
         //        $('#modal-default-overlay').modal('show');
         //    $.ajax({
         //        type: "Post",
-        //        url: "/poec/FormDictionary/UpdateFormDictionary",
+        //        url: "/APSE/FormDictionary/UpdateFormDictionary",
         //        data: JSON.stringify(model),
         //        contentType: 'application/json; charset=utf-8',
         //        dataType: "json",
@@ -373,7 +373,7 @@
         function showEditModel(id) {
             $.ajax({
                 type: "Get",
-                url: "/poec/FormDictionary/GetFormDictionary?id=" + id + "",
+                url: "/APSE/FormDictionary/GetFormDictionary?id=" + id + "",
 
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
@@ -394,7 +394,7 @@
             var id = $(this).attr('id').split('-')[1];
             $.ajax({
                 type: "Get",
-                url: "/poec/FormDictionary/GetPdfPathFIle?id=" + id + "",
+                url: "/APSE/FormDictionary/GetPdfPathFIle?id=" + id + "",
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data, status, jqXHR) {
@@ -414,7 +414,7 @@
 
             $.ajax({
                 type: "Post",
-                url: "/poec/FormDictionary/UploadExcel",
+                url: "/APSE/FormDictionary/UploadExcel",
                 data: formData,
                 processData: false,
                 contentType: false,

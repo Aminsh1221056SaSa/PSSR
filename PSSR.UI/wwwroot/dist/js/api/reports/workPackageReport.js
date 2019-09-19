@@ -30,7 +30,7 @@
         $('#descipline-summary-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetDesciplineWorkPackageReport?wId="+id,
+            url: "/APSE/Dashboard/GetDesciplineWorkPackageReport?wId="+id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -47,7 +47,7 @@
         $('#descipline-summary-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetWorkPackageStepProgress?wId=" + id,
+            url: "/APSE/Dashboard/GetWorkPackageStepProgress?wId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -64,7 +64,7 @@
         $('#system-summary-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetSystemWorkPackageReport?wId=" + id,
+            url: "/APSE/Dashboard/GetSystemWorkPackageReport?wId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

@@ -17,7 +17,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Report/GetDailyTaskFormTypeReport?fromDate=" + sDate + "&toDate=" + enDate + "&workId="+id,
+            url: "/APSE/Report/GetDailyTaskFormTypeReport?fromDate=" + sDate + "&toDate=" + enDate + "&workId="+id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

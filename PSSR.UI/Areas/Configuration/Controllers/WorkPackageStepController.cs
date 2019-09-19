@@ -65,7 +65,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
             return View(viewModel);
         }
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(WorkPackageStepListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetWorkPackageStep([FromQuery] int id)
         {
@@ -78,7 +78,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<WorkPackageStepListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetWorkPackageSteps()
         {
@@ -91,7 +91,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(WorkPackageStepListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetWorkPackageStepByWorkPackage(int wid)
         {
@@ -126,7 +126,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateWorkPackageStep([FromBody] WorkPackageStepDto model,
             [FromServices]IActionService<IUpdateWorkPackageStepAction> service)

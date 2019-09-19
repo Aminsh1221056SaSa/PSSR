@@ -101,7 +101,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(MDRDocumentListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetListSummary([FromQuery] string filterByOption, [FromQuery] string sortByOption
            , [FromQuery] string filterValue, [FromQuery]int pageNum, [FromQuery] string query = "")
@@ -120,7 +120,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(MDRDocumentListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetMDRDocumentDetails([FromQuery] long id)
         {
@@ -133,7 +133,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<MDRDocumentCommentListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetMDRDocumentComments([FromQuery] long id)
         {
@@ -146,7 +146,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<MDRDocumentCommentListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetMDRDocumentStatusHistory(long id)
         {
@@ -158,7 +158,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(MDRDocumentCommentListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetCommentDetails([FromQuery]long commentId)
         {
@@ -170,7 +170,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(MDRIssuanceDescription), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetIssuanceDescription([FromQuery] long mdrId)
         {
@@ -378,7 +378,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseModelDto<MDRDocumentListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> AddMDRComment(IFormFile File, [FromForm] string jsonString,
             [FromServices]IActionService<IPlaceMDRCommentAction> service)
@@ -428,7 +428,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public SuccessfullyResponseDto EditMdrComment([FromBody] MDRDocumentCommentDto model
             , [FromServices]IActionService<IUpdateMDRCommentAction> service)

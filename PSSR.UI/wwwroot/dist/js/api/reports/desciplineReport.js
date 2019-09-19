@@ -20,7 +20,7 @@
         $('#precom-chart-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskStatusPreCommByDesciplines?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=true",
+            url: "/APSE/Dashboard/TaskStatusPreCommByDesciplines?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=true",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -39,7 +39,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskConditionByDesciplines",
+            url: "/APSE/Dashboard/TaskConditionByDesciplines",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -57,7 +57,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskCounterByDesciplines",
+            url: "/APSE/Dashboard/TaskCounterByDesciplines",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -75,7 +75,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskDoneByDesciplines",
+            url: "/APSE/Dashboard/TaskDoneByDesciplines",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -167,7 +167,7 @@
         $('#modal-default-overlay').modal('toggle');
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/TaskStatusPreCommByDesciplines?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=false",
+            url: "/APSE/Dashboard/TaskStatusPreCommByDesciplines?workPackageId=" + workPackageId + "&locationId=" + locationId + "&total=false",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

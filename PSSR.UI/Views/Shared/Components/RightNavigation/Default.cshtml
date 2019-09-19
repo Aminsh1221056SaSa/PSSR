@@ -1,0 +1,19 @@
+﻿@using Microsoft.AspNetCore.Http
+@model PSSR.UI.Helpers.Navigation.NavigationMenu
+@inject IHttpContextAccessor UserHttpContext
+@{
+    var currentUser = UserHttpContext.HttpContext.User.GetCurrentUserDetails();
+}
+
+@foreach (var menuItem in Model.MenuItems)
+{
+    if (currentUser.Roles.Intersect(menuItem.SelectedRoles).Any())
+    {
+        <a href="@menuItem.Link" class="dropdown-item"><i class="@menuItem.MaterialIcon"></i>@menuItem.DisplayName</a>
+    }
+
+}
+<form asp-action="LogOut" asp-controller="Home">
+    <a><button type="submit" class="btn btn-danger">LogOut</button></a>
+</form>
+

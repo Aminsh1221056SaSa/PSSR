@@ -74,7 +74,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
        
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectSubSystemListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetSubSystem([FromQuery] int id)
         {
@@ -87,7 +87,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectMapDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectSubSystems()
         {
@@ -105,7 +105,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectSubSystemListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetSubSystemBySystem([FromQuery] int systemId)
         {
@@ -140,7 +140,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UploadExcel(IFormFile file,
        [FromServices]IActionService<IPlcaeSubSystemBulkAction> service)
@@ -197,7 +197,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateProjectSubSystem([FromBody] ProjectSubSystemDto model,
            [FromServices]IActionService<IUpdateSubSystemAction> service)

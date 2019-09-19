@@ -65,7 +65,7 @@ namespace PSSR.UI.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ServiceLayer.PersonService.PersonListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPerson(int personId)
         {

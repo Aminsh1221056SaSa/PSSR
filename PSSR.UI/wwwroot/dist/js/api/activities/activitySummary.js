@@ -46,7 +46,7 @@ var activitySummary = activitySummary || (function () {
         container.empty();
         $.ajax({
             type: "Get",
-            url: "/poec/activity/ActivityListSummary?filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal
+            url: "/APSE/activity/ActivityListSummary?filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal
                 + "&page=" + pgNum + "&pageSize=" + pgSize + "&search=" + query + "&prevCheckState=" + prevCheckState,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -85,7 +85,7 @@ var activitySummary = activitySummary || (function () {
         container.empty();
         $.ajax({
             type: "Get",
-            url: "/poec/activity/ActivityListSummaryByWorkDescipline?workId=" + workId+"&desId=" + desId + "&filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal
+            url: "/APSE/activity/ActivityListSummaryByWorkDescipline?workId=" + workId+"&desId=" + desId + "&filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal
                 + "&pageNum=" + pgNum + "&pageSize=" + pgSize + "&query=" + query + "&prevCheckState=" + prevCheckState,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -148,7 +148,7 @@ var activitySummary = activitySummary || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/activity/GetActivityDetails?id=" + id,
+            url: "/APSE/activity/GetActivityDetails?id=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

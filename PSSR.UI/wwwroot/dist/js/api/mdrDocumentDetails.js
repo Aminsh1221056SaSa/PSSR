@@ -42,7 +42,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/MDRDocument/GetListSummary?filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal,
+            url: "/APSE/MDRDocument/GetListSummary?filterByOption=" + filterType + "&sortByOption=" + sortOption + "&filterValue=" + filterVal,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -60,7 +60,7 @@
       
      $.ajax({
          type: "Get",
-         url: "/poec/MDRDocument/GetMDRDocumentDetails?id=" + id,
+         url: "/APSE/MDRDocument/GetMDRDocumentDetails?id=" + id,
          contentType: 'application/json; charset=utf-8',
          dataType: "json",
          success: function (data, status, jqXHR) {
@@ -78,7 +78,7 @@
        
         $.ajax({
             type: "Get",
-            url: "/poec/MDRDocument/GetMDRDocumentStatusHistory?id=" + id,
+            url: "/APSE/MDRDocument/GetMDRDocumentStatusHistory?id=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -98,7 +98,7 @@
      
      $.ajax({
          type: "Get",
-         url: "/poec/MDRDocument/GetMDRDocumentComments?id=" + id,
+         url: "/APSE/MDRDocument/GetMDRDocumentComments?id=" + id,
          contentType: 'application/json; charset=utf-8',
          dataType: "json",
          success: function (data, status, jqXHR) {
@@ -119,7 +119,7 @@
         $('#modal-default-overlay').modal('show');
         $.ajax({
             type: "Get",
-            url: "/poec/MDRDocument/GetCommentDetails?commentId=" + id,
+            url: "/APSE/MDRDocument/GetCommentDetails?commentId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -138,7 +138,7 @@
     function getIssuanceDescription(id) {
         $.ajax({
             type: "Get",
-            url: "/poec/MDRDocument/GetIssuanceDescription?mdrId=" + id,
+            url: "/APSE/MDRDocument/GetIssuanceDescription?mdrId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -157,7 +157,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/MDRDocument/GetMDRDocumentComments?id=" + id,
+            url: "/APSE/MDRDocument/GetMDRDocumentComments?id=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -193,7 +193,7 @@
 
     //    $.ajax({
     //        type: "PUT",
-    //        url: "/poec/MDRDocument/UpdateMDRIssuance",
+    //        url: "/APSE/MDRDocument/UpdateMDRIssuance",
     //        data: formData,
     //        processData: false,
     //        contentType: false,
@@ -226,7 +226,7 @@
 
         $.ajax({
             type: "Post",
-            url: "/poec/MDRDocument/AddMDRComment",
+            url: "/APSE/MDRDocument/AddMDRComment",
             data: formData,
             processData: false,
             contentType: false,
@@ -257,7 +257,7 @@
         $('#modal-default-overlay').modal('show');
               $.ajax({
                 type: "PUT",
-                  url: "/poec/MDRDocument/EditMdrComment",
+                  url: "/APSE/MDRDocument/EditMdrComment",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",

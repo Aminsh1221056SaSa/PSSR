@@ -244,7 +244,7 @@
 
             $.ajax({
                 type: "Post",
-                url: "/poec/Activity/UploadExcel",
+                url: "/APSE/Activity/UploadExcel",
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -272,7 +272,7 @@
 
             $.ajax({
                 type: "Get",
-                url: "/poec/FormDictionary/GetFormsByDescipline?desciplineId=" + id,
+                url: "/APSE/FormDictionary/GetFormsByDescipline?desciplineId=" + id,
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (data, status, jqXHR) {
@@ -305,7 +305,7 @@
 
             $.ajax({
                 type: "Get",
-                url: "/poec/SubSystem/GetSubSystemBySystem?systemId=" + id,
+                url: "/APSE/SubSystem/GetSubSystemBySystem?systemId=" + id,
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (data, status, jqXHR) {
@@ -330,7 +330,7 @@
 
             $.ajax({
                 type: "Get",
-                url: "/poec/WorkPackageStep/GetWorkPackageStepByWorkPackage?wid=" + id,
+                url: "/APSE/WorkPackageStep/GetWorkPackageStepByWorkPackage?wid=" + id,
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
                 success: function (data, status, jqXHR) {

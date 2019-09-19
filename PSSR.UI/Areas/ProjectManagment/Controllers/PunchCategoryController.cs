@@ -60,7 +60,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(IEnumerable<PunchCategoryListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchCategoryes()
         {
@@ -78,7 +78,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(PunchCategoryListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetPunchCategory([FromQuery] int id)
         {
@@ -144,7 +144,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         //[ValidateAntiForgeryToken]
         public IActionResult UpdatePunchCategory([FromBody] PunchCategoryDto model,

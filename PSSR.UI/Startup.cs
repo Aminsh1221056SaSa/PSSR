@@ -98,7 +98,7 @@ namespace PSSR.UI
                     options.RequireHttpsMetadata = false;
 
                     options.ClientId = apSetting.ClientId;
-                    options.ClientSecret = "PCMS_WEB_APP_SECRET";
+                    options.ClientSecret = "APSE_PSSR_APP_SECRET";
                     options.ResponseType = "code id_token";
 
                     options.SaveTokens = true;
@@ -189,8 +189,8 @@ namespace PSSR.UI
 
             app.UseMvc(routes =>
             {
-                //routes.MapRoute(name: "areaRoute",
-                //template: "{area:exists}/{controller=Home}/{action=Index}");
+                routes.MapRoute(name: "areaRoute",
+                template: "{area:exists}/{controller=Home}/{action=Index}");
 
                 routes.MapRoute(
                     name: "default",

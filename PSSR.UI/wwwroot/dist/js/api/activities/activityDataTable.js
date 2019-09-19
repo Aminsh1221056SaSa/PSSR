@@ -340,7 +340,7 @@
                 ],
                 ajax: {
                     type: "POST",
-                    url: '/poec/activity/GetActivityDataTable',
+                    url: '/APSE/activity/GetActivityDataTable',
                     contentType: "application/json; charset=utf-8",
                     async: true,
                     headers: {
@@ -648,7 +648,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/ValueUnit/GetValueUnits", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/ValueUnit/GetValueUnits", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     var item = JSON.parse(result);
                                     for (i = 0; i <= item.length; i++) {
@@ -781,7 +781,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/WorkPackage/GetRoadMaps", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/WorkPackage/GetRoadMaps", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     var item = JSON.parse(result);
                                     for (i = 0; i <= item.length; i++) {
@@ -813,7 +813,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/WorkPackage/GetLocations", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/WorkPackage/GetLocations", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     var item = JSON.parse(result);
                                     for (i = 0; i <= item.length; i++) {
@@ -844,7 +844,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/Descipline/GetDesciplineList", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/Descipline/GetDesciplineList", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     var item = JSON.parse(result);
                                     for (i = 0; i <= item.length; i++) {
@@ -875,7 +875,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/ProjectSystem/GetProjectSystems", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/ProjectSystem/GetProjectSystems", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     var item = JSON.parse(result);
                                     for (i = 0; i <= item.length; i++) {
@@ -906,7 +906,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/SubSystem/GetProjectSubSystems", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/SubSystem/GetProjectSubSystems", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     select.append('<option value="">...</option>');
                                     var item = JSON.parse(result);
@@ -938,7 +938,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/FormDictionary/GetformDictionaryies", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/FormDictionary/GetformDictionaryies", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     select.append('<option value="">...</option>');
                                     var item = JSON.parse(result);
@@ -965,7 +965,7 @@
                             });
 
                             $.ajax({
-                                url: "/poec/WorkPackageStep/GetWorkPackageSteps", contentType: "application/json; charset=utf-8",
+                                url: "/APSE/WorkPackageStep/GetWorkPackageSteps", contentType: "application/json; charset=utf-8",
                                 success: function (result) {
                                     select.append('<option value="">...</option>');
                                     var item = JSON.parse(result);

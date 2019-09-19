@@ -93,7 +93,7 @@
 
         $("#activitySelect").select2({
             ajax: {
-                url: "/poec/activity/ActivityListSummary",
+                url: "/APSE/activity/ActivityListSummary",
                 dataType: 'json',
                 delay: 250,
                 data: function (params) {
@@ -155,7 +155,7 @@
 
             $.ajax({
                 type: "Post",
-                url: "/poec/ActivityPunch/UploadExcel",
+                url: "/APSE/ActivityPunch/UploadExcel",
                 data: formData,
                 processData: false,
                 contentType: false,

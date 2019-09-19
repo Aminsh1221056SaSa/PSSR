@@ -292,7 +292,7 @@
                 $('#modal-default-overlay').modal('show');
             $.ajax({
                 type: "PUT",
-                url: "/poec/SubSystem/UpdateProjectSubSystem",
+                url: "/APSE/SubSystem/UpdateProjectSubSystem",
                 data: JSON.stringify(model),
                 contentType: 'application/json; charset=utf-8',
                 dataType: "json",
@@ -316,7 +316,7 @@
 
             $.ajax({
                 type: "Post",
-                url: "/poec/SubSystem/UploadExcel",
+                url: "/APSE/SubSystem/UploadExcel",
                 data: formData,
                 processData: false,
                 contentType: false,
@@ -340,7 +340,7 @@
         function showEditModel(id) {
             $.ajax({
                 type: "Get",
-                url: "/poec/SubSystem/GetSubSystem?id=" + id + "",
+                url: "/APSE/SubSystem/GetSubSystem?id=" + id + "",
 
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",

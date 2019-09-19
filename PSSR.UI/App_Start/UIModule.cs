@@ -26,12 +26,6 @@ namespace PSSR.UI.App_Start
 
             builder.RegisterType<ExcelReportHelper>().As<IExcelReportHelper>()
             .InstancePerLifetimeScope();
-
-            //-----------------------------
-            //Now register the other layers
-            builder.RegisterModule(new ServiceLayerModule());
-            builder.RegisterModule(new AminDbAccessModule());
-            builder.RegisterModule(new AminLogicModule());
         }
     }
 }

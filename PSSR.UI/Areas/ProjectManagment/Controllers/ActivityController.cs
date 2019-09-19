@@ -155,7 +155,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         //api getDatatable format
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<ActivityListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityDataTable([FromBody] JqueryDataTablesParameters param)
         {
@@ -174,7 +174,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(CustomOptionModel<ActivitySortFilterPageOptions, ActivityListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ActivityListSummary([FromQuery] string filterValue, [FromQuery]int page, 
             [FromQuery]int pageSize, [FromQuery] string search = "", [FromQuery]string prevCheckState = "", 
@@ -193,7 +193,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(CustomOptionModel<ActivitySortFilterPageOptions, ActivityListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> ActivityListSummaryByWorkDescipline([FromQuery] int workId, [FromQuery] int desId
            , [FromQuery] string filterValue, [FromQuery]int pageNum, [FromQuery]int pageSize, [FromQuery] string query = "", [FromQuery]string prevCheckState = ""
@@ -208,7 +208,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ActivityListDetailsDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityDetails(long id)
         {
@@ -221,7 +221,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectWBSListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityWBSTree(long activityWBsId)
         {
@@ -239,7 +239,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ActivityStatusHistoryListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityStatusHistory(long activityId)
         {
@@ -254,7 +254,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         //
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ActivityStatusHistoryListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetActivityDocuments(long activityId, [FromServices]IActionService<IPlaceActivityDocumentAction> service)
         {
@@ -464,7 +464,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateActivityStatus([FromBody] ActivityStatusUpdateDto model,
          [FromServices]IActionService<IUpdateActivityStatusAction> service)
@@ -486,7 +486,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateActivityPlane([FromBody]ActivityPlaneDto model,
             [FromServices]IActionService<IUpdateActivityPlaneAction> service)
@@ -514,7 +514,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UploadExcel(IFormFile file,
           [FromServices]IActionService<IPlcaeActivityBulkAction> insertservice, 

@@ -80,7 +80,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(FormDictionaryListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetFormDictionary([FromQuery] long id)
         {
@@ -93,7 +93,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(List<FormDictionarySummaryDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetformDictionaryies()
         {
@@ -106,7 +106,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ServiceLayer.DesciplineServices.DesciplineListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetFormsByDescipline([FromQuery] int desciplineId)
         {
@@ -214,7 +214,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UploadExcel(IFormFile file,
            [FromServices]IActionService<IPlcaeFormDictionaryBulkAction> service)

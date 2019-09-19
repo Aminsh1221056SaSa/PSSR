@@ -4,278 +4,157 @@
     ViewData["Title"] = "Contractor";
 }
 
-<div class="row">
-    <div class="col-md-4">
-        <div class="box box-warning">
-            <div class="box-header with-border">
-                <h3 class="box-title">Contractor</h3>
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-                <partial name="_ValidationSummary" />
-                <form role="form" asp-action="CreateContractor" asp-controller="Contractor" method="post">
+<div class="card bd-1">
+    <div class="card-header bg-gray-400 bd-b-0-f pd-b-0">
+        <nav class="nav nav-tabs">
+            <a class="nav-link active" data-toggle="tab" href="#tabCont1">Contractor</a>
+            <a class="nav-link" data-toggle="tab" href="#tabCont2">Person</a>
+            <a class="nav-link" data-toggle="tab" href="#tabCont3">Project</a>
+        </nav>
+    </div><!-- card-header -->
+    <div class="card-body bd bd-t-0 tab-content">
+        <div id="tabCont1" class="tab-pane active show">
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-3">
+                        <div class="card card-body">
+                            <h5 class="card-title mg-b-20">Add Contractor</h5>
 
-                    <div class="input-group">
-                        <div class="input-group-addon">
-                            <i class="fa fa-info"></i>
+                            <form name="contractorForm" method="post" class="form-horizontal" action="">
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="name">Name</label>
+                                    <input type="text" class="form-control" name="name" id="name">
+                                </div><!-- form-group -->
+
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="phone">Phone</label>
+                                    <div class="pos-relative">
+                                        <input type="text" class="form-control pd-r-80" name="phone" id="phone">
+                                    </div>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="address">Address</label>
+                                    <textarea rows="3" class="form-control" name="address" id="address"></textarea>
+                                </div><!-- form-group -->
+
+                                <button class="btn btn-az-primary btn-block" type="submit" id="btn-contractor-save">Save</button>
+                            </form>
+
                         </div>
-                        <input name="Name" type="text" class="form-control" placeholder="Contractor name">
-                    </div>
-
-                    <br>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <input name="PhoneNumber" type="text" class="form-control" data-inputmask='"mask": "(999) 9999-9999"' data-mask>
-                        </div>
-                        <!-- /.input group -->
-                    </div>
-
-                    <br>
-
-                    <div class="form-group">
-                        <label>Address</label>
-                        <textarea name="Address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                    </div>
-
-                    <br>
-
-                    <div class="form-group">
-                        <label>Contract Details:</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input name="ContractDate" type="text" class="form-control pull-right datepicker">
-                        </div>
-                        <!-- /.input group -->
-                    </div>
-
-                    <div class="box-footer">
-                        <button type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </form>
-            </div>
-            <!-- /.box-body -->
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="box box-success">
-            <div class="option-filter">
-                <form id="sort-filter-form" class="form-horizontal">
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <div class="col-sm-3">
-                                <label class="control-label">Sort By</label>
-                                <select asp-for="SortFilterPageData.OrderByOptions" name="OrderByOptions"
-                                        asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.ContractorServices.QueryObjects.OrderByOptions>()"
-                                        class="form-control sort-filter-width"
-                                        onchange="BookList.sendForm(this)"></select>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="control-label">Filter Type</label>
-                                <select asp-for="SortFilterPageData.FilterBy" name="FilterBy"
-                                        asp-items="Html.GetEnumSelectList<PSSR.ServiceLayer.ContractorServices.QueryObjects.ContractorFilterBy>()"
-                                        class="form-control sort-filter-width"
-                                        onchange="BookList.filterByHasChanged(this)"></select>
-                            </div>
-                            <div class="col-sm-3 dim-filter-value" id="filter-value-group">
-                                <label class="control-label">Filter By</label>
-                                <select asp-for="SortFilterPageData.FilterValue" name="FilterValue"
-                                        id="filter-value-dropdown"
-                                        class="form-control sort-filter-width"
-                                        disabled
-                                        onchange="BookList.sendForm(this)">
-                                    <option>Select filter type...</option>
-                                </select>
-                            </div>
-
-                            <div class="col-sm-2">
-                                <label class="control-label">Page</label>
-                                <div>
-                                    <input asp-for="SortFilterPageData.PageNum" name="PageNum"
-                                           class="form-control page-control-width page-num-input"
-                                           onchange="BookList.sendForm(this)">
-                                    <span class="num-pages-text">of @Model.SortFilterPageData.NumPages</span>
-                                </div>
-                            </div>
-                            <div class="col-sm-2">
-                                <label class="control-label">Page&nbsp;Size</label>
-                                <select asp-for="SortFilterPageData.PageSize" name="PageSize"
-                                        asp-items="Model.SortFilterPageData.PageSizes.Select(x => new SelectListItem {Text = x.ToString(), Value = x.ToString()})"
-                                        class="form-control page-control-width"
-                                        onchange="BookList.sendForm(this)"></select>
-                            </div>
-                        </div>
-                    </div>
-                    <input id="PrevCheckState" name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
-                    @*@Html.Hidden("PrevCheckState", @Model.SortFilterPageData.PrevCheckState) -- this didn't work for some reason*@
-                </form>
-                <br />
-            </div>
-
-            <div>
-                <div class="row">
-                    <div class="col-xs-12">
-                        <div class="box">
-                            <div class="box-header">
-                                <h3 class="box-title">Contractor List</h3>
-                                <div class="box-tools">
-                                    <form method="get">
-                                        <div class="input-group input-group-sm pull-left" style="padding-right:10px">
-
-                                            <input name="PrevCheckState" type="hidden" value=@Model.SortFilterPageData.PrevCheckState>
-                                            <input asp-for="SortFilterPageData.OrderByOptions" name="OrderByOptions" type="hidden">
-                                            <input asp-for="SortFilterPageData.FilterBy" name="OrderByOptions" type="hidden">
-                                            <input asp-for="SortFilterPageData.FilterValue" name="OrderByOptions" type="hidden">
-                                            <input asp-for="SortFilterPageData.PageNum" name="PageNum" type="hidden">
-                                            <input asp-for="SortFilterPageData.PageSize" name="PageSize" type="hidden">
-                                            <div class="input-group input-group-sm pull-right" style="width: 150px;">
-                                                <input type="text" name="QueryFilter" asp-for="SortFilterPageData.QueryFilter" class="form-control pull-right" placeholder="Search">
-                                                <div class="input-group-btn">
-                                                    <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
-                                                </div>
-
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                </div>
-                            </div>
-                            <!-- /.box-header -->
-                            <div class="box-body table-responsive no-padding">
-                                <table class="table fixedHeadertable table-hover">
+                        <!-- card -->
+                    </div><!-- col -->
+                    <div class="col-md-9">
+                        <div class="card card-body">
+                            <div class="az-content-breadcrumb lst-datatablecontainer" style="display:inline-block;">
+                                <table id="contractorLst" class="display responsive nowrap">
                                     <thead>
                                         <tr>
                                             <th>Name</th>
                                             <th>Phone</th>
                                             <th>Address</th>
-                                            <th>Contract Date</th>
+                                            <th></th>
                                             <th></th>
                                         </tr>
                                     </thead>
-                                    <tbody id="hightable-containter">
-                                        @foreach (var item in Model.ContractorList)
-                                        {
-                                            <tr id="@item.Id">
-                                                <td>@item.Name</td>
-                                                <td>@item.PhoneNumber</td>
-                                                <td>@item.Address</td>
-                                                <td>@item.ContractDate</td>
-                                                <td><button type="button" class="btn btn-success btn-sm edtit-btn" id="dec-@item.Id" data-toggle="modal" data-target="#modal-default"><i class="fa fa-edit"></i></button></td>
-                                            </tr>
-                                        }
-                                    </tbody>
+                                    <tbody id="contractor-content"></tbody>
                                 </table>
                             </div>
-                            <!-- /.box-body -->
-                        </div>
-                        <!-- /.box -->
-                    </div>
+                        </div><!-- card -->
+                    </div><!-- col -->
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
+            </div><!-- row -->
+        </div><!-- tab-pane -->
+        <div id="tabCont2" class="tab-pane">This is tab content 2...</div>
+        <div id="tabCont3" class="tab-pane">This is tab content 3...</div>
+    </div><!-- card-body -->
+</div><!-- card -->
 
-<div class="modal fade" id="modal-default">
-    <div class="modal-dialog">
-        <div class="modal-content">
+<div id="edit-contractorModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
             <div class="modal-header">
+                <h6 class="modal-title">Contractor Details</h6>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-                <h4 class="modal-title">Edit Contractor</h4>
             </div>
-            <form asp-action="UpdateContractor" asp-controller="Contractor">
-                <!-- text input -->
+            <form name="contractorEditForm" method="post" class="form-horizontal" action="">
+                <input type="hidden" id="current-contractorId" />
                 <div class="modal-body">
-                    <input type="hidden" name="Id" id="selected-contractor-id" />
-
-                    <div class="input-group">
-                        <div class="input-group-addon required">
-                            <i class="fa fa-info"></i>
-                        </div>
-                        <input id="name" name="Name" type="text" class="form-control" placeholder="Contractor name">
-                    </div>
-                    <br />
                     <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-addon required">
-                                <i class="fa fa-phone"></i>
-                            </div>
-                            <input id="phone" name="PhoneNumber" type="text" class="form-control" placeholder="Contractor Phone">
-                        </div>
-                        <!-- /.input group -->
-                    </div>
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editname">Name</label>
+                        <input type="text" class="form-control" name="editname" id="editname">
+                    </div><!-- form-group -->
 
                     <div class="form-group">
-                        <label>Address</label>
-                        <textarea id="address" name="Address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Contract Details:</label>
-                        <div class="input-group date">
-                            <div class="input-group-addon">
-                                <i class="fa fa-calendar"></i>
-                            </div>
-                            <input id="cDate" name="ContractDate" type="text" class="form-control pull-right datepicker">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editphone">Phone</label>
+                        <div class="pos-relative">
+                            <input type="text" class="form-control pd-r-80" name="editphone" id="editphone">
                         </div>
-                        <!-- /.input group -->
-                    </div>
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editaddress">Address</label>
+                        <textarea rows="3" class="form-control" name="editaddress" id="editaddress"></textarea>
+                    </div><!-- form-group -->
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" id="save-edit">Save changes</button>
+                    <button type="submit" class="btn btn-indigo">Save changes</button>
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<environment names="Development">
+    <script src="~/dist/js/api/ProjectsPerson/contractor.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/js/contractor.min.js"></script>
+</environment>
 
 <script>
-
     $(document).ready(function () {
-        $('.datepicker').datepicker({
-            autoclose: true
+        contractor.init();
+        contractor.getContractorList();
+
+        //var hh = window.innerWidth *0.40;
+        //$('.lst-datatablecontainer').css('height', hh + 'px');
+
+        $('#contractorLst').on('click', '.edit-contractor', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            contractor.setCurrentIndex(rowindex);
+            getContractor(id);
         });
 
-        $('tr').dblclick(function () {
-            var id = $(this).attr('id');
-            $('#modal-default').modal('show');
-            showEditModel(id);
-        })
 
-        $('.edtit-btn').on('click', function () {
-            var id = $(this).attr('id').split('-')[1];
-            showEditModel(id);
-        })
+        $('#contractorLst').on('click', '.delete-contractor', function () {
+              
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            contractor.setCurrentIndex(rowindex);
+            contractor.removeContractor(id);
+         });
 
-        function showEditModel(id) {
-            $.ajax({
-                type: "Get",
-                url: "/poec/Contractor/GetContractor?contractorid=" + id + "",
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function (data, status, jqXHR) {
-                    $('#selected-contractor-id').val(data.id);
-                    $('#name').val(data.name);
-                    $('#phone').val(data.phoneNumber);
-                    $('#address').val(data.address);
+        $('#contractorLst tbody').on('dblclick', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var id = tr.find('.edit-contractor').attr('data-id');
+            var rowindex = tr.index();
+            contractor.setCurrentIndex(rowindex);
+            getContractor(id);
+            $('#edit-contractorModal').modal('toggle');
+        });
 
-                    $('#cDate').datepicker("setDate", data.contractDate);
-                },
-                error: function (jqXHR, status) {
-                    console.log(jqXHR);
-                }
-            });
+        async function getContractor(id) {
+            var data = await contractor.getContractor(id);
+            $('#editname').val(data.name);
+            $('#editphone').val(data.phoneNumber);
+            $('#editaddress').val(data.address);
+            $('#current-contractorId').val(data.id);
         }
-    setCHeight(0.60,'hightable-containter');
     });
+
 </script>

@@ -39,7 +39,7 @@
     function getallPunches() {
         $.ajax({
             type: "Get",
-            url: "/poec/PunchType/GetAllPunchTypes",
+            url: "/APSE/PunchType/GetAllPunchTypes",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -56,7 +56,7 @@
     function getallPunchCategory() {
         $.ajax({
             type: "Get",
-            url: "/poec/PunchCategory/GetPunchCategoryes",
+            url: "/APSE/PunchCategory/GetPunchCategoryes",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -73,7 +73,7 @@
     function getActivityPunchs(activityId) {
         $.ajax({
             type: "Get",
-            url: "/poec/activityPunch/GetActivityPunchs?activityId=" + activityId,
+            url: "/APSE/activityPunch/GetActivityPunchs?activityId=" + activityId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -93,7 +93,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/activityPunch/GetPunchGoDetails?punchId=" + id,
+            url: "/APSE/activityPunch/GetPunchGoDetails?punchId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -109,7 +109,7 @@
     {
         $.ajax({
             type: "Get",
-            url: "/poec/activityPunch/GetPunchDetails?punchId=" + id,
+            url: "/APSE/activityPunch/GetPunchDetails?punchId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -124,7 +124,7 @@
     function getPunchDocuments(punchId) {
         $.ajax({
             type: "Get",
-            url: "/poec/ActivityPunch/GetPunchDocuments?punchId=" + punchId,
+            url: "/APSE/ActivityPunch/GetPunchDocuments?punchId=" + punchId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -144,7 +144,7 @@
         $('#modal-default-overlay').modal('show');
         $.ajax({
             type: "Delete",
-            url: "/poec/activityPunch/DeletePunch/" + id + "",
+            url: "/APSE/activityPunch/DeletePunch/" + id + "",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -202,7 +202,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/poec/activityPunch/AddPUnchToActivity",
+            url: "/APSE/activityPunch/AddPUnchToActivity",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
             dataType: "json",
@@ -259,7 +259,7 @@
 
         $.ajax({
             type: "PUT",
-            url: "/poec/activityPunch/UpdatePUnchToActivity",
+            url: "/APSE/activityPunch/UpdatePUnchToActivity",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
             dataType: "json",
@@ -301,7 +301,7 @@
 
         $.ajax({
             type: "PUT",
-            url: "/poec/activityPunch/UpdatePUnchGo",
+            url: "/APSE/activityPunch/UpdatePUnchGo",
             contentType: 'application/json; charset=utf-8',
             data: JSON.stringify(model),
             dataType: "json",

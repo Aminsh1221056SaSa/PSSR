@@ -29,7 +29,7 @@ var desciplinePlane = desciplinePlane || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/WorkPackage/GetRoadMaps",
+            url: "/APSE/WorkPackage/GetRoadMaps",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -50,7 +50,7 @@ var desciplinePlane = desciplinePlane || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/WorkPackage/GetLocations",
+            url: "/APSE/WorkPackage/GetLocations",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -71,7 +71,7 @@ var desciplinePlane = desciplinePlane || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/ProjectSystem/GetProjectSystems",
+            url: "/APSE/ProjectSystem/GetProjectSystems",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -93,7 +93,7 @@ var desciplinePlane = desciplinePlane || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/SubSystem/GetSubSystemBySystem?systemId=" + systemId+"",
+            url: "/APSE/SubSystem/GetSubSystemBySystem?systemId=" + systemId+"",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -112,7 +112,7 @@ var desciplinePlane = desciplinePlane || (function () {
     {
         $.ajax({
             type: "Get",
-            url: "/poec/Project/GetDesciplineActivityGroupList?workPackageId=" + workId + "&locationId=" + locId + "&systemId=" + systemId + "&subsystemId=" + subSystemId,
+            url: "/APSE/Project/GetDesciplineActivityGroupList?workPackageId=" + workId + "&locationId=" + locId + "&systemId=" + systemId + "&subsystemId=" + subSystemId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -132,7 +132,7 @@ var desciplinePlane = desciplinePlane || (function () {
 
         $.ajax({
             type: "Get",
-            url: "/poec/Project/GetFormDictionaryGroupedByPlanDate?workId=" + workId + "&locationId=" + locationId + "&subSystemId=" + subSystemId + "&desId=" + desId,
+            url: "/APSE/Project/GetFormDictionaryGroupedByPlanDate?workId=" + workId + "&locationId=" + locationId + "&subSystemId=" + subSystemId + "&desId=" + desId,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -158,7 +158,7 @@ var desciplinePlane = desciplinePlane || (function () {
         $('#modal-default-overlay').modal('show');
         $.ajax({
             type: "PUT",
-            url: "/poec/Activity/UpdateActivityPlane",
+            url: "/APSE/Activity/UpdateActivityPlane",
             data: JSON.stringify(model),
             contentType: 'application/json; charset=utf-8',
             dataType: "json",

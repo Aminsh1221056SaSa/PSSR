@@ -49,7 +49,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(WorkPackageListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetRoadMaps(string query)
         {
@@ -62,7 +62,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(LocationListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetLocations(string query)
         {
@@ -75,7 +75,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
         
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(WorkPackageListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetRoadMap([FromQuery] int id)
         {
@@ -88,7 +88,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(LocationListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetLocation([FromQuery] int id)
         {
@@ -103,7 +103,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         //
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseModelDto<ProjectWorkPackageListDto>), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateRoadMap([FromBody] ProjectWorkPackageListDto model
             , [FromServices]IActionService<IPlaceWorkPackageAction> service)
@@ -132,7 +132,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateLocation([FromBody] LocationTypeDto model
            , [FromServices]IActionService<IPlaceLocationTypeAction> service)
@@ -161,7 +161,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         //
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateRoadMap([FromBody] ProjectWorkPackageListDto model
            , [FromServices]IActionService<IUpdateRoadMapAction> service)
@@ -182,7 +182,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult UpdateLocation([FromBody] LocationTypeDto model
           , [FromServices]IActionService<IUpdateLocationTypeAction> service)
@@ -202,7 +202,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpDelete("poec/[controller]/[action]/{id}")]
+        [HttpDelete("APSE/[controller]/[action]/{id}")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult DeleteWorkPackage(int id
          , [FromServices]IActionService<IDeleteWorkPackageAction> service)
@@ -222,7 +222,7 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpDelete("poec/[controller]/[action]/{id}")]
+        [HttpDelete("APSE/[controller]/[action]/{id}")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult DeleteLocation(int id, [FromServices]IActionService<ILocationDeleteAction> service)
         {

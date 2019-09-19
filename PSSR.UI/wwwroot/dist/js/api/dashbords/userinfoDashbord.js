@@ -9,7 +9,7 @@
         $('#project-loading').show();
         $.ajax({
             type: "Get",
-            url: "/poec/Dashboard/GetallCurrentUserprojects",
+            url: "/APSE/Dashboard/GetallCurrentUserprojects",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

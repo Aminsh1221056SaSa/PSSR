@@ -15,7 +15,7 @@
 
         $.ajax({
             type: "Get",
-            url: "/poec/Report/GetStatusReport?workId=" + id,
+            url: "/APSE/Report/GetStatusReport?workId=" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {

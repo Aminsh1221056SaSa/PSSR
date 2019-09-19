@@ -65,7 +65,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectWBSListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectWBSTree()
         {
@@ -83,7 +83,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectWBSListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectWBSActivityTree([FromQuery]long parentId)
         {
@@ -101,7 +101,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [HttpGet]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ProjectWBSListDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> GetProjectWBS([FromQuery] long wbsId)
         {
@@ -116,7 +116,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         //
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPost]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> CreateProjectWBS([FromBody] ProjectWBSDto model,
          [FromServices]IActionService<IPlaceProjectWBSAction> service)
@@ -237,7 +237,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult EditProjectWBS([FromBody] ProjectWBSDto model,
         [FromServices]IActionService<IUpdateProjectWBSAction> service)
@@ -278,7 +278,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> EditProjectWBSWF([FromBody] CustomUpdateModel<float> model,
         [FromServices]IActionService<IUpdateProjectWBSWFAction> service)
@@ -344,7 +344,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
         }
 
         [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpDelete("poec/[controller]/[action]/{id}")]
+        [HttpDelete("APSE/[controller]/[action]/{id}")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public IActionResult DeleteProjectWBS(long id,
         [FromServices]IActionService<IDeleteProjectWBSAction> service)
@@ -385,7 +385,7 @@ namespace PSSR.UI.Areas.ProjectManagment.Controllers
 
         [Authorize(Policy = "dataEventRecordsManager")]
         [HttpPut]
-        [Route("poec/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateAllActivityWf([FromBody] WFCalTypeModel model)
         {
