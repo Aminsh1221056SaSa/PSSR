@@ -1,0 +1,10 @@
+﻿body {
+    overflow-y: hidden;
+}
+
+.dataTables_scrollBody {
+    overflow: hidden !important;
+}
+.container{
+    width:100%
+}
