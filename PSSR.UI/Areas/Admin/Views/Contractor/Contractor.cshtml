@@ -4,12 +4,13 @@
     ViewData["Title"] = "Contractor";
 }
 
+
 <div class="card bd-1">
     <div class="card-header bg-gray-400 bd-b-0-f pd-b-0">
         <nav class="nav nav-tabs">
             <a class="nav-link active" data-toggle="tab" href="#tabCont1">Contractor</a>
-            <a class="nav-link" data-toggle="tab" href="#tabCont2">Person</a>
-            <a class="nav-link" data-toggle="tab" href="#tabCont3">Project</a>
+            <a class="nav-link" id="tb-project" data-toggle="tab" href="#tabCont2">Project</a>
+            <a class="nav-link" id="tb-person" data-toggle="tab" href="#tabCont3">Person</a>
         </nav>
     </div><!-- card-header -->
     <div class="card-body bd bd-t-0 tab-content">
@@ -64,8 +65,137 @@
                 </div>
             </div><!-- row -->
         </div><!-- tab-pane -->
-        <div id="tabCont2" class="tab-pane">This is tab content 2...</div>
-        <div id="tabCont3" class="tab-pane">This is tab content 3...</div>
+        <div id="tabCont2" class="tab-pane">
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-3">
+                        <div class="card card-body">
+                            <h5 class="card-title mg-b-20">Add Project</h5>
+                            <form name="projectForm" method="post" class="form-horizontal" action="">
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="PDescription">Title</label>
+                                    <input type="text" class="form-control" name="PDescription" id="PDescription">
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="type">Type</label>
+                                    <select class="form-control select2" name="type" id="type" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
+                                            style="width: 100%;" required></select>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">Contractor</label>
+                                    <div class="pos-relative">
+                                        <select id="contractorId" class="form-control select2" name="contractorId" data-placeholder="Select Contractor"
+                                                style="width: 100%;" required></select>
+                                    </div>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label>Start Date:</label>
+                                    <div class="wd-200 mg-b-20">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                </div>
+                                            </div>
+                                            <input name="startDate" id="startDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>End Date:</label>
+                                    <div class="wd-200 mg-b-20">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <div class="input-group-text">
+                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                </div>
+                                            </div>
+                                            <input name="endDate" id="endDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
+                            </form>
+                        </div>
+                        <!-- card -->
+                    </div><!-- col -->
+                    <div class="col-md-9">
+                        <div class="card card-body">
+                            <div class="az-content-breadcrumb lst-datatablecontainer" style="display:inline-block;">
+                                <table id="projectLst" class="display responsive nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Contractor</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="project-content"></tbody>
+                                </table>
+                            </div>
+                        </div><!-- card -->
+                    </div><!-- col -->
+                </div>
+            </div><!-- row -->
+        </div>
+        <div id="tabCont3" class="tab-pane">
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-3">
+                        <div class="card card-body">
+                            <h5 class="card-title mg-b-20">Add Person</h5>
+
+                            <form name="personForm" method="post" class="form-horizontal" action="">
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="firstName">First Name</label>
+                                    <input type="text" class="form-control" name="firstName" id="firstName">
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="lastName">Last Name</label>
+                                    <input type="text" class="form-control" name="lastName" id="lastName">
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">National Code</label>
+                                    <div class="pos-relative">
+                                        <input type="text" class="form-control pd-r-80" name="nationalId" id="nationalId">
+                                    </div>
+                                </div><!-- form-group -->
+                                <div class="form-group">
+                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="mobileNumber">Mobile Number</label>
+                                    <div class="pos-relative">
+                                        <input type="text" class="form-control pd-r-80" name="mobileNumber" id="mobileNumber">
+                                    </div>
+                                </div><!-- form-group -->
+
+                                <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
+                            </form>
+
+                        </div>
+                        <!-- card -->
+                    </div><!-- col -->
+                    <div class="col-md-9">
+                        <div class="card card-body">
+                            <div class="az-content-breadcrumb lst-datatablecontainer" style="display:inline-block;">
+                                <table id="personLst" class="display responsive nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Natioanl code</th>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="person-content"></tbody>
+                                </table>
+                            </div>
+                        </div><!-- card -->
+                    </div><!-- col -->
+                </div>
+            </div><!-- row -->
+        </div>
     </div><!-- card-body -->
 </div><!-- card -->
 
@@ -106,21 +236,119 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<div id="edit-projectModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Project Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form name="projectEditForm" method="post" class="form-horizontal" action="">
+                <input type="hidden" id="current-projectId" />
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editPDescription">Title</label>
+                    <input type="text" class="form-control" name="editPDescription" id="editPDescription">
+                </div><!-- form-group -->
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="edittype">Type</label>
+                    <select class="form-control select2" name="edittype" id="edittype" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
+                            style="width: 100%;" required></select>
+                </div><!-- form-group -->
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editcontractorId">Contractor</label>
+                    <div class="pos-relative">
+                        <select id="editcontractorId" class="form-control select2" name="editcontractorId" data-placeholder="Select Contractor"
+                                style="width: 100%;" required></select>
+                    </div>
+                </div><!-- form-group -->
+                <div class="form-group">
+                    <label for="editstartDate">Start Date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="editstartDate" id="editstartDate" type="text" class="form-control pull-right datepicker" autocomplete="off">
+                    </div>
+                </div><!-- form-group -->
+
+                <div class="form-group">
+                    <label for="editendDate">End Date:</label>
+                    <div class="input-group date">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input name="editendDate" id="editendDate" type="text" class="form-control pull-right datepicker" autocomplete="off">
+                    </div>
+                </div><!-- form-group -->
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-indigo">Save changes</button>
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<div id="edit-personModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Person Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form name="personEditForm" method="post" class="form-horizontal" action="">
+                <input type="hidden" id="current-personId" />
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editfirstName">First Name</label>
+                    <input type="text" class="form-control" name="editfirstName" id="editfirstName">
+                </div><!-- form-group -->
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editlastName">Last Name</label>
+                    <input type="text" class="form-control" name="editlastName" id="editlastName">
+                </div><!-- form-group -->
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editnationalId">National Code</label>
+                    <div class="pos-relative">
+                        <input type="text" class="form-control pd-r-80" name="editnationalId" id="editnationalId">
+                    </div>
+                </div><!-- form-group -->
+                <div class="form-group">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editmobileNumber">Mobile Number</label>
+                    <div class="pos-relative">
+                        <input type="text" class="form-control pd-r-80" name="editmobileNumber" id="editmobileNumber">
+                    </div>
+                </div><!-- form-group -->
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-indigo">Save changes</button>
+                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 <environment names="Development">
     <script src="~/dist/js/api/ProjectsPerson/contractor.js"></script>
+    <script src="~/dist/js/api/ProjectsPerson/person.js"></script>
+    <script src="~/dist/js/api/ProjectsPerson/project.js"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="~/js/contractor.min.js"></script>
+    <script src="~/js/person.min.js"></script>
+    <script src="~/js/project.min.js"></script>
 </environment>
 
 <script>
     $(document).ready(function () {
+
+        //contractors
         contractor.init();
         contractor.getContractorList();
-
-        //var hh = window.innerWidth *0.40;
-        //$('.lst-datatablecontainer').css('height', hh + 'px');
-
         $('#contractorLst').on('click', '.edit-contractor', function () {
             var id = $(this).attr('data-id');
             var tr = $(this).closest("tr");
@@ -129,15 +357,14 @@
             getContractor(id);
         });
 
-
         $('#contractorLst').on('click', '.delete-contractor', function () {
-              
+
             var id = $(this).attr('data-id');
             var tr = $(this).closest("tr");
             var rowindex = tr.index();
             contractor.setCurrentIndex(rowindex);
             contractor.removeContractor(id);
-         });
+        });
 
         $('#contractorLst tbody').on('dblclick', 'tr', function () {
             var tr = $(this).closest('tr');
@@ -154,6 +381,106 @@
             $('#editphone').val(data.phoneNumber);
             $('#editaddress').val(data.address);
             $('#current-contractorId').val(data.id);
+        }
+
+        //project
+        var isprojectinited = false;
+        $('#tb-project').on('click', function () {
+            if (!isprojectinited) {
+                project.init();
+                project.getProjectList();
+                isprojectinited = true;
+            }
+                setProjectContractorDropDown();
+        });
+
+        $('#projectLst').on('click', '.edit-project', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            project.setCurrentIndex(rowindex);
+            getProject(id);
+        });
+
+        $('#projectLst').on('click', '.delete-project', function () {
+
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            project.setCurrentIndex(rowindex);
+            project.removeProject(id);
+        });
+
+        $('#projectLst tbody').on('dblclick', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var id = tr.find('.edit-project').attr('data-id');
+            var rowindex = tr.index();
+            project.setCurrentIndex(rowindex);
+            getProject(id);
+            $('#edit-projectModal').modal('toggle');
+        });
+
+        async function getProject(id) {
+            var data = await project.getProject(id);
+            $('#editpDescription').val(data.description);
+            $('#editType').val(data.type);
+            $('#editstartDate').val(data.startDate);
+            $('#editendDate').val(data.editendDate);
+            $('#editcontractroId').val(data.contractroId);
+            $('#current-projectId').val(data.id);
+        }
+
+        async function setProjectContractorDropDown() {
+            var data = await contractor.getContractorListAsync();
+            var select = $('#contractorId');
+            select.empty();
+            $.each(data, function (i, val) {
+                 select.append("<option value="+val.id+">"+val.name+"</option>");
+            });
+        }
+
+        //person
+        var ispersoninited = false;
+        $('#tb-person').on('click', function () {
+            if (!ispersoninited) {
+                person.init();
+                person.getPersonList();
+                ispersoninited = true;
+            }
+        });
+
+        $('#personLst').on('click', '.edit-person', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            person.setCurrentIndex(rowindex);
+            getPerson(id);
+        });
+
+        $('#personLst').on('click', '.delete-person', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            person.setCurrentIndex(rowindex);
+            person.removeContractor(id);
+        });
+
+        $('#personLst tbody').on('dblclick', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var id = tr.find('.edit-person').attr('data-id');
+            var rowindex = tr.index();
+            person.setCurrentIndex(rowindex);
+            getPerson(id);
+            $('#edit-personModal').modal('toggle');
+        });
+
+        async function getPerson(id) {
+            var data = await contractor.getPerson(id);
+            $('#editfirstName').val(data.firstName);
+            $('#editlastName').val(data.lastName);
+            $('#editnationalId').val(data.nationalId);
+            $('#editmobileNumber').val(data.mobileNumber);
+            $('#current-personId').val(data.id);
         }
     });
 

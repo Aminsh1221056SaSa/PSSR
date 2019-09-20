@@ -25,7 +25,7 @@ namespace PSSR.Logic.Contractors.Concrete
 
             _dbAccess.Delete(item);
 
-            Message = $"location is Delete: {item.ToString()}.";
+            Message = $"Contractor is Delete: {item.ToString()}.";
         }
     }
 }

@@ -9,5 +9,6 @@ namespace PSSR.DbAccess.Persons
     public interface IUpdatePersonDbAccess
     {
         Person GetPerson(int personId);
+        bool HaveAnyPorjects(int personId);
     }
 }

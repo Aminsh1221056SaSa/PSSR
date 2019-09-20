@@ -93,5 +93,23 @@
     "minify": {
       "enabled": true
     }
+  },
+  {
+    "outputFileName": "wwwroot/js/person.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/ProjectsPerson/person.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/project.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/ProjectsPerson/project.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
   }
 ]

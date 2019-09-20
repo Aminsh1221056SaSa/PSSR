@@ -28,7 +28,6 @@
         <link href="~/dist/lib/jqvmap/jqvmap.min.css" rel="stylesheet">
         <link href="~/dist/lib/lightslider/css/lightslider.min.css" rel="stylesheet">
         <link href="~/dist/lib/select2/css/select2.min.css" rel="stylesheet">
-
         <!-- azia CSS -->
         <link rel="stylesheet" href="~/dist/css/azia.css" />
         <link rel="stylesheet" href="~/dist/css/site.css" />
@@ -57,6 +56,7 @@
     <script src="~/dist/lib/datatables.net/js/dataTables.colReorder.min.js"></script>
 
     <script src="~/dist/lib/jquery-ui/jquery-ui.min.js"></script>
+    <script src="~/dist/lib/jquery-ui/ui/widgets/datepicker.js"></script>
     <script src="~/dist/js/buttons.colVis.min.js"></script>
     <script src="~/dist/lib/datatables.net/js/buttons.flash.js"></script>
     <script src="~/dist/js/jszip.min.js"></script>
@@ -76,6 +76,7 @@
     <script src="~/dist/lib/select2/js/select2.min.js"></script>
     <script src="~/dist/lib/ion-rangeslider/js/ion.rangeSlider.min.js"></script>
     <script src="~/dist/lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="~/dist/lib/progressbar.js/dist/progressbar.min.js"></script>
 
     <script src="~/dist/js/azia.js"></script>
     <script src="~/dist/js/dashboard.sampledata.js"></script>
@@ -87,7 +88,7 @@
 
 </head>
 <body class="az-body az-body-sidebar">
-
+    <div class="pace-done"></div>
     <div class="az-content az-content-dashboard-two">
         <div class="az-header">
             <div class="container-fluid">
@@ -172,9 +173,27 @@
     </div><!-- az-content -->
 
     <script>
+        
         $(function () {
-            'use strict'
+            
+         $('.fc-datepicker').datepicker({
+          showOtherMonths: true,
+          selectOtherMonths: true
+         });
 
+
+            var bar = new ProgressBar.Line('.pace-done', {easing: 'easeInOut'});
+            bar.animate(1, {
+                strokeWidth: 0.8,
+                 trailWidth: 0.8,
+                 trailWidth: 0.8,
+                 from: { color: '#fff' },
+                to: { color: '#eee' },
+                step: function (state, circle, attachment) {
+                    circle.path.setAttribute('stroke', state.color);
+                }
+            });  // Value from 0.0 to 1.0
+            'use strict'
             $('.az-sidebar .with-sub').on('click', function (e) {
                 e.preventDefault();
                 $(this).parent().toggleClass('show');

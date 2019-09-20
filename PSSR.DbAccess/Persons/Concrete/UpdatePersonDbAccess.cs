@@ -1,6 +1,7 @@
 ﻿
 using PSSR.DataLayer.EfClasses.Person;
 using PSSR.DataLayer.EfCode;
+using System.Linq;
 
 namespace PSSR.DbAccess.Persons.Concrete
 {
@@ -15,6 +16,11 @@ namespace PSSR.DbAccess.Persons.Concrete
         public Person GetPerson(int personId)
         {
             return _context.Find<Person>(personId);
+        }
+
+        public bool HaveAnyPorjects(int personId)
+        {
+            return _context.Persons.Any(c => c.Id == personId && c.ProjectLink.Any());
         }
     }
 }

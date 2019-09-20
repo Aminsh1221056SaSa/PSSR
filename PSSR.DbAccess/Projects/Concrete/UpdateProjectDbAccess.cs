@@ -26,5 +26,10 @@ namespace PSSR.DbAccess.Projects.Concrete
             return _context.Projects.Where(p => p.AgentsLink.Any(s => s.PersonId == personId))
                 .Include(s=>s.AgentsLink).AsEnumerable();
         }
+
+        public bool haveAnyWbs(Guid projectId)
+        {
+            return _context.Projects.Any(p => p.Id==projectId && p.ProjectSystems.Any());
+        }
     }
 }

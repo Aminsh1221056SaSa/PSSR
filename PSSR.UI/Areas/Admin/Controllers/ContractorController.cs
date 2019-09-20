@@ -1,11 +1,9 @@
 ﻿
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using PSSR.DataLayer.EfCode;
 using PSSR.Logic.Contractors;
 using PSSR.ServiceLayer.ContractorServices;
 using PSSR.UI.Controllers;
-using PSSR.UI.Helpers.CashHelper;
 using PSSR.UI.Helpers.Http;
 using PSSR.UI.Configuration;
 using Microsoft.Extensions.Options;
@@ -24,17 +22,13 @@ namespace PSSR.UI.Areas.Admin.Controllers
     [ApiVersion("1.0")]
     public class ContractorController : BaseAdminController
     {
-        private readonly EfCoreContext _context;
-        private readonly IMasterDataCacheOperations _masterDataCache;
         private readonly IHttpClient _clientService;
         private readonly IOptions<ApplicationSettings> _settings;
 
-        public ContractorController(EfCoreContext context, IHttpClient clientService
-            , IOptions<ApplicationSettings> settings, IMasterDataCacheOperations masterDataCache)
+        public ContractorController(IHttpClient clientService
+            , IOptions<ApplicationSettings> settings)
         {
-            _context = context;
             _clientService = clientService;
-            _masterDataCache = masterDataCache;
             _settings = settings;
         }
 

@@ -37,7 +37,8 @@ namespace PSSR.ServiceLayer.ProjectServices.Concrete
             return await _context.Projects.Select(p => new ProjectSummaryListDto
             {
                 Id=p.Id,
-                Name=p.Description
+                Name=p.Description,
+                ContractorName=p.Contractor.Name
             }).ToListAsync();
         }
 

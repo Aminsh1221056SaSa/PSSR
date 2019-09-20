@@ -8,5 +8,6 @@ namespace PSSR.ServiceLayer.ProjectServices
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
+        public string ContractorName { get; set; }
     }
 }

@@ -8,5 +8,6 @@ namespace PSSR.DbAccess.Projects
     {
         Project GetProject(Guid projectId);
         IEnumerable<Project> GetProjectForPerson(int personId);
+        bool haveAnyWbs(Guid projectId);
     }
 }
