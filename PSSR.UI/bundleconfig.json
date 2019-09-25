@@ -76,6 +76,19 @@
   //    "enabled": true
   //  }
   //},
+
+  //pulic definetions
+  {
+    "outputFileName": "wwwroot/js/enumDefinetion.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/enumDefinetion.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+
+  //specific
   {
     "outputFileName": "wwwroot/js/opidConnection.min.js",
     "inputFiles": [

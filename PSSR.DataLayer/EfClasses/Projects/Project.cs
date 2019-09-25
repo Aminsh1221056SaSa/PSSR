@@ -98,8 +98,8 @@ namespace PSSR.DataLayer.EfClasses.Projects
             return status;
         }
 
-        public IStatusGeneric UpdateProject(string description,
-            DateTime? startDate, DateTime? endDate)
+        public IStatusGeneric UpdateProject(string description,int contractorId,
+            DateTime? startDate, DateTime? endDate, ProjectType type)
         {
             var status = new StatusGenericHandler();
 
@@ -107,6 +107,8 @@ namespace PSSR.DataLayer.EfClasses.Projects
             this.EndDate = endDate;
             this.Description = description;
             this.StartDate = startDate;
+            this.ContractorId = contractorId;
+            this.Type = type;
 
             return status;
         }

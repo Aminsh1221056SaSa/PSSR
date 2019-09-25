@@ -34,7 +34,7 @@ namespace PSSR.UI.Areas.Admin.Controllers
 
         [Authorize(Policy = "dataEventRecordsAdmin")]
         // GET: /<controller>/
-        public IActionResult Contractor()
+        public IActionResult InitializationData()
         {
             return View();
         }

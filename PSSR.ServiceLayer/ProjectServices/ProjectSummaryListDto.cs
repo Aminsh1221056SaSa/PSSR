@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using PSSR.Common;
+using System;
 
 namespace PSSR.ServiceLayer.ProjectServices
 {
@@ -9,5 +8,6 @@ namespace PSSR.ServiceLayer.ProjectServices
         public Guid Id { get; set; }
         public string Name { get; set; }
         public string ContractorName { get; set; }
+        public ProjectType Type { get; set; }
     }
 }

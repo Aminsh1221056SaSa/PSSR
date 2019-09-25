@@ -2,11 +2,11 @@
 var project = project || (function () {
 
     return {
-        init: function () {
-            initialization();
+        init: function (enumDefinetion) {
+            initialization(enumDefinetion);
         },
         getProjectList: function () {
-            getProjectList()
+            return initProjectList();
         },
         getProject: function (id) {
             return getProject(id);
@@ -19,14 +19,16 @@ var project = project || (function () {
         }
     };
 
+    var _enumDefine = null;
     var _table = null;
     var _cIndex = 0;
     function setCurrentIndex(index) {
         _cIndex = index;
     }
 
-    function initialization()
+    function initialization(enumDefinetion)
     {
+        _enumDefine = enumDefinetion;
         if (_table) {
             _table.clear().draw();
             _table.destroy();
@@ -65,11 +67,12 @@ var project = project || (function () {
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
                 var description = $('input#pDescription').val();
-                var type = $('input#type').val();
-                var contractor = $('input#contractor').val();
+                var type = $('select#type').val();
+                var contractorId = $('select#contractorId').val();
+                var cName = $('#contractorId option:selected').text();
                 var startDate = $('input#startDate').val();
                 var endDate = $('input#endDate').val();
-                createProject(description, type, contractor, startDate, endDate);
+                createProject(description, type, contractorId, startDate, endDate, cName);
             }
         });
 
@@ -105,43 +108,49 @@ var project = project || (function () {
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
-                var description = $('input#pDescription').val();
-                var type = $('input#type').val();
-                var contractorId = $('input#contractorId').val();
-                var startDate = $('input#startDate').val();
-                var endDate = $('input#endDate').val();
-                var id = $('#current-contractorId').val();
-                editProject(description, type, contractorId, startDate, endDate, id);
+                var description = $('input#editPDescription').val();
+                var type = $('select#edittype').val();
+                var contractorId = $('select#editcontractorId').val();
+                var cName = $('#contractorId option:selected').text();
+                var startDate = $('input#editstartDate').val();
+                var endDate = $('input#editendDate').val();
+                var id = $('#current-projectId').val();
+                editProject(description, type, contractorId, startDate, endDate, id, cName);
             }
         });
     }
 
     function getProjectList()
     {
-        var content = $('#project-content');
-        content.empty();
-        $.ajax({
+        return $.ajax({
             type: "Get",
             url: "/APSE/Project/GetProjects",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
-                $.each(data, function (i, val) {
-                    var description = $("<td>" + val.description + "</td>");
-                    var contractorName = $("<td>" + val.contractorName + "</td>");
-                    var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-projectModal' data-id='" + val.id + "' class='edit-contractor btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
-                    var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-project btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
-                    var row = $('<tr></tr>');
-                    row.append(description).append(contractorName).append(editBtn).append(deleteBtn);
-                    content.append(row);
-                });
-
-                _table = tableinit();
+               
             },
             error: function (jqXHR, status) {
                 console.log(jqXHR);
             }
         })
+    }
+
+    async function initProjectList() {
+        var content = $('#project-content');
+        content.empty();
+        var data = await getProjectList();
+        $.each(data, function (i, val) {
+            var name = $("<td>" + val.name + "</td>");
+            var contractorName = $("<td>" + val.contractorName + "</td>");
+            var type = $("<td>" + _enumDefine.getProjectType(val.type) + "</td>");
+            var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-projectModal' data-id='" + val.id + "' class='edit-project btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
+            var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-project btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
+            var row = $('<tr></tr>');
+            row.append(name).append(contractorName).append(type).append(editBtn).append(deleteBtn);
+            content.append(row);
+        });
+        _table = tableinit();
     }
 
     function getProject(id) {
@@ -159,13 +168,13 @@ var project = project || (function () {
         });
     }
 
-    function createProject(description, type, contractorId, startDate, endDate)
+    function createProject(description, type, contractorId, startDate, endDate,contractorName)
     {
         var model =
         {
             'description': description, 'startDate': startDate, 'endDate': endDate, 'contractorId': contractorId, 'type': type
         };
-
+        var sType = _enumDefine.getProjectType(parseInt(type));
         $.ajax({
             type: "Post",
             url: "/APSE/Project/CreateProject",
@@ -177,7 +186,8 @@ var project = project || (function () {
                     if (_table) {
                         _table.row.add([
                             description,
-                            contractorId,
+                            contractorName,
+                            sType,
                             "<button  data-toggle='modal' data-target='#edit-projectModal' data-id='" + data.subject + "' class='edit-project btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
                             "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-project btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
                         ]).draw(false);
@@ -193,11 +203,12 @@ var project = project || (function () {
         });
     }
 
-    function editProject(description, type, contractorId, startDate, endDate,id) {
+    function editProject(description, type, contractorId, startDate, endDate, id, contractorName) {
         var model =
         {
             'description': description, 'startDate': startDate, 'endDate': endDate, 'contractorId': contractorId, 'type': type
         };
+        var sType = _enumDefine.getProjectType(parseInt(type));
         $.ajax({
             type: "PUT",
             url: "/APSE/Project/UpdateProject/"+id,
@@ -209,11 +220,12 @@ var project = project || (function () {
                     if (_table) {
                         _table.row(':eq(' + _cIndex + ')').data([
                             description,
-                            contractorId,
+                            contractorName,
+                            sType,
                             "<button  data-toggle='modal' data-target='#edit-projectModal' data-id='" + data.subject + "' class='edit-project btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
                             "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-project btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
                         ]);
-                        $('#edit-contractorModal').modal('toggle');
+                        $('#edit-projectModal').modal('toggle');
                     }
                 }
                 else {
@@ -312,13 +324,15 @@ var project = project || (function () {
           scroller: !0,
           "fnInitComplete": function () {
               //$('.dataTables_scrollBody').perfectScrollbar();
-              const ps = new PerfectScrollbar('.dataTables_scrollBody');
           },
           //on paginition page 2,3.. often scroll shown, so reset it and assign it again
           "fnDrawCallback": function (oSettings) {
-              //$('.dataTables_scrollBody').perfectScrollbar('destroy').perfectScrollbar();
-              //ps.update();
-              const ps = new PerfectScrollbar('.dataTables_scrollBody');
+              $('.dataTables_scrollBody').each(function () {
+                  if (!$(this).hasClass('ps')) {
+                      const ps = new PerfectScrollbar($(this)[0]);
+                  }
+                  $(this)[0].scrollTop = 0;
+              });
           }
       });
         return table;

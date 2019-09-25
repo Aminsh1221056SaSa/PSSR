@@ -8,13 +8,13 @@
 <div class="card bd-1">
     <div class="card-header bg-gray-400 bd-b-0-f pd-b-0">
         <nav class="nav nav-tabs">
-            <a class="nav-link active" data-toggle="tab" href="#tabCont1">Contractor</a>
-            <a class="nav-link" id="tb-project" data-toggle="tab" href="#tabCont2">Project</a>
-            <a class="nav-link" id="tb-person" data-toggle="tab" href="#tabCont3">Person</a>
+            <a class="nav-link active" data-toggle="tab" href="#Contractor">Contractor</a>
+            <a class="nav-link" data-toggle="tab" href="#Project">Project</a>
+            <a class="nav-link" data-toggle="tab" href="#Person">Person</a>
         </nav>
     </div><!-- card-header -->
     <div class="card-body bd bd-t-0 tab-content">
-        <div id="tabCont1" class="tab-pane active show">
+        <div id="Contractor" class="tab-pane active show">
             <div class="container">
                 <div class="row" style="width:100%">
                     <div class="col-md-3">
@@ -65,63 +65,78 @@
                 </div>
             </div><!-- row -->
         </div><!-- tab-pane -->
-        <div id="tabCont2" class="tab-pane">
+        <div id="Project" class="tab-pane">
             <div class="container">
                 <div class="row" style="width:100%">
-                    <div class="col-md-3">
-                        <div class="card card-body">
+                    <div class="col-md-5">
+                        <div class="card card-body" id="project-inputs">
                             <h5 class="card-title mg-b-20">Add Project</h5>
                             <form name="projectForm" method="post" class="form-horizontal" action="">
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="PDescription">Title</label>
-                                    <input type="text" class="form-control" name="PDescription" id="PDescription">
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="type">Type</label>
-                                    <select class="form-control select2" name="type" id="type" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
-                                            style="width: 100%;" required></select>
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">Contractor</label>
-                                    <div class="pos-relative">
-                                        <select id="contractorId" class="form-control select2" name="contractorId" data-placeholder="Select Contractor"
-                                                style="width: 100%;" required></select>
-                                    </div>
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label>Start Date:</label>
-                                    <div class="wd-200 mg-b-20">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="pDescription">Title</label>
+                                                <input type="text" class="form-control" name="pDescription" id="pDescription">
+                                            </div><!-- form-group -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="type">Type</label>
+                                                <select class="form-control select2" name="type" id="type" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
+                                                        style="width: 100%;" required></select>
+                                            </div><!-- form-group -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">Contractor</label>
+                                                <div class="pos-relative">
+                                                    <select id="contractorId" class="form-control select2" name="contractorId" data-placeholder="Select Contractor"
+                                                            style="width: 100%;" required></select>
+                                                </div>
+                                            </div><!-- form-group -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Start Date:</label>
+                                                <div class="wd-200 mg-b-20">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input name="startDate" id="startDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <input name="startDate" id="startDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>End Date:</label>
+                                                <div class="wd-200 mg-b-20">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <div class="input-group-text">
+                                                                <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                                            </div>
+                                                        </div>
+                                                        <input name="endDate" id="endDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <br />
+                                            <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
                                         </div>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <label>End Date:</label>
-                                    <div class="wd-200 mg-b-20">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <div class="input-group-text">
-                                                    <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
-                                                </div>
-                                            </div>
-                                            <input name="endDate" id="endDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
                             </form>
                         </div>
                         <!-- card -->
                     </div><!-- col -->
-                    <div class="col-md-9">
+                    <div class="col-md-7">
                         <div class="card card-body">
                             <div class="az-content-breadcrumb lst-datatablecontainer" style="display:inline-block;">
                                 <table id="projectLst" class="display responsive nowrap">
@@ -129,6 +144,7 @@
                                         <tr>
                                             <th>Name</th>
                                             <th>Contractor</th>
+                                            <th>Type</th>
                                             <th></th>
                                             <th></th>
                                         </tr>
@@ -141,7 +157,7 @@
                 </div>
             </div><!-- row -->
         </div>
-        <div id="tabCont3" class="tab-pane">
+        <div id="Person" class="tab-pane">
             <div class="container">
                 <div class="row" style="width:100%">
                     <div class="col-md-3">
@@ -247,45 +263,62 @@
             </div>
             <form name="projectEditForm" method="post" class="form-horizontal" action="">
                 <input type="hidden" id="current-projectId" />
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editPDescription">Title</label>
-                    <input type="text" class="form-control" name="editPDescription" id="editPDescription">
-                </div><!-- form-group -->
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="edittype">Type</label>
-                    <select class="form-control select2" name="edittype" id="edittype" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
-                            style="width: 100%;" required></select>
-                </div><!-- form-group -->
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editcontractorId">Contractor</label>
-                    <div class="pos-relative">
-                        <select id="editcontractorId" class="form-control select2" name="editcontractorId" data-placeholder="Select Contractor"
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editPDescription">Title</label>
+                        <input type="text" class="form-control" name="editPDescription" id="editPDescription">
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="edittype">Type</label>
+                        <select class="form-control select2" name="edittype" id="edittype" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
                                 style="width: 100%;" required></select>
-                    </div>
-                </div><!-- form-group -->
-                <div class="form-group">
-                    <label for="editstartDate">Start Date:</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editcontractorId">Contractor</label>
+                        <div class="pos-relative">
+                            <select id="editcontractorId" class="form-control select2" name="editcontractorId" data-placeholder="Select Contractor"
+                                    style="width: 100%;" required></select>
                         </div>
-                        <input name="editstartDate" id="editstartDate" type="text" class="form-control pull-right datepicker" autocomplete="off">
-                    </div>
-                </div><!-- form-group -->
+                    </div><!-- form-group -->
+                  <div class="container">
+                      <div class="row">
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="editstartDate">Start Date:</label>
+                                  <div class="wd-200 mg-b-20">
+                                      <div class="input-group">
+                                          <div class="input-group-prepend">
+                                              <div class="input-group-text">
+                                                  <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                              </div>
+                                          </div>
+                                          <input name="editstartDate" id="editstartDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                      </div>
+                                  </div>
+                              </div><!-- form-group -->
+                          </div>
+                          <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="editendDate">End Date:</label>
+                                  <div class="wd-200 mg-b-20">
+                                      <div class="input-group">
+                                          <div class="input-group-prepend">
+                                              <div class="input-group-text">
+                                                  <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                              </div>
+                                          </div>
+                                          <input name="editendDate" id="editendDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                      </div>
+                                  </div>
+                              </div><!-- form-group -->
 
-                <div class="form-group">
-                    <label for="editendDate">End Date:</label>
-                    <div class="input-group date">
-                        <div class="input-group-addon">
-                            <i class="fa fa-calendar"></i>
-                        </div>
-                        <input name="editendDate" id="editendDate" type="text" class="form-control pull-right datepicker" autocomplete="off">
+                          </div>
+                      </div>
+                  </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-indigo">Save changes</button>
+                        <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                     </div>
-                </div><!-- form-group -->
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-indigo">Save changes</button>
-                    <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
                 </div>
             </form>
         </div>
@@ -336,19 +369,76 @@
     <script src="~/dist/js/api/ProjectsPerson/contractor.js"></script>
     <script src="~/dist/js/api/ProjectsPerson/person.js"></script>
     <script src="~/dist/js/api/ProjectsPerson/project.js"></script>
+    <script src="~/dist/js/api/enumDefinetion.js"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="~/js/contractor.min.js"></script>
     <script src="~/js/person.min.js"></script>
     <script src="~/js/project.min.js"></script>
+    <script src="~/dist/enumDefinetion.js"></script>
 </environment>
 
 <script>
     $(document).ready(function () {
 
+        var hash = window.location.hash;
+        $('div.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+            var hash = $(this).attr('href');
+            var ghash = hash.substring(1);
+            initonServerData(ghash);
+        });
+
+        var isprojectinited = false;
+        var ispersoninited = false;
+        var isContractorinited = false;
+
+        if (hash.length > 0) {
+            $('.active').removeClass('active');
+            var ghash = hash.substring(1);
+            var a = $('a[href$=' + ghash + ']');
+            a.addClass('active');
+            $("" + hash + "").addClass('active');
+            initonServerData(ghash);
+        }
+        else {
+             contractor.init();
+             contractor.getContractorList();
+        }
+
+        function initonServerData(ghash) {
+              switch (ghash) {
+                case 'Project':
+                    if (!isprojectinited) {
+                        project.init(enumDefinetion);
+                        project.getProjectList();
+                        isprojectinited = true;
+                    }
+           setProjectContractorDropDown();
+                    break;
+                case 'Person':
+                    if (!ispersoninited) {
+                        person.init();
+                        person.getPersonList();
+                        ispersoninited = true;
+                    }
+                    break;
+                    case 'Contractor':
+                    if (!isContractorinited)
+                    {
+                        contractor.init();
+                        contractor.getContractorList();
+                    }
+                    break;
+            }
+        }
         //contractors
-        contractor.init();
-        contractor.getContractorList();
+       
         $('#contractorLst').on('click', '.edit-contractor', function () {
             var id = $(this).attr('data-id');
             var tr = $(this).closest("tr");
@@ -384,16 +474,7 @@
         }
 
         //project
-        var isprojectinited = false;
-        $('#tb-project').on('click', function () {
-            if (!isprojectinited) {
-                project.init();
-                project.getProjectList();
-                isprojectinited = true;
-            }
-                setProjectContractorDropDown();
-        });
-
+       
         $('#projectLst').on('click', '.edit-project', function () {
             var id = $(this).attr('data-id');
             var tr = $(this).closest("tr");
@@ -422,31 +503,30 @@
 
         async function getProject(id) {
             var data = await project.getProject(id);
-            $('#editpDescription').val(data.description);
-            $('#editType').val(data.type);
+            $('#editPDescription').val(data.description);
+            $("#edittype option[value="+data.type+"]").attr('selected','selected');
             $('#editstartDate').val(data.startDate);
-            $('#editendDate').val(data.editendDate);
-            $('#editcontractroId').val(data.contractroId);
+            $('#editendDate').val(data.endDate);
+            $("#editcontractorId option[value=" + data.contractorId + "]").attr('selected', 'selected');
             $('#current-projectId').val(data.id);
         }
 
         async function setProjectContractorDropDown() {
             var data = await contractor.getContractorListAsync();
             var select = $('#contractorId');
+           var editSelect= $('#editcontractorId');
             select.empty();
+            editSelect.empty();
             $.each(data, function (i, val) {
-                 select.append("<option value="+val.id+">"+val.name+"</option>");
+                select.append("<option value=" + val.id + ">" + val.name + "</option>");
+                 editSelect.append("<option value="+val.id+">"+val.name+"</option>");
             });
         }
 
         //person
-        var ispersoninited = false;
+       
         $('#tb-person').on('click', function () {
-            if (!ispersoninited) {
-                person.init();
-                person.getPersonList();
-                ispersoninited = true;
-            }
+          
         });
 
         $('#personLst').on('click', '.edit-person', function () {

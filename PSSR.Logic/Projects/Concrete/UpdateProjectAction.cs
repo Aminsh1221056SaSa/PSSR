@@ -16,14 +16,21 @@ namespace PSSR.Logic.Projects.Concrete
         {
             var project = _dbAccess.GetProject(inputData.Id);
             if (project == null)
-                throw new NullReferenceException("Could not find the project. Someone entering illegal ids?");
+            {
+                AddError("Could not find the project. Someone entering illegal ids?");
+            }
+            if (_dbAccess.haveAnyWbs(inputData.Id))
+            {
+                AddError("Project have some wbs items and could not to edit.");
+            }
+            if (!HasErrors)
+            {
+                var status = project.UpdateProject(inputData.Description, inputData.ContractorId, inputData.StartDate, inputData.EndDate, inputData.Type);
 
-            var status = project.UpdateProject(inputData.Description,inputData.StartDate,inputData.EndDate);
+                CombineErrors(status);
 
-            CombineErrors(status);
-
-            Message = $"project is update: {project.ToString()}.";
+                Message = $"project is update: {project.ToString()}.";
+            }
         }
-
     }
 }

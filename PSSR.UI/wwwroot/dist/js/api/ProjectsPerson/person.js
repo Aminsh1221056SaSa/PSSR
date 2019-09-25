@@ -343,9 +343,12 @@ var person = person || (function () {
           },
           //on paginition page 2,3.. often scroll shown, so reset it and assign it again
           "fnDrawCallback": function (oSettings) {
-              //$('.dataTables_scrollBody').perfectScrollbar('destroy').perfectScrollbar();
-              //ps.update();
-              const ps = new PerfectScrollbar('.dataTables_scrollBody');
+              $('.dataTables_scrollBody').each(function () {
+                  if (!$(this).hasClass('ps')) {
+                      const ps = new PerfectScrollbar($(this)[0]);
+                  }
+                  $(this)[0].scrollTop = 0;
+              });
           }
       });
         return table;

@@ -38,7 +38,8 @@ namespace PSSR.ServiceLayer.ProjectServices.Concrete
             {
                 Id=p.Id,
                 Name=p.Description,
-                ContractorName=p.Contractor.Name
+                ContractorName=p.Contractor.Name,
+                Type=p.Type
             }).ToListAsync();
         }
 

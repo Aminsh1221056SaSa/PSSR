@@ -62,11 +62,11 @@ namespace PSSR.UI.Areas.Admin.Controllers
         [HttpPost]
         [Route("APSE/[controller]/[action]")]
         [ProducesResponseType(typeof(ResultResponseDto<string, Guid>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> CreatePerson([FromBody] ProjectDto model)
+        public async Task<IActionResult> CreateProject([FromBody] ProjectDto model)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var response = await _clientService.PostAsync($"{_settings.Value.OilApiAddress}Project/CreatePerson", model,
+            var response = await _clientService.PostAsync($"{_settings.Value.OilApiAddress}Project/CreateProject", model,
                 authorizationToken: accessToken);
             var content = await response.Content.ReadAsStringAsync();
             return new ObjectResult(content);
