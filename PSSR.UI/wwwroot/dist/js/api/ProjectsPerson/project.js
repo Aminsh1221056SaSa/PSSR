@@ -16,6 +16,9 @@ var project = project || (function () {
         },
         removeProject: function (id) {
             removeProject(id);
+        },
+        getAllProjects: function () {
+            return getProjectList();
         }
     };
 

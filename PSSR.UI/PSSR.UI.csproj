@@ -39,7 +39,6 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\AdminConfig\" />
     <Folder Include="Areas\Configuration\Models\" />
     <Folder Include="Areas\ProjectManagment\Models\" />
     <Folder Include="Filters\" />

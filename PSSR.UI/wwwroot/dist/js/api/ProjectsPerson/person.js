@@ -11,7 +11,8 @@ var person = person || (function () {
         getPerson: function (id) {
             return getPerson(id);
         },
-        setCurrentIndex: function (index) {
+        setCurrentIndex: function (index) 
+        {
             setCurrentIndex(index);
         },
         removePerson: function (id) {
@@ -44,11 +45,13 @@ var person = person || (function () {
                 mobileNumber: {
                     required: true,
                     minlength: 7,
-                }
+                },
+                projects: "required",
             },
             messages: {
                 firstName: "Please enter Person First Name",
                 lastName: "Please enter Person Last Name",
+                projects: "Please select at least one project",
                 nationalId:
                 {
                     required: "Please enter Person National code",
@@ -82,8 +85,9 @@ var person = person || (function () {
                 var fname = $('input#firstName').val();
                 var lname = $('input#lastName').val();
                 var nid = $('input#nationalId').val();
-                var mobile = $('textarea#mobileNumber').val();
-                createPerson(fname, lname, nid, mobile);
+                var mobile = $('input#mobileNumber').val();
+                var projects = $("select#projects").select2("val");
+                createPerson(fname, lname, nid, mobile, projects);
             }
         });
 
@@ -99,11 +103,13 @@ var person = person || (function () {
                 mobileNumber: {
                     required: true,
                     minlength: 7,
-                }
+                },
+                projects: "required",
             },
             messages: {
                 firstName: "Please enter Person First Name",
                 lastName: "Please enter Person Last Name",
+                projects: "Please select at least one project",
                 nationalId:
                 {
                     required: "Please enter Person National code",
@@ -137,9 +143,10 @@ var person = person || (function () {
                 var fname = $('input#editfirstName').val();
                 var lname = $('input#editlastName').val();
                 var nid = $('input#editnationalId').val();
-                var mobile = $('textarea#editmobileNumber').val();
+                var mobile = $('input#editmobileNumber').val();
+                var projects = $("select#editprojects").select2("val");
                 var id = $('#current-personId').val();
-                editPerson(fname, lname, nid, mobile,id);
+                editPerson(fname, lname, nid, mobile, projects,id);
             }
         });
     }
@@ -163,7 +170,6 @@ var person = person || (function () {
                     row.append(name).append(nationalId).append(editBtn).append(deleteBtn);
                     content.append(row);
                 });
-
                 _table = tableinit();
             },
             error: function (jqXHR, status) {
@@ -187,13 +193,13 @@ var person = person || (function () {
         });
     }
 
-    function createPerson(firstName, lastName, nationalId, mobileNumber)
+    function createPerson(firstName, lastName, nationalId, mobileNumber, projects)
     {
         var model =
         {
-            'firstName': firstName, 'lastName': lastName, 'nationalId': nationalId, 'mobileNumber': mobileNumber
+            'firstName': firstName, 'lastName': lastName, 'nationalId': nationalId, 'mobileNumber': mobileNumber, 'projectIds': projects
         };
-
+        var name = firstName + " " + lastName;
         $.ajax({
             type: "Post",
             url: "/APSE/Person/CreatePerson",
@@ -221,11 +227,12 @@ var person = person || (function () {
         });
     }
 
-    function editPerson(firstName, lastName, nationalId, mobileNumber,id) {
+    function editPerson(firstName, lastName, nationalId, mobileNumber, projects,id) {
         var model =
         {
-            'firstName': firstName, 'lastName': lastName, 'nationalId': nationalId, 'mobileNumber': mobileNumber
+            'firstName': firstName, 'lastName': lastName, 'nationalId': nationalId, 'mobileNumber': mobileNumber, 'projectIds': projects
         };
+        var name = firstName + " " + lastName;
         $.ajax({
             type: "PUT",
             url: "/APSE/Person/UpdatePerson/"+id,
@@ -241,7 +248,7 @@ var person = person || (function () {
                             "<button  data-toggle='modal' data-target='#edit-personModal' data-id='" + data.subject + "' class='edit-person btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
                             "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-person btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
                         ]);
-                        $('#edit-contractorModal').modal('toggle');
+                        $('#edit-personModal').modal('toggle');
                     }
                 }
                 else {

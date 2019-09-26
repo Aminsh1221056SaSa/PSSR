@@ -4,7 +4,6 @@
     ViewData["Title"] = "Contractor";
 }
 
-
 <div class="card bd-1">
     <div class="card-header bg-gray-400 bd-b-0-f pd-b-0">
         <nav class="nav nav-tabs">
@@ -160,39 +159,63 @@
         <div id="Person" class="tab-pane">
             <div class="container">
                 <div class="row" style="width:100%">
-                    <div class="col-md-3">
+                    <div class="col-md-5">
                         <div class="card card-body">
                             <h5 class="card-title mg-b-20">Add Person</h5>
 
                             <form name="personForm" method="post" class="form-horizontal" action="">
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="firstName">First Name</label>
-                                    <input type="text" class="form-control" name="firstName" id="firstName">
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="lastName">Last Name</label>
-                                    <input type="text" class="form-control" name="lastName" id="lastName">
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">National Code</label>
-                                    <div class="pos-relative">
-                                        <input type="text" class="form-control pd-r-80" name="nationalId" id="nationalId">
-                                    </div>
-                                </div><!-- form-group -->
-                                <div class="form-group">
-                                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="mobileNumber">Mobile Number</label>
-                                    <div class="pos-relative">
-                                        <input type="text" class="form-control pd-r-80" name="mobileNumber" id="mobileNumber">
-                                    </div>
-                                </div><!-- form-group -->
+                              <div class="container">
+                                  <div class="row">
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="az-content-label tx-11 tx-medium tx-gray-600" for="projects">Projects</label>
+                                              <div class="pos-relative">
+                                                  <select class="form-control select2" multiple="multiple" id="projects" name="projects"></select>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="az-content-label tx-11 tx-medium tx-gray-600" for="firstName">First Name</label>
+                                              <input type="text" class="form-control" name="firstName" id="firstName">
+                                          </div><!-- form-group -->
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="az-content-label tx-11 tx-medium tx-gray-600" for="lastName">Last Name</label>
+                                              <input type="text" class="form-control" name="lastName" id="lastName">
+                                          </div><!-- form-group -->
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">National Code</label>
+                                              <div class="pos-relative">
+                                                  <input type="text" class="form-control pd-r-80" name="nationalId" id="nationalId">
+                                              </div>
+                                          </div><!-- form-group -->
+                                      </div>
+                                      <div class="col-md-6">
+                                          <div class="form-group">
+                                              <label class="az-content-label tx-11 tx-medium tx-gray-600" for="mobileNumber">Mobile Number</label>
+                                              <div class="pos-relative">
+                                                  <input type="text" class="form-control pd-r-80" name="mobileNumber" id="mobileNumber">
+                                              </div>
+                                          </div><!-- form-group -->
 
-                                <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
+                                      </div>
+
+                                      <div class="col-md-6">
+                                          <br />
+                                          <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
+                                      </div>
+                                  </div>
+                              </div>
                             </form>
 
                         </div>
                         <!-- card -->
                     </div><!-- col -->
-                    <div class="col-md-9">
+                    <div class="col-md-7">
                         <div class="card card-body">
                             <div class="az-content-breadcrumb lst-datatablecontainer" style="display:inline-block;">
                                 <table id="personLst" class="display responsive nowrap">
@@ -336,26 +359,35 @@
             </div>
             <form name="personEditForm" method="post" class="form-horizontal" action="">
                 <input type="hidden" id="current-personId" />
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editfirstName">First Name</label>
-                    <input type="text" class="form-control" name="editfirstName" id="editfirstName">
-                </div><!-- form-group -->
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editlastName">Last Name</label>
-                    <input type="text" class="form-control" name="editlastName" id="editlastName">
-                </div><!-- form-group -->
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editnationalId">National Code</label>
-                    <div class="pos-relative">
-                        <input type="text" class="form-control pd-r-80" name="editnationalId" id="editnationalId">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editprojects">Projects</label>
+                        <div class="pos-relative">
+                            <select class="form-control select2" multiple="multiple" id="editprojects" name="editprojects"></select>
+                        </div>
                     </div>
-                </div><!-- form-group -->
-                <div class="form-group">
-                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editmobileNumber">Mobile Number</label>
-                    <div class="pos-relative">
-                        <input type="text" class="form-control pd-r-80" name="editmobileNumber" id="editmobileNumber">
-                    </div>
-                </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editfirstName">First Name</label>
+                        <input type="text" class="form-control" name="editfirstName" id="editfirstName">
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editlastName">Last Name</label>
+                        <input type="text" class="form-control" name="editlastName" id="editlastName">
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editnationalId">National Code</label>
+                        <div class="pos-relative">
+                            <input type="text" class="form-control pd-r-80" name="editnationalId" id="editnationalId">
+                        </div>
+                    </div><!-- form-group -->
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editmobileNumber">Mobile Number</label>
+                        <div class="pos-relative">
+                            <input type="text" class="form-control pd-r-80" name="editmobileNumber" id="editmobileNumber">
+                        </div>
+                    </div><!-- form-group -->
+
+                </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-indigo">Save changes</button>
                     <button type="button" class="btn btn-outline-light" data-dismiss="modal">Close</button>
@@ -380,7 +412,15 @@
 
 <script>
     $(document).ready(function () {
+        
+        $('#projects').select2({
+            width: '100%'
+        });
 
+        $('#editprojects').select2({
+            width: '100%',
+            dropdownParent: $('#edit-personModal')
+        });
         var hash = window.location.hash;
         $('div.nav a[href="' + hash + '"]').tab('show');
 
@@ -426,7 +466,8 @@
                         person.init();
                         person.getPersonList();
                         ispersoninited = true;
-                    }
+                      }
+                      setProjectDropDown();
                     break;
                     case 'Contractor':
                     if (!isContractorinited)
@@ -542,7 +583,7 @@
             var tr = $(this).closest("tr");
             var rowindex = tr.index();
             person.setCurrentIndex(rowindex);
-            person.removeContractor(id);
+            person.removePerson(id);
         });
 
         $('#personLst tbody').on('dblclick', 'tr', function () {
@@ -555,12 +596,30 @@
         });
 
         async function getPerson(id) {
-            var data = await contractor.getPerson(id);
+            var data = await person.getPerson(id);
             $('#editfirstName').val(data.firstName);
             $('#editlastName').val(data.lastName);
             $('#editnationalId').val(data.nationalId);
             $('#editmobileNumber').val(data.mobileNumber);
             $('#current-personId').val(data.id);
+            var arr = [];
+            $.each(data.currentProjects, function (i, val) {
+                arr.push(val);
+            });
+
+            $('#editprojects').val(arr).trigger('change');
+        }
+
+        async function setProjectDropDown() {
+            var data = await project.getAllProjects();
+            var select = $('#projects');
+            var editSelect = $('#editprojects');
+            select.empty();
+            editSelect.empty();
+            $.each(data, function (i, val) {
+                select.append("<option value=" + val.id + ">" + val.name + "</option>");
+                editSelect.append("<option value=" + val.id + ">" + val.name + "</option>");
+            });
         }
     });
 

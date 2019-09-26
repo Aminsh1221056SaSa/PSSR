@@ -18,10 +18,14 @@ namespace PSSR.Logic.Persons.Concrete
         {
             var item = _updatedbAccess.GetPerson(inputData);
             if (item == null)
+            {
                 AddError("Could not find the person. Someone entering illegal ids?");
+            }
 
-            if (_updatedbAccess.HaveAnyPorjects(item.Id))
-                AddError("person hvae some projects!!!");
+            //if (_updatedbAccess.HaveAnyPorjects(item.Id))
+            //{
+            //    AddError("person hvae some Activated projects!!!");
+            //}
 
             _dbAccess.Delete(item);
 

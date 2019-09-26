@@ -20,7 +20,7 @@ namespace PSSR.DbAccess.Persons.Concrete
 
         public bool HaveAnyPorjects(int personId)
         {
-            return _context.Persons.Any(c => c.Id == personId && c.ProjectLink.Any());
+            return _context.Persons.Any(c => c.Id == personId && c.ProjectLink.Any(x=>x.Project.ProjectWBS.Any()));
         }
     }
 }
