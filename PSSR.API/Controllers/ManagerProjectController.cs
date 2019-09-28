@@ -21,8 +21,6 @@ using PSSR.ServiceLayer.ProjectServices;
 using PSSR.ServiceLayer.ProjectServices.Concrete;
 using PSSR.ServiceLayer.ProjectSystemServices;
 using PSSR.ServiceLayer.ProjectSystemServices.Concrete;
-using PSSR.ServiceLayer.RoadMapServices;
-using PSSR.ServiceLayer.RoadMapServices.Concrete;
 using PSSR.ServiceLayer.SubSystemServices;
 using PSSR.ServiceLayer.SubSystemServices.Concrete;
 using PSSR.ServiceLayer.ValueUnits;
@@ -65,127 +63,8 @@ namespace PSSR.API.Controllers
             var descipline = await listService.GetFormsByDescipline(desciplineId);
             return new ObjectResult(descipline);
         }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(WorkPackageListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetWorkPackages(string query)
-        {
-            var roadMapService = new ListWorkPackageService(_context);
-            return new ObjectResult(await roadMapService.GetRoadMapsAsync(query));
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(LocationListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetLocations(string query)
-        {
-            var roadMapService = new ListWorkPackageService(_context);
-            return new ObjectResult(await roadMapService.GetLocationsAsync(query));
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(WorkPackageListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetWorkPackage(int id)
-        {
-            var roadMapService = new ListWorkPackageService(_context);
-            return new ObjectResult(await roadMapService.GetRoadMapAsycn(id));
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(LocationListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetLocation(int id)
-        {
-            var roadMapService = new ListWorkPackageService(_context);
-            return new ObjectResult(await roadMapService.GetLocationAsycn(id));
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(DesciplineListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetDescipline(int id)
-        {
-            var listService = new ListDesciplineService(_context);
-
-            var desciplineList = await listService.GetDescipline(id);
-
-            return new ObjectResult(desciplineList);
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(DesciplineListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetDesciplineList()
-        {
-            var listService = new ListDesciplineService(_context);
-
-            var desciplineList = await listService.GetAllDesciplines();
-
-            return new ObjectResult(desciplineList);
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(WorkPackageStepListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetWorkPackageStep(int id)
-        {
-            var listService = new WorkPackageStepService(_context);
-
-            var desciplineList = await listService.GetWorkPackageStep(id);
-
-            return new ObjectResult(desciplineList);
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(List<WorkPackageStepListDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetWorkPackageSteps()
-        {
-            var listService = new WorkPackageStepService(_context);
-
-            var desciplineList = await listService.GetWorkPackageSteps();
-
-            return new ObjectResult(desciplineList);
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(FormDictionaryListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetFormDictionary(long id)
-        {
-            var listService = new ListFormDictionaryService(_context);
-
-            var desciplineList = await listService.GetformDictionary(id);
-
-            return new ObjectResult(desciplineList);
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(List<FormDictionarySummaryDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetformDictionaryies()
-        {
-            var listService = new ListFormDictionaryService(_context);
-
-            var desciplineList = await listService.GetformDictionaryies();
-
-            return new ObjectResult(desciplineList);
-        }
-
-        [HttpGet]
-        [Route("[action]")]
-        [ProducesResponseType(typeof(List<ValueUnitListDto>), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetValueUnits()
-        {
-            var listService = new ListValueUnitService(_context);
-
-            var valueUnits = await listService.GetValueUnitDtos();
-
-            return new ObjectResult(valueUnits);
-        }
-
+        
+       
         #endregion
 
         #region project related

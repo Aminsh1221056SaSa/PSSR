@@ -17,7 +17,7 @@ namespace PSSR.Logic.ValueUnits.Concrete
         {
             var valueUnit = _dbAccess.GetValueUnit(inputData.Id);
             if (valueUnit == null)
-                throw new NullReferenceException("Could not find the value unit. Someone entering illegal ids?");
+                AddError("Could not find the value unit. Someone entering illegal ids?");
 
             var status = valueUnit.UpdateValueUnit(inputData.Name, inputData.MathType, inputData.MathNum);
 

@@ -1,29 +1,17 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using System.Net;
-
-using BskaGenericCoreLib;
-using PSSR.Logic.Desciplines;
-using PSSR.UI.Models;
-using PSSR.UI.Helpers;
 using PSSR.ServiceLayer.DesciplineServices;
-using PSSR.ServiceLayer.DesciplineServices.Concrete;
-using PSSR.DataLayer.EfCode;
-using PSSR.ServiceLayer.Logger;
 using PSSR.ServiceLayer.Utils;
 using PSSR.UI.Controllers;
-using PSSR.UI.Helpers.CashHelper;
 using PSSR.UI.Helpers.Http;
 using Microsoft.Extensions.Options;
 using PSSR.UI.Configuration;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using PSSR.UI.Helpers.Security;
-using PSSR.DataLayer.EfClasses.Management;
+using PSSR.Logic.Desciplines;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -33,56 +21,26 @@ namespace PSSR.UI.Areas.Configuration.Controllers
     [ApiVersion("1.0")]
     public class DesciplineController : BaseAdminController
     {
-        private readonly EfCoreContext _context;
-        private readonly IMasterDataCacheOperations _masterDataCache;
         private readonly IHttpClient _clientService;
         private readonly IOptions<ApplicationSettings> _settings;
-        public DesciplineController(EfCoreContext context, IMasterDataCacheOperations masterDataCache
-            , IHttpClient clientService
+        public DesciplineController(IHttpClient clientService
             , IOptions<ApplicationSettings> settings)
         {
-            _context = context;
-            _masterDataCache = masterDataCache;
             _clientService = clientService;
             _settings = settings;
         }
 
-        [Authorize(Policy = "dataEventRecordsManager")]
-        public async Task<IActionResult> Descipline(DesciplineSortFilterPageOptions options)
+        [HttpGet]
+        [Route("APSE/[controller]/[action]")]
+        [ProducesResponseType(typeof(List<DesciplineListDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetDesciplines()
         {
-            var listService =
-                 new ListDesciplineService(_context);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var desciplineList = listService
-                .SortFilterPage(options)
-                .ToList();
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}Descipline/GetDesciplines",
+                authorizationToken: accessToken);
 
-            SetupTraceInfo();           //Thsi makes the logging display work
-            var viewModel = new DesciplineListCombinedDto(options, desciplineList);
-            await _masterDataCache.CreateMasterDataCacheAsync(User.GetCurrentUserDetails().Name, viewModel);
-            return View(viewModel);
-        }
-
-        [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateDescipline(DesciplineDto model,
-            [FromServices]IActionService<IPlaceDesciplineAction> service)
-        {
-            var dto = new PlaceDesciplineDto(model);
-            var descipline = service.RunBizAction<Descipline>(dto);
-
-            if (!service.Status.HasErrors)
-            {
-                SetupTraceInfo();
-                return RedirectToAction("Descipline");
-            }
-
-            service.Status.CopyErrorsToModelState(ModelState, dto);
-
-            SetupTraceInfo();       //Used to update the logs
-            var viewModel = await _masterDataCache.GetMasterDataCacheAsync<DesciplineListCombinedDto>(User.GetCurrentUserDetails().Name);
-            return View("Descipline", viewModel);
+            return new ObjectResult(content);
         }
 
         [HttpGet]
@@ -92,61 +50,50 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}ManagerProject/GetDescipline?id={id}",
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}Descipline/GetDescipline?id={id}",
                 authorizationToken: accessToken);
 
             return new ObjectResult(content);
         }
 
-        [HttpGet]
+        [HttpPost]
         [Route("APSE/[controller]/[action]")]
-        [ProducesResponseType(typeof(DesciplineListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetDesciplineList()
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateDescipline([FromBody] DesciplineDto model)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}ManagerProject/GetDesciplineList",
+            var response = await _clientService.PostAsync($"{_settings.Value.OilApiAddress}Descipline/CreateDescipline", model,
                 authorizationToken: accessToken);
-
+            var content = await response.Content.ReadAsStringAsync();
             return new ObjectResult(content);
         }
 
-        [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpPost]
-        [Route("APSE/[controller]/[action]")]
-        [ProducesResponseType(typeof(SuccessfullyResponseDto), (int)HttpStatusCode.OK)]
-        public IActionResult UpdateDescipline([FromBody] DesciplineDto model,
-            [FromServices]IActionService<IUpdateDesciplineAction> service)
+        [HttpPut]
+        [Route("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateDescipline(int id, [FromBody] DesciplineDto model)
         {
-            var dto = new PlaceDesciplineDto(model);
-          
-            service.RunBizAction(dto);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            if (!service.Status.HasErrors)
-            {
-                SetupTraceInfo();
-                return new ObjectResult(new SuccessfullyResponseDto { Key=200});
-            }
+            var response = await _clientService.PutAsync($"{_settings.Value.OilApiAddress}Descipline/UpdateDescipline/{id}", model,
+                authorizationToken: accessToken);
 
-            service.Status.CopyErrorsToModelState(ModelState, dto);
-
-            SetupTraceInfo();       //Used to update the logs
-            return BadRequest();
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
         }
 
-        [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpGet]
-        public JsonResult GetFilterSearchContent(DesciplineSortFilterPageOptions options)
+        [HttpDelete("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteDescipline(int id)
         {
-            var service = new DesciplineFilterDropdownService(_context);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var traceIdent = HttpContext.TraceIdentifier; //This makes the logging display work
+            var response = await _clientService.DeleteAsync($"{_settings.Value.OilApiAddress}Descipline/DeleteDescipline/{id}",
+                authorizationToken: accessToken);
 
-            return Json(
-                new TraceIndentGeneric<IEnumerable<DropdownTuple>>(
-                traceIdent,
-                service.GetFilterDropDownValues(
-                    options.FilterBy)));
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
         }
 
     }

@@ -2,22 +2,16 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
-using PSSR.DataLayer.EfCode;
 using PSSR.Logic.ValueUnits;
-using BskaGenericCoreLib;
-using PSSR.UI.Helpers;
 using PSSR.ServiceLayer.ValueUnits;
 using PSSR.UI.Controllers;
-using PSSR.UI.Helpers.CashHelper;
-using Microsoft.AspNetCore.Authorization;
-using PSSR.UI.Helpers.Security;
 using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Authentication;
 using PSSR.UI.Helpers.Http;
 using Microsoft.Extensions.Options;
 using PSSR.UI.Configuration;
-using PSSR.DataLayer.EfClasses.Management;
+using PSSR.ServiceLayer.Utils;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -27,26 +21,13 @@ namespace PSSR.UI.Areas.Configuration.Controllers
     [ApiVersion("1.0")]
     public class ValueUnitController : BaseAdminController
     {
-        private readonly EfCoreContext _context;
         private readonly IHttpClient _clientService;
         private readonly IOptions<ApplicationSettings> _settings;
-        private readonly IMasterDataCacheOperations _masterDataCache;
-        public ValueUnitController(EfCoreContext context, IHttpClient clientService, IMasterDataCacheOperations masterDataCache
-              , IOptions<ApplicationSettings> settings)
+        public ValueUnitController(IHttpClient clientService
+            , IOptions<ApplicationSettings> settings)
         {
-            _context = context;
             _clientService = clientService;
-            _masterDataCache = masterDataCache;
             _settings = settings;
-        }
-
-        [Authorize(Policy = "dataEventRecordsManager")]
-        public async Task<IActionResult> ValueUnit()
-        {
-            var viewModel = new ValueUnitListCombinedDto(null);
-
-            await _masterDataCache.CreateMasterDataCacheAsync(User.GetCurrentUserDetails().Name, viewModel);
-            return View(viewModel);
         }
 
         [HttpGet]
@@ -56,31 +37,63 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}ManagerProject/GetValueUnits",
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}ValueUnit/GetValueUnits",
                 authorizationToken: accessToken);
 
             return new ObjectResult(content);
         }
 
-        [Authorize(Policy = "dataEventRecordsManager")]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateValueUnit(ValueUnitDto model,
-           [FromServices]IActionService<IPlaceValuUnitAction> service)
+        [HttpGet]
+        [Route("APSE/[controller]/[action]")]
+        [ProducesResponseType(typeof(ValueUnitListDto), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetValueUnit([FromQuery] int id)
         {
-            var valueUnit = service.RunBizAction<ValueUnit>(model);
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
 
-            if (!service.Status.HasErrors)
-            {
-                SetupTraceInfo();
-                return RedirectToAction("ValueUnit");
-            }
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}ValueUnit/GetValueUnit?id={id}",
+                authorizationToken: accessToken);
 
-            service.Status.CopyErrorsToModelState(ModelState, model);
+            return new ObjectResult(content);
+        }
 
-            SetupTraceInfo();       //Used to update the logs
-            var viewModel = await _masterDataCache.GetMasterDataCacheAsync<ValueUnitListCombinedDto>(User.GetCurrentUserDetails().Name);
-            return View("ValueUnit",viewModel);
+        [HttpPost]
+        [Route("APSE/[controller]/[action]")]
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> CreateValueUnit([FromBody] ValueUnitDto model)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var response = await _clientService.PostAsync($"{_settings.Value.OilApiAddress}ValueUnit/CreateValueUnit", model,
+                authorizationToken: accessToken);
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
+        }
+
+        [HttpPut]
+        [Route("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> UpdateValueUnit(int id, [FromBody] ValueUnitDto model)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var response = await _clientService.PutAsync($"{_settings.Value.OilApiAddress}ValueUnit/UpdateValueUnit/{id}", model,
+                authorizationToken: accessToken);
+
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
+        }
+
+        [HttpDelete("APSE/[controller]/[action]/{id}")]
+        [ProducesResponseType(typeof(ResultResponseDto<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> DeleteValueUnit(int id)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var response = await _clientService.DeleteAsync($"{_settings.Value.OilApiAddress}ValueUnit/DeleteValueUnit/{id}",
+                authorizationToken: accessToken);
+
+            var content = await response.Content.ReadAsStringAsync();
+            return new ObjectResult(content);
         }
     }
 }

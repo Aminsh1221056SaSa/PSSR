@@ -34,20 +34,18 @@ namespace PSSR.ServiceLayer.RoadMapServices.Concrete
             }).ToListAsync();
         }
 
-        public async Task<List<WorkPackageListDto>> GetRoadMapsAsync(string query = "")
+        public async Task<List<WorkPackageListDto>> GetRoadMapsAsync()
         {
-            return await _context.ProjectRoadMaps.Where(s => string.IsNullOrWhiteSpace(query)
-            || s.Name.Contains(query)).Select(s => new WorkPackageListDto
+            return await _context.ProjectRoadMaps.Select(s => new WorkPackageListDto
             {
                 Id=s.Id,
                 Title=s.Name,
             }).ToListAsync();
         }
 
-        public async Task<List<LocationListDto>> GetLocationsAsync(string query = "")
+        public async Task<List<LocationListDto>> GetLocationsAsync()
         {
-            return await _context.LocationTypes.Where(s => string.IsNullOrWhiteSpace(query)
-            || s.Title.Contains(query)).Select(s => new LocationListDto
+            return await _context.LocationTypes.Select(s => new LocationListDto
             {
                 Id = s.Id,
                 Title = s.Title
