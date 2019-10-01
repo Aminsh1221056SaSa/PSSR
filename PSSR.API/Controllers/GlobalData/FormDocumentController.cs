@@ -110,10 +110,11 @@ namespace PSSR.API.Controllers.GlobalData
 
             if (!service.Status.HasErrors)
             {
-                return new ObjectResult(new ResultResponseDto<String, int>
+                return new ObjectResult(new ResultResponseDto<String, long>
                 {
                     Key = HttpStatusCode.OK,
-                    Value = "FormDocument updated.."
+                    Value = "FormDocument updated..",
+                    Subject = model.Id
                 });
             }
 

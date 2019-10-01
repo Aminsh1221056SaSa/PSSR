@@ -52,7 +52,7 @@ namespace PSSR.DataLayer.EfClasses.Management
             var status = new StatusGenericHandler();
             if (string.IsNullOrWhiteSpace(title))
             {
-                status.AddError("I'm sorry, but title is empty.");
+                status.AddError("I'm sorry, but Name is empty.");
                 return status;
             }
 

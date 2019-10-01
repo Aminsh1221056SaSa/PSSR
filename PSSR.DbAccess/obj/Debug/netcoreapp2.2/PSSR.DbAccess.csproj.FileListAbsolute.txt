@@ -8,7 +8,6 @@ D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSS
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\PSSR.Common.pdb
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\bin\Debug\netcoreapp2.2\BskaGenericCoreLib.pdb
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.csprojAssemblyReference.cache
-D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.csproj.CoreCompileInputs.cache
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.AssemblyInfoInputs.cache
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.AssemblyInfo.cs
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.DbAccess\obj\Debug\netcoreapp2.2\PSSR.DbAccess.csproj.CopyComplete

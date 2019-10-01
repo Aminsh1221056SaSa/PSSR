@@ -1,0 +1,35 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20">Add WorkPackageStep</h5>
+
+    <form name="workstepForm" method="post" class="form-horizontal" action="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="workstepname">Name</label>
+                        <input type="text" class="form-control" name="workstepname" id="workstepname">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="workpackageId">WorkPackage</label>
+                        <div class="pos-relative">
+                            <select id="workpackageId" class="form-control select2" name="workpackageId" data-placeholder="Select WorkPackage"
+                                    style="width: 100%;" required></select>
+                        </div>
+                    </div><!-- form-group -->
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="workstepDescription">Description</label>
+                        <input type="text" class="form-control" name="workstepDescription" id="workstepDescription">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <button class="btn btn-az-primary btn-block" type="submit" id="btn-workstep-save">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

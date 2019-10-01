@@ -1,0 +1,37 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20"></h5>
+
+    <form name="workstepEditForm" method="post" class="form-horizontal" action="">
+        <input type="hidden" id="current-workstepId" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editworkstepname">Name</label>
+                        <input type="text" class="form-control" name="editworkstepname" id="editworkstepname">
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editworkpackageId">WorkPackage</label>
+                        <div class="pos-relative">
+                            <select id="editworkpackageId" class="form-control select2" name="editworkpackageId" data-placeholder="Select WorkPackage"
+                                    style="width: 100%;" required></select>
+                        </div>
+                    </div><!-- form-group -->
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editworkstepDescription">Description</label>
+                        <input type="text" class="form-control" name="editworkstepDescription" id="editworkstepDescription">
+                    </div>
+                </div>
+           
+                <div class="col-md-6">
+                    <br />
+                    <button class="btn btn-az-primary btn-block" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

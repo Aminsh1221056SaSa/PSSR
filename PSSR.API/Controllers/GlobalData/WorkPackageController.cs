@@ -71,11 +71,11 @@ namespace PSSR.API.Controllers.GlobalData
            , [FromServices]IActionService<IUpdateRoadMapAction> service)
         {
             model.Id = id;
-            service.RunBizAction<LocationType>(model);
+            service.RunBizAction(model);
 
             if (!service.Status.HasErrors)
             {
-                return new ObjectResult(new ResultResponseDto<String, int> { Key = HttpStatusCode.OK, Value = "WorkPackage updated.." });
+                return new ObjectResult(new ResultResponseDto<String, int> { Key = HttpStatusCode.OK, Value = "WorkPackage updated..", Subject = model.Id });
             }
 
             var errors = service.Status.CopyErrorsToString(ModelState);

@@ -6,7 +6,7 @@ var workPackage = workPackage || (function () {
             initialization();
         },
         getWorkPackageList: function () {
-            getWorkPackageList()
+            setWorkPackageList()
         },
         getWorkPackage: function (id) {
             return getWorkPackage(id);
@@ -16,6 +16,9 @@ var workPackage = workPackage || (function () {
         },
         removeWorkPackage: function (id) {
             removeWorkPackage(id);
+        },
+        getAllWorkPackages: function () {
+            return getWorkPackageList();
         }
     };
 
@@ -93,7 +96,7 @@ var workPackage = workPackage || (function () {
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
-                var name = $('input#name').val();
+                var name = $('input#editname').val();
                 var id = $('#current-workPackageId').val();
                 editWorkPackage(name,id);
             }
@@ -101,28 +104,34 @@ var workPackage = workPackage || (function () {
     }
 
     function getWorkPackageList() {
-        var content = $('#workPackage-content');
-        content.empty();
-        $.ajax({
+        return $.ajax({
             type: "Get",
             url: "/APSE/WorkPackage/GetWorkPackages",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
-                $.each(data, function (i, val) {
-                    var name = $("<td>" + val.name + "</td>");
-                    var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-workPackageModal' data-id='" + val.id + "' class='edit-workPackage btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
-                    var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-workPackage btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
-                    var row = $('<tr></tr>');
-                    row.append(name).append(editBtn).append(deleteBtn);
-                    content.append(row);
-                });
-                _table = tableinit();
+
             },
             error: function (jqXHR, status) {
                 console.log(jqXHR);
             }
-        })
+        });
+    }
+
+   async function setWorkPackageList() {
+        var content = $('#workPackage-content');
+        content.empty();
+        var data =await getWorkPackageList();
+
+        $.each(data, function (i, val) {
+            var name = $("<td>" + val.title + "</td>");
+            var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-workPackageModal' data-id='" + val.id + "' class='edit-workPackage btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
+            var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-workPackage btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
+            var row = $('<tr></tr>');
+            row.append(name).append(editBtn).append(deleteBtn);
+            content.append(row);
+        });
+        _table = tableinit();
     }
 
     function getWorkPackage(id) {
@@ -156,8 +165,8 @@ var workPackage = workPackage || (function () {
                     if (_table) {
                         _table.row.add([
                             name,
-                            "<button  data-toggle='modal' data-target='#edit-workPackageModal' data-id='" + data.subject + "' class='edit-WorkPackage btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
-                            "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-WorkPackage btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
+                            "<button  data-toggle='modal' data-target='#edit-workPackageModal' data-id='" + data.subject + "' class='edit-workPackage btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
+                            "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-workPackage btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
                         ]).draw(false);
                     }
                 }
@@ -204,7 +213,6 @@ var workPackage = workPackage || (function () {
     }
 
     function removeWorkPackage(id) {
-
         $.ajax({
             type: "Delete",
             url: "/APSE/WorkPackage/DeleteWorkPackage/" + id,

@@ -45,9 +45,9 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("APSE/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]/{id}")]
         [ProducesResponseType(typeof(FormDictionarySummaryDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetFormDocument([FromQuery] long id)
+        public async Task<IActionResult> GetFormDocument(long id)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 

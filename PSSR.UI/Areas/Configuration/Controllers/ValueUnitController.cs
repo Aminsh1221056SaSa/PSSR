@@ -44,9 +44,9 @@ namespace PSSR.UI.Areas.Configuration.Controllers
         }
 
         [HttpGet]
-        [Route("APSE/[controller]/[action]")]
+        [Route("APSE/[controller]/[action]/{id}")]
         [ProducesResponseType(typeof(ValueUnitListDto), (int)HttpStatusCode.OK)]
-        public async Task<IActionResult> GetValueUnit([FromQuery] int id)
+        public async Task<IActionResult> GetValueUnit(int id)
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
 

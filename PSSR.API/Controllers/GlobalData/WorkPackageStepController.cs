@@ -83,7 +83,8 @@ namespace PSSR.API.Controllers.GlobalData
                 return new ObjectResult(new ResultResponseDto<String, int>
                 {
                     Key = HttpStatusCode.OK,
-                    Value = "WorkPackageStep updated.."
+                    Value = "WorkPackageStep updated..",
+                    Subject = model.Id
                 });
             }
 

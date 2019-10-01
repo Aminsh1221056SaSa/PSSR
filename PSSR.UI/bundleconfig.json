@@ -124,5 +124,43 @@
     "minify": {
       "enabled": true
     }
+  },
+
+  //global data
+  {
+    "outputFileName": "wwwroot/js/workPackage.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/globalData/workPackage.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/pssrlocation.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/globalData/pssrlocation.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/descipline.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/globalData/descipline.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
+  },
+  {
+    "outputFileName": "wwwroot/js/workstep.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/globalData/workstep.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
   }
 ]
