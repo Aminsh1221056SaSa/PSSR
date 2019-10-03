@@ -1,8 +1,9 @@
-﻿$(document).ready(function () {
-    $.fn.extend({
+﻿var myTreeview = myTreeview || (function () {
+    return {
         treed: function (o) {
-            var openedClass = 'fa fa-plus-circle';
-            var closedClass = 'fa fa-minus-circle';
+            
+            var openedClass = 'fa-plus';
+            var closedClass = 'fa-minus';
 
             if (typeof o != 'undefined') {
                 if (typeof o.openedClass != 'undefined') {
@@ -12,13 +13,13 @@
                     closedClass = o.closedClass;
                 }
             };
-
+          
             //initialize each of the top levels
-            var tree = $(this);
+            var tree = $(o);
             tree.addClass("tree");
             tree.find('li').has("ul").each(function () {
                 var branch = $(this); //li with children ul
-                branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+                branch.prepend("<i class='indicator fa " + closedClass + "'></i>");
                 branch.addClass('branch');
                 branch.on('click', function (e) {
                     if (this == e.target) {
@@ -29,7 +30,7 @@
                 })
                 branch.children().children().toggle();
             });
-
+          
             //fire event from the dynamically added icon
             tree.find('.branch .indicator').each(function () {
                 $(this).on('click', function () {
@@ -52,12 +53,12 @@
 
             $(".myTreeview .collaps-open").parents('.myTreeview .branch').map(function () {
                 var icon = $(this).children('i:first');
-
-                icon.toggleClass('glyphicon-minus-sign glyphicon-plus-sign');
+               
+                icon.toggleClass('fa-minus fa-minus');
 
                 $(this).children().children().toggle();
             })
         }
-    });
-    $('.myTreeview').treed();
-});
+    }
+}());
+

@@ -67,6 +67,7 @@ namespace PSSR.UI.Controllers
             _masterDataCache.SetUserCurrentProject(user.Name, pid);
             return View();
         }
+
         //render partial views
         public async Task<ActionResult> WorkPackageDetails(int wId,int locId)
         {

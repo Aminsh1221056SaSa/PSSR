@@ -5,3 +5,4 @@ D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.Common\obj\Debug\netcoreapp2.2\PSSR.
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.Common\obj\Debug\netcoreapp2.2\PSSR.Common.AssemblyInfo.cs
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.Common\obj\Debug\netcoreapp2.2\PSSR.Common.dll
 D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.Common\obj\Debug\netcoreapp2.2\PSSR.Common.pdb
+D:\projects\myProjects\selfs\PSSR\PSSR\PSSR.Common\obj\Debug\netcoreapp2.2\PSSR.Common.csprojAssemblyReference.cache

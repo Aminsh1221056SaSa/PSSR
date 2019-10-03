@@ -89,7 +89,13 @@ namespace PSSR.API
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddSwaggerGen(SwaggerHelper.ConfigureSwaggerGen);
-            services.AddAutoMapper();
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new AppMapping());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
 
             var containerBuilder = new ContainerBuilder();
 

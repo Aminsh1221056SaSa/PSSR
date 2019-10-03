@@ -68,7 +68,16 @@
 
         </div>
         <div id="ValueUnit" class="tab-pane">
-
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-5">
+                        <partial name="~/Areas/Configuration/Views/PartialViews/FormInput/_ValueUnitInput.cshtml" />
+                    </div>
+                    <div class="col-md-7">
+                        <partial name="~/Areas/Configuration/Views/PartialViews/TableList/_valueUnitList.cshtml" />
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -137,18 +146,38 @@
     </div><!-- modal-dialog -->
 </div><!-- modal -->
 
+<div id="edit-valueUnitModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Value Unit Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <partial name="~/Areas/Configuration/Views/PartialViews/FormEditInput/_valueUnitEditInput.cshtml" />
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
 <environment names="Development">
     <script src="~/dist/js/api/globalData/workPackage.js"></script>
     <script src="~/dist/js/api/globalData/pssrlocation.js"></script>
     <script src="~/dist/js/api/globalData/descipline.js"></script>
     <script src="~/dist/js/api/globalData/workstep.js"></script>
+    <script src="~/dist/js/api/globalData/valueUnit.js"></script>
 </environment>
 <environment names="Staging,Production">
     <script src="~/js/workPackage.min.js"></script>
     <script src="~/js/pssrlocation.min.js"></script>
     <script src="~/js/descipline.min.js"></script>
     <script src="~/js/workstep.min.js"></script>
+    <script src="~/js/valueUnit.min.js"></script>
 </environment>
+
+<script src="~/dist/js/myTreeviewScript.js"></script>
 <script>
     $(document).ready(function () {
 
@@ -169,6 +198,7 @@
         var isLocationInited = false;
         var isDesciplineInited = false;
         var isWorkpackagestepInited = false;
+        var isValueUnitInited = false;
 
         if (hash.length > 0) {
             $('.active').removeClass('active');
@@ -206,7 +236,7 @@
                         isDesciplineInited = true;
                     }
                     break;
-                 case 'WorkPackageStep':
+                case 'WorkPackageStep':
                     if (!isWorkpackagestepInited) {
                         workstep.init();
                         workstep.getWorkstepList();
@@ -214,7 +244,14 @@
                     }
                     setWorkPackageDropDown();
                     break;
-               
+                case 'ValueUnit':
+                    if (!isValueUnitInited) {
+                        valueUnit.init(myTreeview);
+                        valueUnit.getValueUnitList();
+                     
+                        isValueUnitInited = true;
+                    }
+                    break;
             }
         }
 
@@ -316,7 +353,7 @@
             $('#current-desciplineId').val(data.id);
         }
 
-          //WorkPackage Step
+        //WorkPackage Step
         $('#workstepLst').on('click', '.edit-workstep', function () {
             var id = $(this).attr('data-id');
             var tr = $(this).closest("tr");
@@ -361,6 +398,32 @@
                 editSelect.append("<option value=" + val.id + ">" + val.title + "</option>");
             });
         }
+
+        //value unit
+        //WorkPackage Step
+        $('#value-unit-treeItems').on('click', '.valueUNitNode', function () {
+            var id = $(this).attr('data-id').split('-')[1];
+            var name = $(this).attr('data-name');
+            $('#current-valueUnitparent-id').val(id);
+            $('#selected-parent').text('Selected Parent: ' + name);
+             $('#delete-valueUnit').attr('disabled', false);
+        });
+
+        $('#refresh-valueUnit').on('click', function () {
+            $('#current-valueUnitparent-id').val(null);
+            $('#selected-parent').text(null);
+            valueUnit.getValueUnitList();
+            $('#delete-valueUnit').attr('disabled', true);
+        });
+
+         $('#delete-valueUnit').on('click', function () {
+             var id = $('#current-valueUnitparent-id').val();
+             if (parseInt(id) > 0) {
+                 valueUnit.removeValueUnit(id);
+                 $('#current-valueUnitparent-id').val(null);
+                 $('#selected-parent').text(null);
+             }
+        });
     });
 
 </script>

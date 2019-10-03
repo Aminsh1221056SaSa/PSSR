@@ -162,5 +162,14 @@
     "minify": {
       "enabled": true
     }
+  },
+  {
+    "outputFileName": "wwwroot/js/valueUnit.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/globalData/valueUnit.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
   }
 ]

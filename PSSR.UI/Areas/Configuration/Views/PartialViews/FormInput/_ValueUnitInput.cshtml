@@ -1,0 +1,34 @@
+﻿
+    <div class="card card-body">
+        <h5 class="card-title mg-b-20">Add Value Unit</h5>
+
+        <form name="valueUnitForm" method="post" class="form-horizontal" action="">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label class="az-content-label tx-11 tx-medium tx-gray-600" for="valueUnitname">Name</label>
+                            <input type="text" class="form-control" name="valueUnitname" id="valueUnitname">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="az-content-label tx-11 tx-medium tx-gray-600" for="mathType">Math Type</label>
+                            <select class="form-control select2" name="mathType" id="mathType" asp-items="Html.GetEnumSelectList<PSSR.Common.UnitMathType>()" data-placeholder="Select Math Type"
+                                    style="width:100%;" required></select>
+                        </div><!-- form-group -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="az-content-label tx-11 tx-medium tx-gray-600" for="mathNum">Math Num</label>
+                            <input value="0" id="mathNum" name="mathNum" type="number" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <button class="btn btn-az-primary btn-block" type="submit" id="btn-valueUnit-save">Save</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>

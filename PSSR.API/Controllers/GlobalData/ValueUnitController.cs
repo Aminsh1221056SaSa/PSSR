@@ -1,4 +1,5 @@
-﻿using BskaGenericCoreLib;
+﻿using AutoMapper;
+using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
@@ -19,10 +20,12 @@ namespace PSSR.API.Controllers.GlobalData
     public class ValueUnitController : BaseAdminController
     {
         private readonly EfCoreContext _context;
+        private readonly IMapper _mapper;
 
-        public ValueUnitController(EfCoreContext context)
+        public ValueUnitController(EfCoreContext context, IMapper mapper)
         {
             this._context = context;
+            this._mapper = mapper;
         }
 
         [HttpGet]
@@ -33,6 +36,18 @@ namespace PSSR.API.Controllers.GlobalData
             var listService = new ListValueUnitService(_context);
 
             var valueUnits = await listService.GetValueUnitDtos();
+
+            return new ObjectResult(valueUnits);
+        }
+
+        [HttpGet]
+        [Route("[action]")]
+        [ProducesResponseType(typeof(List<ValueUnitListDto>), (int)HttpStatusCode.OK)]
+        public async Task<IActionResult> GetValueUnitsTreeFormat()
+        {
+            var listService = new ListValueUnitService(_context,_mapper);
+
+            var valueUnits = await listService.GetValueUnitTreeFormat();
 
             return new ObjectResult(valueUnits);
         }

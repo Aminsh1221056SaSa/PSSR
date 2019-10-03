@@ -12,6 +12,9 @@ using PSSR.UI.Helpers.Http;
 using Microsoft.Extensions.Options;
 using PSSR.UI.Configuration;
 using PSSR.ServiceLayer.Utils;
+using PSSR.Common.CommonModels;
+using Newtonsoft.Json;
+using PSSR.UI.ViewComponents;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,6 +44,18 @@ namespace PSSR.UI.Areas.Configuration.Controllers
                 authorizationToken: accessToken);
 
             return new ObjectResult(content);
+        }
+
+        [HttpGet]
+        [Route("APSE/[controller]/[action]")]
+        public async Task<IActionResult> GetValueUnitsTreeFormat()
+        { var accessToken = await HttpContext.GetTokenAsync("access_token");
+
+            var content = await _clientService.GetStringAsync($"{_settings.Value.OilApiAddress}ValueUnit/GetValueUnitsTreeFormat",
+                authorizationToken: accessToken);
+
+            var model = JsonConvert.DeserializeObject<List<ValueUnitModel>>(content);
+            return ViewComponent(typeof(ValuUnitTreeViewComponent), new { ValueUnits=model });
         }
 
         [HttpGet]

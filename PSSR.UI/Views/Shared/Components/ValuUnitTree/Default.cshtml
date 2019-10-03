@@ -1,6 +1,6 @@
-﻿@model IEnumerable<PSSR.DataLayer.EfClasses.Management.ValueUnit>
+﻿@model IEnumerable<PSSR.Common.CommonModels.ValueUnitModel>
 @{
-    var items = Model.Where(s => s.Parent == null);
+    var items = Model.Where(s => s.ParentId == null);
 }
 
 @foreach (var item in items)

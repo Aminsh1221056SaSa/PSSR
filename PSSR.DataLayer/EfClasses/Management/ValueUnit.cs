@@ -8,7 +8,7 @@ using System.Text;
 
 namespace PSSR.DataLayer.EfClasses.Management
 {
-    public class ValueUnit:IEquatable<ValueUnit>, IFormattable
+    public class ValueUnit
     {
         public int Id { get; private set; }
         public string Name { get; private set; }
@@ -80,58 +80,5 @@ namespace PSSR.DataLayer.EfClasses.Management
             return status;
         }
 
-        //
-        public bool Equals(ValueUnit other)
-        {
-            if (other == null)
-                return base.Equals(other);
-            return this.Id == other.Id && this.Name == other.Name;
-        }
-        public override bool Equals(object obj)
-        {
-            if (obj == null)
-                return base.Equals(obj);
-            return Equals(obj as ValueUnit);
-        }
-
-        public override int GetHashCode()
-        {
-            return Id.GetHashCode();
-        }
-
-        public override string ToString()
-        {
-            return string.Format("{0} {1}", this.Name, this.Id);
-        }
-        public string ToString(string format, IFormatProvider formatProvider)
-        {
-            if (format == null)
-            {
-                return ToString();
-            }
-            string formatUpper = format.ToUpper();
-            switch (formatUpper)
-            {
-                case "URM":
-                    return setMathFormat();
-                default:
-                    return ToString();
-            }
-        }
-
-        private string setMathFormat()
-        {
-            switch (MathType)
-            {
-                case UnitMathType.None:
-                    return "Not Relation";
-                case UnitMathType.Divide:
-                    return string.Format("Relation to Parent Value Unit 1 / {0}", MathNum);
-                case UnitMathType.Multiple:
-                    return string.Format("Relation to Parent Value Unit 1 * {0}", MathNum);
-                default:
-                    return "Not Specific";
-            }
-        }
     }
 }
