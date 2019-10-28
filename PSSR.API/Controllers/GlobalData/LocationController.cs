@@ -6,16 +6,17 @@ using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.RoadMapServices;
 using PSSR.DataLayer.EfClasses.Management;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.LocationTypes;
 using PSSR.ServiceLayer.RoadMapServices;
 using PSSR.ServiceLayer.RoadMapServices.Concrete;
-using PSSR.ServiceLayer.Utils;
 
 namespace PSSR.API.Controllers.GlobalData
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class LocationController : BaseAdminController
     {
         private readonly EfCoreContext _context;

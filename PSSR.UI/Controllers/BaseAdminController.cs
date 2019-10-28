@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace PSSR.UI.Controllers
 {
+    [Route("APSE/[controller]")]
     public class BaseAdminController : BaseTraceController
     {
     }

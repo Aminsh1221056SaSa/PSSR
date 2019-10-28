@@ -1,8 +1,7 @@
-﻿using PSSR.ServiceLayer.ContractorServices;
+﻿using PSSR.Common.ContractorServices;
+using PSSR.Common.ProjectServices;
 using PSSR.ServiceLayer.ProjectServices.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace PSSR.ServiceLayer.ProjectServices
 {

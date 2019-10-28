@@ -22,6 +22,7 @@ namespace PSSR.UserSecurity.Models
         public int Sequence { get; set; }
         public MenuType Type { get; set; }
         public int? ParentId { get; set; }
+        public string ClientName { get; set; }
         public NavigationMenuType Parent { get; set; }
         public ICollection<NavigationMenuType> Childeren { get; private set; }
         public ICollection<NavigationMenuItemRole> Roles { get; private set; }

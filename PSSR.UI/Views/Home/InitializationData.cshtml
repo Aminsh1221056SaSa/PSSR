@@ -1,0 +1,334 @@
+﻿@model PSSR.ServiceLayer.ContractorServices.ContractorListCombinedDto
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Contractor";
+}
+
+<div class="card bd-1">
+    <div class="card-header bg-gray-400 bd-b-0-f pd-b-0">
+        <nav class="nav nav-tabs">
+            <a class="nav-link active" data-toggle="tab" href="#Contractor">Contractor</a>
+            <a class="nav-link" data-toggle="tab" href="#Project">Project</a>
+            <a class="nav-link" data-toggle="tab" href="#Person">Person</a>
+        </nav>
+    </div><!-- card-header -->
+    <div class="card-body bd bd-t-0 tab-content">
+        <div id="Contractor" class="tab-pane active show">
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-3">
+                        <partial name="~/Areas/Admin/Views/PartialViews/FormInput/_contractorInput.cshtml" />
+                        <!-- card -->
+                    </div><!-- col -->
+                    <div class="col-md-9">
+                        <partial name="~/Areas/Admin/Views/PartialViews/TableList/_contractorList.cshtml" />
+                    </div><!-- col -->
+                </div>
+            </div><!-- row -->
+        </div><!-- tab-pane -->
+        <div id="Project" class="tab-pane">
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-5">
+                        <partial name="~/Areas/Admin/Views/PartialViews/FormInput/_projectInput.cshtml" />
+                        <!-- card -->
+                    </div><!-- col -->
+                    <div class="col-md-7">
+                        <partial name="~/Areas/Admin/Views/PartialViews/TableList/_projectList.cshtml" />
+                    </div><!-- col -->
+                </div>
+            </div><!-- row -->
+        </div>
+        <div id="Person" class="tab-pane">
+            <div class="container">
+                <div class="row" style="width:100%">
+                    <div class="col-md-5">
+                        <partial name="~/Areas/Admin/Views/PartialViews/FormInput/_personInput.cshtml" />
+                        <!-- card -->
+                    </div><!-- col -->
+                    <div class="col-md-7">
+                        <partial name="~/Areas/Admin/Views/PartialViews/TableList/_personList.cshtml" />
+                    </div><!-- col -->
+                </div>
+            </div><!-- row -->
+        </div>
+    </div><!-- card-body -->
+</div><!-- card -->
+
+<div id="edit-contractorModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Contractor Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <partial name="~/Areas/Admin/Views/PartialViews/FormEditInput/_contractorEditInput.cshtml" />
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<div id="edit-projectModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Project Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <partial name="~/Areas/Admin/Views/PartialViews/FormEditInput/_projectEditInput.cshtml" />
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<div id="edit-personModal" class="modal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content modal-content-demo">
+            <div class="modal-header">
+                <h6 class="modal-title">Person Details</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <partial name="~/Areas/Admin/Views/PartialViews/FormEditInput/_personEditInput.cshtml" />
+            </div>
+        </div>
+    </div><!-- modal-dialog -->
+</div><!-- modal -->
+
+<environment names="Development">
+    <script src="~/dist/js/api/enumDefinetion.js"></script>
+
+    <script src="~/dist/js/api/ProjectsPerson/contractor.js"></script>
+    <script src="~/dist/js/api/ProjectsPerson/person.js"></script>
+    <script src="~/dist/js/api/ProjectsPerson/project.js"></script>
+</environment>
+<environment names="Staging,Production">
+    <script src="~/dist/enumDefinetion.js"></script>
+
+    <script src="~/js/contractor.min.js"></script>
+    <script src="~/js/person.min.js"></script>
+    <script src="~/js/project.min.js"></script>
+</environment>
+
+<script>
+    $(document).ready(function () {
+        
+        $('#projects').select2({
+            width: '100%'
+        });
+
+        $('#editprojects').select2({
+            width: '100%',
+            dropdownParent: $('#edit-personModal')
+        });
+        var hash = window.location.hash;
+        $('div.nav a[href="' + hash + '"]').tab('show');
+
+        $('.nav-tabs a').click(function (e) {
+            $(this).tab('show');
+            var scrollmem = $('body').scrollTop() || $('html').scrollTop();
+            window.location.hash = this.hash;
+            $('html,body').scrollTop(scrollmem);
+            var hash = $(this).attr('href');
+            var ghash = hash.substring(1);
+            initonServerData(ghash);
+        });
+
+        var isprojectinited = false;
+        var ispersoninited = false;
+        var isContractorinited = false;
+
+        if (hash.length > 0) {
+            $('.active').removeClass('active');
+            var ghash = hash.substring(1);
+            var a = $('a[href$=' + ghash + ']');
+            a.addClass('active');
+            $("" + hash + "").addClass('active');
+            initonServerData(ghash);
+        }
+        else {
+             contractor.init();
+             contractor.getContractorList();
+        }
+
+        function initonServerData(ghash) {
+              switch (ghash) {
+                case 'Project':
+                    if (!isprojectinited) {
+                        project.init(enumDefinetion);
+                        project.getProjectList();
+                        isprojectinited = true;
+                    }
+           setProjectContractorDropDown();
+                    break;
+                case 'Person':
+                    if (!ispersoninited) {
+                        person.init();
+                        person.getPersonList();
+                        ispersoninited = true;
+                      }
+                      setProjectDropDown();
+                    break;
+                    case 'Contractor':
+                    if (!isContractorinited)
+                    {
+                        contractor.init();
+                        contractor.getContractorList();
+                    }
+                    break;
+            }
+        }
+        //contractors
+       
+        $('#contractorLst').on('click', '.edit-contractor', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            contractor.setCurrentIndex(rowindex);
+            getContractor(id);
+        });
+
+        $('#contractorLst').on('click', '.delete-contractor', function () {
+
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            contractor.setCurrentIndex(rowindex);
+            contractor.removeContractor(id);
+        });
+
+        $('#contractorLst tbody').on('dblclick', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var id = tr.find('.edit-contractor').attr('data-id');
+            var rowindex = tr.index();
+            contractor.setCurrentIndex(rowindex);
+            getContractor(id);
+            $('#edit-contractorModal').modal('toggle');
+        });
+
+        async function getContractor(id) {
+            var data = await contractor.getContractor(id);
+            $('#editname').val(data.name);
+            $('#editphone').val(data.phoneNumber);
+            $('#editaddress').val(data.address);
+            $('#current-contractorId').val(data.id);
+        }
+
+        //project
+       
+        $('#projectLst').on('click', '.edit-project', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            project.setCurrentIndex(rowindex);
+            getProject(id);
+        });
+
+        $('#projectLst').on('click', '.delete-project', function () {
+
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            project.setCurrentIndex(rowindex);
+            project.removeProject(id);
+        });
+
+        $('#projectLst tbody').on('dblclick', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var id = tr.find('.edit-project').attr('data-id');
+            var rowindex = tr.index();
+            project.setCurrentIndex(rowindex);
+            getProject(id);
+            $('#edit-projectModal').modal('toggle');
+        });
+
+        async function getProject(id) {
+            var data = await project.getProject(id);
+            $('#editPDescription').val(data.description);
+            $("#edittype option[value="+data.type+"]").attr('selected','selected');
+            $('#editstartDate').val(data.startDate);
+            $('#editendDate').val(data.endDate);
+            $("#editcontractorId option[value=" + data.contractorId + "]").attr('selected', 'selected');
+            $('#current-projectId').val(data.id);
+        }
+
+        async function setProjectContractorDropDown() {
+            var data = await contractor.getContractorListAsync();
+            var select = $('#contractorId');
+           var editSelect= $('#editcontractorId');
+            select.empty();
+            editSelect.empty();
+            $.each(data, function (i, val) {
+                select.append("<option value=" + val.id + ">" + val.name + "</option>");
+                 editSelect.append("<option value="+val.id+">"+val.name+"</option>");
+            });
+        }
+
+        //person
+       
+        $('#tb-person').on('click', function () {
+          
+        });
+
+        $('#personLst').on('click', '.edit-person', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            person.setCurrentIndex(rowindex);
+            getPerson(id);
+        });
+
+        $('#personLst').on('click', '.delete-person', function () {
+            var id = $(this).attr('data-id');
+            var tr = $(this).closest("tr");
+            var rowindex = tr.index();
+            person.setCurrentIndex(rowindex);
+            person.removePerson(id);
+        });
+
+        $('#personLst tbody').on('dblclick', 'tr', function () {
+            var tr = $(this).closest('tr');
+            var id = tr.find('.edit-person').attr('data-id');
+            var rowindex = tr.index();
+            person.setCurrentIndex(rowindex);
+            getPerson(id);
+            $('#edit-personModal').modal('toggle');
+        });
+
+        async function getPerson(id) {
+            var data = await person.getPerson(id);
+            $('#editfirstName').val(data.firstName);
+            $('#editlastName').val(data.lastName);
+            $('#editnationalId').val(data.nationalId);
+            $('#editmobileNumber').val(data.mobileNumber);
+            $('#current-personId').val(data.id);
+            var arr = [];
+            $.each(data.currentProjects, function (i, val) {
+                arr.push(val);
+            });
+
+            $('#editprojects').val(arr).trigger('change');
+        }
+
+        async function setProjectDropDown() {
+            var data = await project.getAllProjects();
+            var select = $('#projects');
+            var editSelect = $('#editprojects');
+            select.empty();
+            editSelect.empty();
+            $.each(data, function (i, val) {
+                select.append("<option value=" + val.id + ">" + val.name + "</option>");
+                editSelect.append("<option value=" + val.id + ">" + val.name + "</option>");
+            });
+        }
+    });
+
+</script>

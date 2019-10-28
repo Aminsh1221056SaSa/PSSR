@@ -23,6 +23,7 @@ namespace PSSR.UI.Helpers.Navigation
         public int Sequence { get; set; }
         public MenuType Type { get; set; }
         public int? ParentId { get; set; }
+        public string ClientName { get; set; }
         public List<string> SelectedRoles { get; set; }
         public List<NavigationMenuItem> Childeren { get; set; }
     }

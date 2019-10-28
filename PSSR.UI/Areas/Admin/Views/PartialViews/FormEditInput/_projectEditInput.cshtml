@@ -1,0 +1,63 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20"></h5>
+    <form name="projectEditForm" method="post" class="form-horizontal" action="">
+        <input type="hidden" id="current-projectId" />
+        <div class="container">
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editPDescription">Title</label>
+                <input type="text" class="form-control" name="editPDescription" id="editPDescription">
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="edittype">Type</label>
+                <select class="form-control select2" name="edittype" id="edittype" asp-items="Html.GetEnumSelectList<PSSR.Common.ProjectType>()" data-placeholder="Select Project"
+                        style="width: 100%;" required></select>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editcontractorId">Contractor</label>
+                <div class="pos-relative">
+                    <select id="editcontractorId" class="form-control select2" name="editcontractorId" data-placeholder="Select Contractor"
+                            style="width: 100%;" required></select>
+                </div>
+            </div><!-- form-group -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="editstartDate">Start Date:</label>
+                            <div class="wd-200 mg-b-20">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                        </div>
+                                    </div>
+                                    <input name="editstartDate" id="editstartDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="editendDate">End Date:</label>
+                            <div class="wd-200 mg-b-20">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text">
+                                            <i class="typcn typcn-calendar-outline tx-24 lh--9 op-6"></i>
+                                        </div>
+                                    </div>
+                                    <input name="editendDate" id="editendDate" type="text" class="form-control fc-datepicker" placeholder="MM/DD/YYYY">
+                                </div>
+                            </div>
+                        </div><!-- form-group -->
+
+                    </div>
+                    <div class="col-md-6">
+                        <br />
+                        <button class="btn btn-az-primary btn-block" type="submit">Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

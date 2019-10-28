@@ -1,10 +1,6 @@
 ﻿using Autofac;
-using PSSR.DbAccess.App_Start;
-using PSSR.Logic.App_Start;
-using PSSR.ServiceLayer.App_Start;
 using PSSR.UI.Helpers;
 using PSSR.UI.Helpers.CashHelper;
-using PSSR.UI.Helpers.ExcelHelper;
 
 namespace PSSR.UI.App_Start
 {
@@ -23,9 +19,6 @@ namespace PSSR.UI.App_Start
 
             builder.RegisterType<DatabaseService>().As<IDatabaseService>()
                .InstancePerLifetimeScope();
-
-            builder.RegisterType<ExcelReportHelper>().As<IExcelReportHelper>()
-            .InstancePerLifetimeScope();
         }
     }
 }

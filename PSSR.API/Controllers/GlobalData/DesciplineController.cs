@@ -6,16 +6,16 @@ using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.DesciplineServices;
 using PSSR.DataLayer.EfClasses.Management;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.Desciplines;
-using PSSR.ServiceLayer.DesciplineServices;
 using PSSR.ServiceLayer.DesciplineServices.Concrete;
-using PSSR.ServiceLayer.Utils;
 
 namespace PSSR.API.Controllers.GlobalData
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class DesciplineController : BaseAdminController
     {
         private readonly EfCoreContext _context;

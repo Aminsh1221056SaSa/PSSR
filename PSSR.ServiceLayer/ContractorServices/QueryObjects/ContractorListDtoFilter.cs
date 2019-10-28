@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PSSR.Common.ContractorServices;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 

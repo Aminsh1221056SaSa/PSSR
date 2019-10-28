@@ -3,10 +3,11 @@ using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.ValueUnits;
 using PSSR.DataLayer.EfClasses.Management;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.ValueUnits;
-using PSSR.ServiceLayer.Utils;
 using PSSR.ServiceLayer.ValueUnits;
 using PSSR.ServiceLayer.ValueUnits.Concrete;
 using System;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace PSSR.API.Controllers.GlobalData
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class ValueUnitController : BaseAdminController
     {
         private readonly EfCoreContext _context;

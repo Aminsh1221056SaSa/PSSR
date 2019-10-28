@@ -13,9 +13,7 @@ namespace PSSR.UI.Areas.Admin.Controllers
     public class AdminConfigController : BaseSuperAdminController
     {
         // GET: /<controller>/
-        public IActionResult MDRConfig()
-        {
-            return View();
-        }
+       
+
     }
 }

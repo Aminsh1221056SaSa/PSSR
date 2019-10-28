@@ -1,10 +1,6 @@
-﻿using PSSR.ServiceLayer.ProjectServices;
-using PSSR.ServiceLayer.RoadMapServices;
-using PSSR.ServiceLayer.WorkPackageServices;
-using System;
+﻿using PSSR.Common.ProjectServices;
+using PSSR.Common.RoadMapServices;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PSSR.UI.Models
 {
@@ -18,6 +14,5 @@ namespace PSSR.UI.Models
     {
         public IEnumerable<WorkPackageListDto> WorkPackages { get; set; }
         public ProjectListDto Project { get; set; }
-        public IEnumerable<ProjectWBSListDto> Locations { get; set; }
     }
 }

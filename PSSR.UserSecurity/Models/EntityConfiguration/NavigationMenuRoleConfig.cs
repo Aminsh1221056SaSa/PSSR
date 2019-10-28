@@ -14,6 +14,8 @@ namespace PSSR.UserSecurity.Models.EntityConfiguration
             builder.HasKey(p =>
                new { p.NavigationMenuItemId, p.RoleId });
 
+            builder.ToTable("NavigationMenuItemRole", "Setting");
+
             builder.HasOne(pt => pt.Role)        //#C
                 .WithMany(p => p.NavigationItems)   //#C
                 .HasForeignKey(pt => pt.RoleId).OnDelete(DeleteBehavior.Restrict);//#C

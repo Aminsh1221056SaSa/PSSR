@@ -6,9 +6,13 @@ using System.Net;
 using System.Threading.Tasks;
 using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
+using Newtonsoft.Json;
 using PSSR.API.Helper;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.FormDictionaryServices;
 using PSSR.DataLayer.EfClasses.Management;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.FormDictionaries;
@@ -18,13 +22,13 @@ using PSSR.ServiceLayer.Utils;
 
 namespace PSSR.API.Controllers.GlobalData
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class FormDocumentController : BaseAdminController
     {
         private readonly EfCoreContext _context;
-        private readonly IHostingEnvironment _enviroment;
+        private readonly IWebHostEnvironment _enviroment;
 
-        public FormDocumentController(EfCoreContext context, IHostingEnvironment enviroment)
+        public FormDocumentController(EfCoreContext context, IWebHostEnvironment enviroment)
         {
             this._context = context;
             this._enviroment = enviroment;
@@ -56,36 +60,46 @@ namespace PSSR.API.Controllers.GlobalData
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> CreateFormDocument(FormDictionaryDto model,
-           [FromServices]IActionService<IPlaceFormDictionaryAction> service)
+        public async Task<IActionResult> CreateFormDocument([FromServices]IActionService<IPlaceFormDictionaryAction> service)
         {
-            if (model.File == null)
+            if (Request.HasFormContentType)
             {
-                service.Status.AddError("File Not Valid!!!", "Form Document");
-            }
-
-            var formService = new ListFormDictionaryService(_context);
-            if (await formService.HasDuplicatedCode(model.Code))
-            {
-                service.Status.AddError("Entered code is taked from other form!!!", "Form Document");
-            }
-
-            if (!service.Status.HasErrors)
-            {
-                if (model.File != null && model.File.Length > 0)
+                var sModel = Request.Form["DocParameters"];
+             
+                var model = JsonConvert.DeserializeObject<FormDictionaryDto>(sModel);
+                if (model == null)
                 {
-                    FormDocumentFileHelper docHelper = new FormDocumentFileHelper();
-                    string filePath = await docHelper.SaveFormDocument(model.Code, model.File, _enviroment);
-                    model.FileName = Path.Combine(Path.Combine(filePath, $"{model.Code}"));
+                    service.Status.AddError("some data are invalied..", "Form Document");
+                }
+                if(!Request.Form.Files.Any())
+                {
+                    service.Status.AddError("File Not Valid!!!", "Form Document");
+                }
+                model.File = Request.Form.Files[0];
+
+                var formService = new ListFormDictionaryService(_context);
+                if (await formService.HasDuplicatedCode(model.Code))
+                {
+                    service.Status.AddError("Entered code is taked from other form!!!", "Form Document");
                 }
 
-                var formDic = service.RunBizAction<FormDictionary>(model);
-                return new ObjectResult(new ResultResponseDto<String, long>
+                if (!service.Status.HasErrors)
                 {
-                    Key = HttpStatusCode.OK,
-                    Value = "FormDocument created..",
-                    Subject=formDic.Id
-                });
+                    if (model.File != null && model.File.Length > 0)
+                    {
+                        FormDocumentFileHelper docHelper = new FormDocumentFileHelper();
+                        string filePath = await docHelper.SaveFormDocument(model.Code, model.File, _enviroment);
+                        model.FileName = Path.Combine(Path.Combine(filePath, $"{model.Code}"));
+                    }
+
+                    var formDic = service.RunBizAction<FormDictionary>(model);
+                    return new ObjectResult(new ResultResponseDto<String, long>
+                    {
+                        Key = HttpStatusCode.OK,
+                        Value = "FormDocument created..",
+                        Subject = formDic.Id
+                    });
+                }
             }
 
             var errors = service.Status.CopyErrorsToString(ModelState);

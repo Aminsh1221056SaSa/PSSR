@@ -1,0 +1,80 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20"></h5>
+
+    <form name="formDocumentEditForm" method="post" class="form-horizontal" action="">
+        <input type="hidden" id="current-formdicId" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicFile">Document</label>
+                        <div class="pos-relative">
+                            <input type="file" name="editformdicFile" id="editformdicFile">
+                            <p class="help-block">Upload Form's Document.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicCode">Code</label>
+                        <input type="text" class="form-control" name="editformdicCode" id="editformdicCode">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicType">Type</label>
+                        <select name="editformdicType" id="editformdicType"
+                                asp-items="Html.GetEnumSelectList<PSSR.Common.FormDictionaryType>()"
+                                class="form-control sort-filter-width" required></select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicWorkpackageId">WorkPackage</label>
+                    <div class="pos-relative">
+                        <select id="editformdicWorkpackageId" class="form-control select2" name="editformdicWorkpackageId" data-placeholder="Select WorkPackage"
+                                style="width: 100%;" required></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicPriority">Priority</label>
+                        <input type="text" class="form-control" name="editformdicPriority" id="editformdicPriority">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicPriority">Priority</label>
+                        <input type="number" min="1" class="form-control" name="editformdicPriority" id="editformdicPriority" value="1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicMH">Man Hours</label>
+                        <input type="number" min="1" class="form-control" name="editformdicMH" id="editformdicMH" value="1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicDescipline">Desciplines</label>
+                        <div class="pos-relative">
+                            <select class="form-control select2" multiple="multiple" id="editformdicDescipline" name="editformdicDescipline"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editformdicDescription">Description</label>
+                        <div class="pos-relative">
+                            <select class="form-control select2" multiple="multiple" id="editformdicDescription" name="editformdicDescription"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <button class="btn btn-az-primary btn-block" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -19,7 +19,7 @@ namespace PSSR.API
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                      .SetBasePath(env.ContentRootPath)
@@ -43,7 +43,8 @@ namespace PSSR.API
 
             services.AddMvc(options =>
             {
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+               options.EnableEndpointRouting = false;
+            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddAuthentication("Bearer")
                .AddIdentityServerAuthentication(options =>
@@ -115,9 +116,9 @@ namespace PSSR.API
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
+            if (env.EnvironmentName== "Development")
             {
                 app.UseDeveloperExceptionPage();
             }

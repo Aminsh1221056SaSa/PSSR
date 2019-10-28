@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PSSR.Common.ContractorServices;
 using PSSR.DataLayer.EfCode;
 using PSSR.DataLayer.QueryObjects;
 using PSSR.ServiceLayer.ContractorServices.QueryObjects;

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
 using Microsoft.Web.Http;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -15,12 +17,21 @@ namespace PSSR.API.Helper
     {
         public static void ConfigureSwaggerGen(SwaggerGenOptions swaggerGenOptions)
         {
-            swaggerGenOptions.AddSecurityDefinition("oauth2", new ApiKeyScheme
+            swaggerGenOptions.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
             {
-                Description = "Standard Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
-                In = "header",
-                Name = "Authorization",
-                Type = "Authorization"
+                Type = SecuritySchemeType.OAuth2,
+                Flows = new OpenApiOAuthFlows
+                {
+                    Implicit = new OpenApiOAuthFlow
+                    {
+                        AuthorizationUrl = new Uri("https://localhost:44365/connect/authorize", UriKind.Absolute),
+                        Scopes = new Dictionary<string, string>
+                         {
+                         { "Oil_Api","Oil_Api"}
+                        }
+                    }
+                },
+                
             });
 
             var webApiAssembly = Assembly.GetEntryAssembly();
@@ -34,7 +45,7 @@ namespace PSSR.API.Helper
             var apiVersions = GetApiVersions(webApiAssembly);
             foreach (var apiVersion in apiVersions)
             {
-                string title = "Amin Sahranavard Oil Api";
+                string title = "APSE Oil Api";
                 switch (apiVersion)
                 {
                     case "1.0":
@@ -43,7 +54,7 @@ namespace PSSR.API.Helper
                 }
 
                 swaggerGenOptions.SwaggerDoc($"v{apiVersion}",
-                    new Info
+                    new OpenApiInfo
                     {
                         Title = title,
                         Version = $"v{apiVersion}"
@@ -55,7 +66,10 @@ namespace PSSR.API.Helper
         {
             swaggerGenOptions.DocInclusionPredicate((docName, apiDesc) =>
             {
-                var versions = apiDesc.ControllerAttributes()
+                if (!apiDesc.TryGetMethodInfo(out MethodInfo methodInfo)) return false;
+
+                var versions = methodInfo.DeclaringType
+                    .GetCustomAttributes(true)
                     .OfType<ApiVersionAttribute>()
                     .SelectMany(attr => attr.Versions);
 
@@ -90,7 +104,10 @@ namespace PSSR.API.Helper
                 switch (apiVersion)
                 {
                     case "1.0":
-                        title = "1.0 - Manage Profile";
+                        title = "1.0 - Admin Profile";
+                        break;
+                    case "2.0":
+                        title = "1.0 - Global Data Profile";
                         break;
                 }
                 swaggerUIOptions.SwaggerEndpoint($"/swagger/v{apiVersion}/swagger.json", $"V{title} Docs");

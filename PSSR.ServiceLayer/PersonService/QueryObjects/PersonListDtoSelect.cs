@@ -1,9 +1,6 @@
-﻿using PSSR.DataLayer.EfClasses;
+﻿using PSSR.Common.PersonService;
 using PSSR.DataLayer.EfClasses.Person;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace PSSR.ServiceLayer.PersonService.QueryObjects
 {

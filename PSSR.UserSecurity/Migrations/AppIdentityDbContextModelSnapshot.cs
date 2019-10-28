@@ -168,7 +168,7 @@ namespace PSSR.UserSecurity.Migrations
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("NavigationMenuItemRole");
+                    b.ToTable("NavigationMenuItemRole","Setting");
                 });
 
             modelBuilder.Entity("PSSR.UserSecurity.Models.NavigationMenuType", b =>
@@ -176,6 +176,9 @@ namespace PSSR.UserSecurity.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientName")
+                        .IsRequired();
 
                     b.Property<string>("DisplayName")
                         .IsRequired()
@@ -199,7 +202,7 @@ namespace PSSR.UserSecurity.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("NavigationMenus");
+                    b.ToTable("NavigationMenuType","Setting");
                 });
 
             modelBuilder.Entity("PSSR.UserSecurity.Models.Role", b =>

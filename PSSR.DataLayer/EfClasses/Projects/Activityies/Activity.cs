@@ -1,7 +1,6 @@
 ﻿using BskaGenericCoreLib;
 using PSSR.Common;
 using PSSR.DataLayer.EfClasses.Management;
-using PSSR.DataLayer.EfClasses.Management;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -29,23 +28,36 @@ namespace PSSR.DataLayer.EfClasses.Projects.Activities
 
         public DateTime CreatedDate { get; internal set; }
         public DateTime UpdatedDate { get; internal set; }
+
+        //value unit
+        public int ValueUnitId { get; private set; }
+        public ValueUnit ValueUnit { get; private set; }
         //-----------------------------------------
         //Relationships
-        public int ValueUnitId { get; private set; }
-        public int WorkPackageId { get; private set; }
-        public int LocationId { get; private set; }
-        public long SubsytemId { get; private set; }
-        public int DesciplineId { get; private set; }
-        public long FormDictionaryId { get; private set; }
-        public int WorkPackageStepId { get; private set; }
-
+        //workPackage
+        public int? WorkPackageId { get; private set; }
         public WorkPackage WorkPackage { get; private set; }
+
+        //location
+        public int? LocationId { get; private set; }
         public LocationType Location { get; private set; }
+
+        //subsystem
+        public long? SubsytemId { get; private set; }
         public ProjectSubSystem SubSystem { get; private set; }
-        public ValueUnit ValueUnit { get; private set; }
-        public FormDictionary FormDictionary { get; private set; }
+
+        //desciplines
+        public int? DesciplineId { get; private set; }
         public Descipline Descipline { get; private set; }
+
+        //formdictionary
+        public long? FormDictionaryId { get; private set; }
+        public FormDictionary FormDictionary { get; private set; }
+
+        //workpackagestep
+        public int? WorkPackageStepId { get; private set; }
         public WorkPackageStep WorkPackageStep { get; private set; }
+
         public ICollection<Punch> Punchs { get; private set; }
         public ICollection<ActivityStatusHistory> StatusHistory { get; private set; }
         public ICollection<ActivityDocument> ActivityDocuments { get; private set; }

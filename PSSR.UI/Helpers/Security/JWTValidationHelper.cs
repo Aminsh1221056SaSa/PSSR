@@ -18,7 +18,7 @@ namespace PSSR.UI.Helpers.Security
         //    var discoveryClient = new DiscoveryClient("https://localhost:44365");
         //    var doc = await discoveryClient.GetAsync();
         //    var keys = new List<SecurityKey>();
-        //    foreach(var webkey in doc.KeySet.Keys)
+        //    foreach (var webkey in doc.KeySet.Keys)
         //    {
         //        var e = Base64Url.Decode(webkey.E);
         //        var n = Base64Url.Decode(webkey.N);

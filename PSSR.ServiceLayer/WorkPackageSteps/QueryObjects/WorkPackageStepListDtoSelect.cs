@@ -1,9 +1,6 @@
-﻿using PSSR.DataLayer.EfClasses.Management;
-using PSSR.DataLayer.EfClasses.Projects;
-using System;
-using System.Collections.Generic;
+﻿using PSSR.Common.WorkPackageSteps;
+using PSSR.DataLayer.EfClasses.Management;
 using System.Linq;
-using System.Text;
 
 namespace PSSR.ServiceLayer.WorkPackageSteps.QueryObjects
 {

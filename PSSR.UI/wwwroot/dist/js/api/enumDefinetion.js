@@ -2,6 +2,9 @@
     return {
         getProjectType: function (eId) {
             return getProjectType(eId);
+        },
+        getFormDocumentType: function (ftId) {
+            return getFormDocumentType(ftId);
         }
     };
 
@@ -17,6 +20,15 @@
                 return "Refinery";
             case 1004:
                 return "Other";
+        }
+    }
+
+    function getFormDocumentType(ftId) {
+        switch (ftId) {
+            case 1:
+                return "Test";
+            case 2:
+                return "Check";
         }
     }
 }());

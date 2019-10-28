@@ -1,4 +1,5 @@
-﻿using PSSR.DataLayer.EfClasses.Projects;
+﻿using PSSR.Common.ProjectServices;
+using PSSR.DataLayer.EfClasses.Projects;
 using System.Linq;
 
 namespace PSSR.ServiceLayer.ProjectServices.QueryObjects

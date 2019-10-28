@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PSSR.Common.WorkPackageSteps;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 
 namespace PSSR.ServiceLayer.WorkPackageSteps.QueryObjects
 {

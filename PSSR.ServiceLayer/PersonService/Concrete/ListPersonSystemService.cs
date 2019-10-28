@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PSSR.Common.PersonService;
 using PSSR.DataLayer.EfCode;
 using PSSR.DataLayer.QueryObjects;
 using PSSR.ServiceLayer.PersonService.QueryObjects;

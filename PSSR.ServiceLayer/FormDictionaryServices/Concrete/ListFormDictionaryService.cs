@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PSSR.Common.FormDictionaryServices;
 using PSSR.DataLayer.EfCode;
 using PSSR.DataLayer.QueryObjects;
 using PSSR.ServiceLayer.FormDictionaryServices.QueryObjects;
@@ -55,7 +56,9 @@ namespace PSSR.ServiceLayer.FormDictionaryServices.Concrete
             {
                 Id=s.Id,
                 Description=s.Description,
-                Code=s.Code
+                Code=s.Code,
+                Type=s.Type,
+                WrokPackageName=s.WorkPackage.Name
             }).ToListAsync();
             return items;
         }

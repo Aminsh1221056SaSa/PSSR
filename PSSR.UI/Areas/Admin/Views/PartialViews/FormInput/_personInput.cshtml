@@ -1,0 +1,53 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20">Add Person</h5>
+
+    <form name="personForm" method="post" class="form-horizontal" action="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="projects">Projects</label>
+                        <div class="pos-relative">
+                            <select class="form-control select2" multiple="multiple" id="projects" name="projects"></select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="firstName">First Name</label>
+                        <input type="text" class="form-control" name="firstName" id="firstName">
+                    </div><!-- form-group -->
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="lastName">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" id="lastName">
+                    </div><!-- form-group -->
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="nationalId">National Code</label>
+                        <div class="pos-relative">
+                            <input type="text" class="form-control pd-r-80" name="nationalId" id="nationalId">
+                        </div>
+                    </div><!-- form-group -->
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="mobileNumber">Mobile Number</label>
+                        <div class="pos-relative">
+                            <input type="text" class="form-control pd-r-80" name="mobileNumber" id="mobileNumber">
+                        </div>
+                    </div><!-- form-group -->
+
+                </div>
+
+                <div class="col-md-6">
+                    <br />
+                    <button class="btn btn-az-primary btn-block" type="submit" id="btn-person-save">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>

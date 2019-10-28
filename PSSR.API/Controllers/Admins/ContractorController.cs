@@ -1,19 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
-using PSSR.API.Models;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.ContractorServices;
 using PSSR.DataLayer.EfClasses.Person;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.Contractors;
-using PSSR.ServiceLayer.ContractorServices;
 using PSSR.ServiceLayer.ContractorServices.Concrete;
-using PSSR.ServiceLayer.Utils;
 
 namespace PSSR.API.Controllers.Admins
 {

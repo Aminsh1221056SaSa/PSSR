@@ -16,9 +16,10 @@ namespace PSSR.UserSecurity.Models.EntityConfiguration
             builder.Property(s => s.Link).HasMaxLength(500);
             builder.Property(s => s.MaterialIcon).HasMaxLength(150);
             builder.Property(s => s.Sequence).IsRequired();
+            builder.Property(s => s.ClientName).IsRequired();
             builder.Property(s => s.ParentId);
             builder.Property(s => s.Type).IsRequired();
-
+            builder.ToTable("NavigationMenuType", "Setting");
             builder.HasMany(s => s.Roles)
                 .WithOne(s => s.NavigationMenu).HasForeignKey(s => s.NavigationMenuItemId)
                 .OnDelete(DeleteBehavior.Cascade);

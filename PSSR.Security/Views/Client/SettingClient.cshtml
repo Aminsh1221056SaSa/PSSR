@@ -1,0 +1,178 @@
+﻿@model IEnumerable<PSSR.UserSecurity.Models.NavigationMenuType>
+@{
+    ViewData["Title"] = "SettingClient";
+    Layout = "~/Views/Shared/_CustomLayout.cshtml";
+    string ClientName = ViewBag.ClientName;
+    var lItems = Model.Where(s => s.Type == PSSR.UserSecurity.Models.MenuType.PCMSWEBLeft).OrderBy(s=>s.Sequence).ToList();
+    var rItems = Model.Where(s => s.Type == PSSR.UserSecurity.Models.MenuType.PCMSWEBRight).OrderBy(s=>s.Sequence).ToList();
+}
+<style>
+    table .collapse.in {
+	display:table-row;
+}
+</style>
+<div class="col-sm-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+                <h4 class="card-title mb-2">Setting</h4>
+            </div>
+            <div>
+                <ul class="nav nav-tabs tab-no-active-fill" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active pl-2 pr-2" id="revenue-for-last-month-tab" data-toggle="tab" href="#revenue-for-last-month" role="tab" aria-controls="revenue-for-last-month" aria-selected="true">Left Menu</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-2 pr-2" id="server-loading-tab" data-toggle="tab" href="#server-loading" role="tab" aria-controls="server-loading" aria-selected="false">Right Menu</a>
+                    </li>
+                </ul>
+                <div class="tab-content tab-no-active-fill-tab-content">
+                    <div class="tab-pane fade show active" id="revenue-for-last-month" role="tabpanel" aria-labelledby="revenue-for-last-month-tab">
+                        <div class="d-lg-flex justify-content-between">
+                            <div class="table-responsive">
+                                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                                <table class="table table-hover">
+                                    <thead><tr><th></th><th>Name</th><th>Icon</th><th>Sequence</th><th>Roles</th><th></th></tr></thead>
+                                    @if (Model.Count() == 0)
+                                    {
+                                        <tr><td colspan="6" class="text-center">No menu items</td></tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (var menu in lItems)
+                                        {
+                                            <tr class="clickable" data-toggle="collapse" id="row-@menu.Id" data-target=".row-@menu.Id">
+                                                <td style="font-size:25px"><i class="mdi mdi-plus text-primary"></i></td>
+                                                <td>@menu.DisplayName</td>
+                                                <td>@menu.MaterialIcon</td>
+                                                <td>@menu.Sequence</td>
+                                                <td>
+                                                    @if (menu.Roles.Any())
+                                                    {
+                                                        var rName = menu.Roles.Select(s => s.Role.Name).Aggregate((s, v) => s + " , " + v);
+                                                        <p>@rName</p>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <form asp-controller="MenuItem" asp-action="DeleteMenu" asp-route-menuId="@menu.Id" method="post">
+                                                        <a class="btn btn-sm btn-primary" asp-controller="MenuItem" asp-action="EditMenu"
+                                                           asp-route-id="@menu.Id">Edit</a>
+                                                        <button type="submit"
+                                                                class="btn btn-sm btn-danger">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+
+                                            foreach (var child in menu.Childeren)
+                                            {
+                                                <tr style="background:#e7f6a9" class="collapse row-@menu.Id">
+                                                    <td></td>
+                                                    <td>@child.DisplayName</td>
+                                                    <td>@child.MaterialIcon</td>
+                                                    <td>@child.Sequence</td>
+                                                    <td>
+                                                        @if (child.Roles.Any())
+                                                        {
+                                                            var rName = child.Roles.Select(s => s.Role.Name).Aggregate((s, v) => s + " , " + v);
+                                                            <p>@rName</p>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <form asp-controller="MenuItem" asp-action="DeleteMenu" asp-route-menuId="@child.Id" method="post">
+                                                            <a class="btn btn-sm btn-primary" asp-controller="MenuItem" asp-action="EditMenu"
+                                                               asp-route-id="@child.Id">Edit</a>
+                                                            <button type="submit"
+                                                                    class="btn btn-sm btn-danger">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </table>
+                                <a class="btn btn-primary" asp-route-clientName="@ClientName" asp-action="MenuInsert" asp-controller="MenuItem" asp-route-id="0">Create</a>
+                            </div>
+                        </div>
+                        <canvas id="revenue-for-last-month-chart"></canvas>
+                    </div>
+                    <div class="tab-pane fade" id="server-loading" role="tabpanel" aria-labelledby="server-loading-tab">
+                        <div class="d-flex justify-content-between">
+                            <div class="table-responsive">
+                                <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                                <table class="table table-hover">
+                                    <thead><tr><th></th><th>Name</th><th>Icon</th><th>Sequence</th><th>Roles</th><th></th></tr></thead>
+                                    @if (Model.Count() == 0)
+                                    {
+                                        <tr><td colspan="6" class="text-center">No menu items</td></tr>
+                                    }
+                                    else
+                                    {
+                                        foreach (var menu in rItems)
+                                        {
+                                            <tr class="clickable" data-toggle="collapse" id="row-@menu.Id" data-target=".row-@menu.Id">
+                                                <td style="font-size:25px"><i class="mdi mdi-plus text-primary"></i></td>
+                                                <td>@menu.DisplayName</td>
+                                                <td>@menu.MaterialIcon</td>
+                                                <td>@menu.Sequence</td>
+                                                <td>
+                                                    @if (menu.Roles.Any())
+                                                    {
+                                                        var rName = menu.Roles.Select(s => s.Role.Name).Aggregate((s, v) => s + " , " + v);
+                                                        <p>@rName</p>
+                                                    }
+                                                </td>
+                                                <td>
+                                                    <form asp-controller="MenuItem" asp-action="DeleteMenu" asp-route-menuId="@menu.Id" method="post">
+                                                        <a class="btn btn-sm btn-primary" asp-controller="MenuItem" asp-action="EditMenuRigth"
+                                                           asp-route-id="@menu.Id">Edit</a>
+                                                        <button type="submit"
+                                                                class="btn btn-sm btn-danger">
+                                                            Delete
+                                                        </button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                            foreach (var child in menu.Childeren)
+                                            {
+                                                <tr style="background:#e7f6a9" class="collapse row-@menu.Id">
+                                                    <td></td>
+                                                    <td>@child.DisplayName</td>
+                                                    <td>@child.MaterialIcon</td>
+                                                    <td>@child.Sequence</td>
+                                                    <td>
+                                                        @if (menu.Roles.Any())
+                                                        {
+                                                            var rName = child.Roles.Select(s => s.Role.Name).Aggregate((s, v) => s + " , " + v);
+                                                            <p>@rName</p>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <form asp-controller="MenuItem" asp-action="DeleteMenu" asp-route-menuId="@child.Id" method="post">
+                                                            <a class="btn btn-sm btn-primary" asp-controller="MenuItem" asp-action="EditMenuRigth"
+                                                               asp-route-id="@child.Id">Edit</a>
+                                                            <button type="submit"
+                                                                    class="btn btn-sm btn-danger">
+                                                                Delete
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </table>
+                                <a class="btn btn-primary" asp-route-clientName="@ClientName" asp-action="MenuInsertRigth" asp-controller="MenuItem" asp-route-id="0">Create</a>
+                            </div>
+                        </div>
+                        <canvas id="serveLoading"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

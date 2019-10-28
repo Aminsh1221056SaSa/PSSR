@@ -6,7 +6,7 @@ var descipline = descipline || (function () {
             initialization();
         },
         getDesciplineList: function () {
-            getDesciplineList()
+            setDesciplineList()
         },
         getDescipline: function (id) {
             return getDescipline(id);
@@ -16,6 +16,9 @@ var descipline = descipline || (function () {
         },
         removeDescipline: function (id) {
             removeDescipline(id);
+        },
+        getAllDescipliens: function () {
+            return getDesciplineList();
         }
     };
 
@@ -102,28 +105,35 @@ var descipline = descipline || (function () {
     }
 
     function getDesciplineList() {
-        var content = $('#descipline-content');
-        content.empty();
-        $.ajax({
+        return $.ajax({
             type: "Get",
             url: "/APSE/Descipline/getDesciplines",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
-                $.each(data, function (i, val) {
-                    var name = $("<td>" + val.title + "</td>");
-                    var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-desciplineModal' data-id='" + val.id + "' class='edit-descipline btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
-                    var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-descipline btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
-                    var row = $('<tr></tr>');
-                    row.append(name).append(editBtn).append(deleteBtn);
-                    content.append(row);
-                });
-                _table = tableinit();
+               
             },
             error: function (jqXHR, status) {
                 console.log(jqXHR);
             }
-        })
+        });
+        
+    }
+
+    async function setDesciplineList() {
+        var content = $('#descipline-content');
+        content.empty();
+        var data = await getDesciplineList();
+
+        $.each(data, function (i, val) {
+            var name = $("<td>" + val.title + "</td>");
+            var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-desciplineModal' data-id='" + val.id + "' class='edit-descipline btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
+            var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-descipline btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
+            var row = $('<tr></tr>');
+            row.append(name).append(editBtn).append(deleteBtn);
+            content.append(row);
+        });
+        _table = tableinit();
     }
 
     function getDescipline(id) {

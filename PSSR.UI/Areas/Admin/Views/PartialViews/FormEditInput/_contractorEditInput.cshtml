@@ -1,0 +1,27 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20"></h5>
+    <form name="contractorEditForm" method="post" class="form-horizontal" action="">
+        <input type="hidden" id="current-contractorId" />
+        <div class="container">
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editname">Name</label>
+                <input type="text" class="form-control" name="editname" id="editname">
+            </div><!-- form-group -->
+
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editphone">Phone</label>
+                <div class="pos-relative">
+                    <input type="text" class="form-control pd-r-80" name="editphone" id="editphone">
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editaddress">Address</label>
+                <textarea rows="3" class="form-control" name="editaddress" id="editaddress"></textarea>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-indigo">Save changes</button>
+            </div>
+        </div>
+        
+    </form>
+</div>

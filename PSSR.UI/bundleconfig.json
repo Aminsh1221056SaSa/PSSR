@@ -171,5 +171,14 @@
     "minify": {
       "enabled": true
     }
+  },
+  {
+    "outputFileName": "wwwroot/js/formdocument.min.js",
+    "inputFiles": [
+      "wwwroot/dist/js/api/globalData/formdocument.js"
+    ],
+    "minify": {
+      "enabled": true
+    }
   }
 ]

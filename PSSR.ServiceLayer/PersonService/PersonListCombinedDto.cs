@@ -1,4 +1,6 @@
-﻿using PSSR.ServiceLayer.PersonService.Concrete;
+﻿using PSSR.Common.PersonService;
+using PSSR.Common.ProjectServices;
+using PSSR.ServiceLayer.PersonService.Concrete;
 using PSSR.ServiceLayer.ProjectServices;
 using System;
 using System.Collections.Generic;

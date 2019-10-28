@@ -16,7 +16,7 @@ namespace PSSR.API.Helper
 {
     public class FormDocumentFileHelper
     {
-        public async Task<string> SaveFormDocument(string formCode, IFormFile file, IHostingEnvironment enviroment)
+        public async Task<string> SaveFormDocument(string formCode, IFormFile file, IWebHostEnvironment enviroment)
         {
             var filePath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/exceldocuments");
 
@@ -37,7 +37,7 @@ namespace PSSR.API.Helper
             return filePath;
         }
 
-        public async Task SaveXlsxAsPdf(long docId, string fileName, IHostingEnvironment enviroment)
+        public async Task SaveXlsxAsPdf(long docId, string fileName, IWebHostEnvironment enviroment)
         {
             string extension = Path.GetExtension(fileName);
             await Task.Run(() =>
@@ -56,7 +56,7 @@ namespace PSSR.API.Helper
 
         //mdr manipulation
         public async Task<string> SaveMDRDocumentsNative(string mdrCode, string projectId, List<IFormFile> nativeFiles,
-            IHostingEnvironment enviroment, string foldername, string statusName)
+            IWebHostEnvironment enviroment, string foldername, string statusName)
         {
             var filePath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/mdrdocuments/{projectId}/MDR-{mdrCode}/{statusName}/{foldername}");
 
@@ -83,7 +83,7 @@ namespace PSSR.API.Helper
             return fileNames;
         }
 
-        public async Task<string> SaveMDRDocumentComment(string mdrCode, string projectId, IFormFile file, IHostingEnvironment enviroment)
+        public async Task<string> SaveMDRDocumentComment(string mdrCode, string projectId, IFormFile file, IWebHostEnvironment enviroment)
         {
             var filePath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/mdrdocuments/{projectId}/MDR-{mdrCode}/Comments");
 
@@ -108,7 +108,7 @@ namespace PSSR.API.Helper
         }
 
         public void renameMDRDocumentsFolder(string mdrCodeOld, string projectId, string newName,
-            IHostingEnvironment enviroment)
+            IWebHostEnvironment enviroment)
         {
             var oldPath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/mdrdocuments/{projectId}/MDR{mdrCodeOld}");
             var newPath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/mdrdocuments/{projectId}/MDR{newName}");
@@ -120,7 +120,7 @@ namespace PSSR.API.Helper
         }
 
         //activity manipulation
-        public string MoveFormDocToActivityFolder(string formCode, long activityId, string projectId, IHostingEnvironment enviroment)
+        public string MoveFormDocToActivityFolder(string formCode, long activityId, string projectId, IWebHostEnvironment enviroment)
         {
             var formDocPath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/exceldocuments");
             var fromPathXls = Path.Combine(formDocPath, $"{formCode}.xls");
@@ -165,7 +165,7 @@ namespace PSSR.API.Helper
             return saveToPath;
         }
 
-        public async Task<string> SaveActivityDocument(long activityId, string projectId, IFormFile file, IHostingEnvironment enviroment)
+        public async Task<string> SaveActivityDocument(long activityId, string projectId, IFormFile file, IWebHostEnvironment enviroment)
         {
             var filePath = Path.Combine($"{enviroment.ContentRootPath}/wwwroot/activityDocuemnts/{projectId}/task{activityId}");
 
@@ -222,7 +222,7 @@ namespace PSSR.API.Helper
         }
 
         //private methods
-        private void CreateActivityBarcode(string input, string projectId, long activityId, IHostingEnvironment enviroment)
+        private void CreateActivityBarcode(string input, string projectId, long activityId, IWebHostEnvironment enviroment)
         {
             var barcode = new Barcode(input, NetBarcode.Type.Code128, true); // default: Code128
             var folderPath = $"{enviroment.ContentRootPath}/wwwroot/activityDocuemnts/{projectId}/task{activityId}";

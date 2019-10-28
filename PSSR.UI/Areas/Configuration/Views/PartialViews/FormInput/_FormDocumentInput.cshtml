@@ -1,0 +1,72 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20">Add Form Document</h5>
+
+    <form name="formdictionaryForm" method="post" class="form-horizontal" action="">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicFile">Document</label>
+                        <div class="pos-relative">
+                            <input type="file" name="formdicFile" id="formdicFile">
+                            <p class="help-block">Upload Form's Document.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicCode">Code</label>
+                        <input type="text" class="form-control" name="formdicCode" id="formdicCode">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicType">Type</label>
+                        <select name="formdicType" id="formdicType"
+                                asp-items="Html.GetEnumSelectList<PSSR.Common.FormDictionaryType>()"
+                                class="form-control sort-filter-width" required></select>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicWorkpackageId">WorkPackage</label>
+                    <div class="pos-relative">
+                        <select id="formdicWorkpackageId" class="form-control select2" name="formdicWorkpackageId" data-placeholder="Select WorkPackage"
+                                style="width: 100%;" required></select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicPriority">Priority</label>
+                        <input type="number" min="1" class="form-control" name="formdicPriority" id="formdicPriority" value="1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicMH">Man Hours</label>
+                        <input type="number" min="1" class="form-control" name="formdicMH" id="formdicMH" value="1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicDescipline">Desciplines</label>
+                        <div class="pos-relative">
+                            <select class="form-control select2" multiple="multiple" id="formdicDescipline" name="formdicDescipline"></select>
+                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label class="az-content-label tx-11 tx-medium tx-gray-600" for="formdicDescription">Description</label>
+                        <input class="form-control" name="formdicDescription" id="formdicDescription" value="1">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <br />
+                    <button class="btn btn-az-primary btn-block" type="submit">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

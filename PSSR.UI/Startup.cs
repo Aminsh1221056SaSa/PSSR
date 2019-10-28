@@ -12,8 +12,6 @@ using AutoMapper;
 using Autofac.Extensions.DependencyInjection;
 using BskaGenericCoreLib.Configuration;
 using Microsoft.Extensions.Logging;
-using PSSR.UI.Helpers;
-using PSSR.UI.Hubs;
 using PSSR.UI.Configuration;
 using System.IdentityModel.Tokens.Jwt;
 using PSSR.UI.Helpers.CashHelper;
@@ -23,12 +21,14 @@ using Microsoft.AspNetCore.Authorization;
 using PSSR.UI.Helpers.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using PSSR.UserSecurity.Configuration.IdentityContextModels;
+using PSSR.UI.Helpers.Security.Http;
+using IdentityModel.Client;
 
 namespace PSSR.UI
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IWebHostEnvironment env)
         {
             var builder = new ConfigurationBuilder()
                     .SetBasePath(env.ContentRootPath)
@@ -67,10 +67,10 @@ namespace PSSR.UI
 
             services.AddMvc(options =>
             {
+                options.EnableEndpointRouting = false;
             }).AddViewOptions(options =>
             {
-                options.HtmlHelperOptions.ClientValidationEnabled = false;
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            }).SetCompatibilityVersion(CompatibilityVersion.Latest);
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -85,8 +85,8 @@ namespace PSSR.UI
                 options.DefaultChallengeScheme = "oidc";
             }).AddCookie(option=>{
                 option.AccessDeniedPath = "/Home/Privacy";
-                option.ExpireTimeSpan = TimeSpan.FromMinutes(120);
-                option.Cookie.Name = "POECCookie";
+                option.Cookie.Name = "APSECookie";
+                option.SessionStore = new MemoryCacheTicketStore();
 
                 //option.EventsType = typeof(CookieEventHandler);
             })
@@ -108,6 +108,25 @@ namespace PSSR.UI
                     options.Scope.Add(apSetting.OilApiName);
                 });
 
+            services.AddSingleton(new ClientCredentialsTokenRequest
+            {
+                Address = $"{apSetting.Authority}connect/token",
+                ClientId = apSetting.ClientId,
+                ClientSecret = "PCMS_WEB_APP_SECRET",
+                Scope = apSetting.OilApiName
+            });
+
+            services.AddHttpClient<IIdentityServerClient, IdentityServerClient>(client =>
+            {
+                client.BaseAddress = new Uri(apSetting.Authority);
+            });
+
+            services.AddTransient<ProtectedApiBearerTokenHandler>();
+            services.AddHttpClient<IProtectedApiClient, StandardHttpClient>(client =>
+            {
+                client.BaseAddress = new Uri(apSetting.OilApiAddress);
+            }).AddHttpMessageHandler<ProtectedApiBearerTokenHandler>();
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy("dataEventRecordsSuperAdmin",
@@ -128,13 +147,8 @@ namespace PSSR.UI
             });
 
             services.AddScoped<IAuthorizationHandler, SuperAdminPolicyHandle>();
-            services.AddTransient<IHttpClient, StandardHttpClient>();
 
             services.AddAutoMapper();
-            services.AddSwaggerGen(SwaggerHelper.ConfigureSwaggerGen);
-            //signalR
-            services.AddSignalR();
-            services.AddSignalRCore();
             //--------------------------------------------------------------------
 
             //Now we use AutoFac to do some of the more complex registering of services
@@ -156,7 +170,7 @@ namespace PSSR.UI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public async void Configure(IApplicationBuilder app, IHostingEnvironment env,
+        public async void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             ILoggerFactory loggerFactory, IHttpContextAccessor httpContextAccessor,
             INavigationCacheOperations navigationCacheOperations, IAdminNavigationHelper adminNavigationCashOperations)
         {
@@ -178,14 +192,6 @@ namespace PSSR.UI
           
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
-            app.UseSignalR(routes =>
-            {
-                routes.MapHub<WBSRoadMapHub>("/WBSRoadMap");
-            });
-
-            app.UseSwagger(SwaggerHelper.ConfigureSwagger);
-            app.UseSwaggerUI(SwaggerHelper.ConfigureSwaggerUI);
 
             app.UseMvc(routes =>
             {

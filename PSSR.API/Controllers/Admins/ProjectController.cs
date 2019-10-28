@@ -6,13 +6,13 @@ using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.ProjectServices;
 using PSSR.DataLayer.EfClasses.Projects;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.Projects;
-using PSSR.ServiceLayer.PersonService;
 using PSSR.ServiceLayer.ProjectServices;
 using PSSR.ServiceLayer.ProjectServices.Concrete;
-using PSSR.ServiceLayer.Utils;
 
 namespace PSSR.API.Controllers.Admins
 {

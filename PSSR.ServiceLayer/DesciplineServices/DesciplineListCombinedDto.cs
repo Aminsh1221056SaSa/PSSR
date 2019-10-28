@@ -1,4 +1,5 @@
-﻿using PSSR.ServiceLayer.DesciplineServices.Concrete;
+﻿using PSSR.Common.DesciplineServices;
+using PSSR.ServiceLayer.DesciplineServices.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Text;

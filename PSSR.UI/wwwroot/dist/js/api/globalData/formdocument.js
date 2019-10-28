@@ -1,43 +1,62 @@
 ﻿
-var descipline = descipline || (function () {
+var formdocument = formdocument || (function () {
 
     return {
-        init: function () {
-            initialization();
+        init: function (enumDefinetion) {
+            initialization(enumDefinetion);
         },
-        getDesciplineList: function () {
-            getDesciplineList()
+        getFormDictionaryList: function () {
+            getFormDictionaryList()
         },
-        getDescipline: function (id) {
-            return getDescipline(id);
+        getFormDictionary: function (id) {
+            return getFormDictionary(id);
         },
         setCurrentIndex: function (index) {
             setCurrentIndex(index);
         },
-        removeDescipline: function (id) {
-            removeDescipline(id);
+        removeFormDictionary: function (id) {
+            removeFormDictionary(id);
         }
     };
-
+    var _enumDefine = null;
     var _table = null;
     var _cIndex = 0;
     function setCurrentIndex(index) {
         _cIndex = index;
     }
 
-    function initialization() {
+    function initialization(enumDefinetion) {
+        _enumDefine = enumDefinetion;
         if (_table) {
             _table.clear().draw();
             _table.destroy();
         }
 
-        $("form[name='desciplineForm']").validate({
+        $("form[name='formdictionaryForm']").validate({
             // Specify validation rules
             rules: {
-                desciplinename: "required",
+                formdicFile: "required",
+                formdicCode: "required",
+                formdicType: "required",
+                formdicWorkpackageId: "required",
+                formdicPriority: {
+                    required: true,
+                    number: true
+                },
+                formdicMH: {
+                    required: true,
+                    number: true
+                },
+                formdicDescipline:"required"
             },
             messages: {
-                desciplinename: "Please enter Descipline Name",
+                formdicFile: "Please select a Document",
+                formdicCode: "Please enter form code",
+                formdicType: "Please select a type",
+                formdicWorkpackageId: "Please select a workpackage",
+                formdicPriority: { required: "Please Enter a priority", number: "Please enter numbers Only" },
+                formdicMH: { required: "Please Enter a Man Hours", number: "Please enter numbers Only" },
+                formdicDescipline: "Please select at least one descipline",
             },
             errorElement: "em",
             errorPlacement: function (error, element) {
@@ -59,19 +78,44 @@ var descipline = descipline || (function () {
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
-                var name = $('input#desciplinename').val();
-                var description = $('input#desciplineDescription').val();
-                createdescipline(name, description);
+                var formData = new FormData();
+                formData.append('file', $('#formdicFile')[0].files[0]);
+                var code = $('input#formdicCode').val();
+                var type = $('select#formdicType').val();
+                var workp = $('select#formdicWorkpackageId').val();
+                var priority = $('input#formdicPriority').val();
+                var mh = $('input#formdicMH').val();
+                var descipliens = $("select#formdicDescipline").select2("val");
+                var description = $('input#formdicDescription').val();
+                createformDictionary(formData, code, type, workp, priority, mh, descipliens, description);
             }
         });
 
-        $("form[name='desciplineEditForm']").validate({
+        $("form[name='formDocumentEditForm']").validate({
             // Specify validation rules
             rules: {
-                desciplinename: "required",
+                formdicFile: "required",
+                formdicCode: "required",
+                formdicType: "required",
+                formdicWorkpackageId: "required",
+                formdicPriority: {
+                    required: true,
+                    number: true
+                },
+                formdicMH: {
+                    required: true,
+                    number: true
+                },
+                formdicDescipline: "required"
             },
             messages: {
-                desciplinename: "Please enter Descipline Name"
+                formdicFile: "Please select a Document",
+                formdicCode: "Please enter form code",
+                formdicType: "Please select a type",
+                formdicWorkpackageId: "Please select a workpackage",
+                formdicPriority: { required: "Please Enter a priority", number: "Please enter numbers Only" },
+                formdicMH: { required: "Please Enter a Man Hours", number: "Please enter numbers Only" },
+                formdicDescipline: "Please select at least one descipline",
             },
             errorElement: "em",
             errorPlacement: function (error, element) {
@@ -93,29 +137,31 @@ var descipline = descipline || (function () {
             // Make sure the form is submitted to the destination defined
             // in the "action" attribute of the form when valid
             submitHandler: function (form) {
-                var name = $('input#editdesciplinename').val();
-                var description = $('input#editdesciplineDescription').val();
-                var id = $('#current-desciplineId').val();
-                editdescipline(name, description, id);
+                var name = $('input#editformDictionaryname').val();
+                var description = $('input#editformDictionaryDescription').val();
+                var id = $('#current-formDictionaryId').val();
+                editformDictionary(name, description, id);
             }
         });
     }
 
-    function getDesciplineList() {
-        var content = $('#descipline-content');
+    function getFormDictionaryList() {
+        var content = $('#formDictionary-content');
         content.empty();
         $.ajax({
             type: "Get",
-            url: "/APSE/Descipline/getDesciplines",
+            url: "/APSE/FormDictionary/GetFormDocuments",
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
                 $.each(data, function (i, val) {
-                    var name = $("<td>" + val.title + "</td>");
-                    var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-desciplineModal' data-id='" + val.id + "' class='edit-descipline btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
-                    var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-descipline btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
+                    var name = $("<td>" + val.code + "</td>");
+                    var type = $("<td>" + _enumDefine.getFormDocumentType(val.type) + "</td>");
+                    var workPackage = $("<td>" + val.wrokPackageName + "</td>");
+                    var editBtn = $("<td><button  data-toggle='modal' data-target='#edit-formDictionaryModal' data-id='" + val.id + "' class='edit-formDictionary btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>");
+                    var deleteBtn = $("<td><button data-id='" + val.id + "' class='delete-formDictionary btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button></td>");
                     var row = $('<tr></tr>');
-                    row.append(name).append(editBtn).append(deleteBtn);
+                    row.append(name).append(type).append(workPackage).append(editBtn).append(deleteBtn);
                     content.append(row);
                 });
                 _table = tableinit();
@@ -126,10 +172,10 @@ var descipline = descipline || (function () {
         })
     }
 
-    function getDescipline(id) {
+    function getFormDictionary(id) {
         return $.ajax({
             type: "Get",
-            url: '/APSE/Descipline/getDescipline/' + id,
+            url: '/APSE/FormDictionary/getFormDictionary/' + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -141,30 +187,39 @@ var descipline = descipline || (function () {
         });
     }
 
-    function createdescipline(name,description) {
-
+    function createformDictionary(formData, code, type, workp, priority, mh, descipliens, description)
+    {
         var model =
         {
-            'Name': name, 'Description': description
+            'Description': description, 'Code': code, 'Type': type, 'WorkPackageId': workp,
+            'Priority': priority, 'Mh': mh, 'AvailableDesciplines': descipliens
         };
+
+        formData.append('jsonString', JSON.stringify(model));
+        var sType = _enumDefine.getFormDocumentType(parseInt(type));
+        var workpackageName = $('select#formdicWorkpackageId').text();
+
         $.ajax({
             type: "Post",
-            url: "/APSE/Descipline/CreateDescipline",
-            data: JSON.stringify(model),
-            contentType: 'application/json; charset=utf-8',
-            dataType: "json",
+            url: "/APSE/FormDictionary/CreateFormDocument",
+            data: formData,
+            processData: false,
+            contentType: false,
             success: function (data, status, jqXHR) {
-                if (data.key == 200) {
+                var gdata = JSON.parse(data);
+                if (gdata.key == 200) {
                     if (_table) {
                         _table.row.add([
                             name,
-                            "<button  data-toggle='modal' data-target='#edit-desciplineModal' data-id='" + data.subject + "' class='edit-descipline btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
-                            "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-descipline btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
+                            sType,
+                            workpackageName,
+                            "<button  data-toggle='modal' data-target='#edit-formDictionaryModal' data-id='" + data.subject + "' class='edit-formDictionary btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
+                            "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-formDictionary btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
                         ]).draw(false);
                     }
                 }
                 else {
-                    alert(data.value);
+                    alert(gdata.value);
                 }
             },
             error: function (jqXHR, status) {
@@ -173,14 +228,14 @@ var descipline = descipline || (function () {
         });
     }
 
-    function editdescipline(name, description, id) {
+    function editformDictionary(name, description, id) {
         var model =
         {
             'Name': name, 'Description': description
         };
         $.ajax({
             type: "PUT",
-            url: "/APSE/Descipline/UpdateDescipline/" + id,
+            url: "/APSE/FormDictionary/UpdateFormDictionary/" + id,
             data: JSON.stringify(model),
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
@@ -189,10 +244,10 @@ var descipline = descipline || (function () {
                     if (_table) {
                         _table.row(':eq(' + _cIndex + ')').data([
                             name,
-                            "<button  data-toggle='modal' data-target='#edit-desciplineModal' data-id='" + data.subject + "' class='edit-descipline btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
-                            "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-descipline btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
+                            "<button  data-toggle='modal' data-target='#edit-formDictionaryModal' data-id='" + data.subject + "' class='edit-formDictionary btn btn-indigo btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-edit'></i></button></td>",
+                            "<button  data-toggle='modal' data-id='" + data.subject + "' class='delete-formDictionary btn  btn-danger btn-icon' style='height:28px;min-height:28px'><i style='line-height:0.4;color: #FFF;' class='typcn typcn-delete'></i></button>"
                         ]);
-                        $('#edit-desciplineModal').modal('toggle');
+                        $('#edit-formDictionaryModal').modal('toggle');
                     }
                 }
                 else {
@@ -205,10 +260,10 @@ var descipline = descipline || (function () {
         });
     }
 
-    function removeDescipline(id) {
+    function removeFormDictionary(id) {
         $.ajax({
             type: "Delete",
-            url: "/APSE/Descipline/DeleteDescipline/" + id,
+            url: "/APSE/FormDictionary/DeleteFormDictionary/" + id,
             contentType: 'application/json; charset=utf-8',
             dataType: "json",
             success: function (data, status, jqXHR) {
@@ -229,7 +284,7 @@ var descipline = descipline || (function () {
 
     function tableinit() {
         var hh = window.innerHeight * 0.45;
-        var table = $('#desciplineLst').DataTable({
+        var table = $('#formDictionaryLst').DataTable({
             responsive: true,
             FixedHeader: true,
             scrollY: hh + "px",

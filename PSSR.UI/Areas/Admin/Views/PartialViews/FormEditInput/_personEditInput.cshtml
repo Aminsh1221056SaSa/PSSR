@@ -1,0 +1,37 @@
+﻿<div class="card card-body">
+    <h5 class="card-title mg-b-20"></h5>
+    <form name="personEditForm" method="post" class="form-horizontal" action="">
+        <input type="hidden" id="current-personId" />
+        <div class="container">
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editprojects">Projects</label>
+                <div class="pos-relative">
+                    <select class="form-control select2" multiple="multiple" id="editprojects" name="editprojects"></select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editfirstName">First Name</label>
+                <input type="text" class="form-control" name="editfirstName" id="editfirstName">
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editlastName">Last Name</label>
+                <input type="text" class="form-control" name="editlastName" id="editlastName">
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editnationalId">National Code</label>
+                <div class="pos-relative">
+                    <input type="text" class="form-control pd-r-80" name="editnationalId" id="editnationalId">
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <label class="az-content-label tx-11 tx-medium tx-gray-600" for="editmobileNumber">Mobile Number</label>
+                <div class="pos-relative">
+                    <input type="text" class="form-control pd-r-80" name="editmobileNumber" id="editmobileNumber">
+                </div>
+            </div><!-- form-group -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-indigo">Save changes</button>
+            </div>
+        </div>
+    </form>
+</div>

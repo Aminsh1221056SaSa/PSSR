@@ -4,12 +4,12 @@
     Layout = "~/Views/Shared/_CustomLayout.cshtml";
 
 
-    List<SelectListItem> roles = new List<SelectListItem>() ;
+    List<SelectListItem> roles = new List<SelectListItem>();
 
-    foreach(var r in (ViewBag.Roles as List<PSSR.UserSecurity.Models.Role>))
+    foreach (var r in (ViewBag.Roles as List<PSSR.UserSecurity.Models.Role>))
     {
         var s = new SelectListItem { Text = r.Name, Value = r.Id };
-        if(Model.SelectedRoles.Any(v=>v==r.Name))
+        if (Model.SelectedRoles.Any(v => v == r.Name))
         {
             s.Selected = true;
         }
@@ -18,12 +18,12 @@
     List<SelectListItem> parents = new List<SelectListItem>();
     parents.Add(new SelectListItem
     {
-        Text="...Select Parent...",
-        Value="-1",
-         Disabled=true
+        Text = "...Select Parent...",
+        Value = "-1",
+        Disabled = true
     });
     var prs = ViewBag.Parents as List<PSSR.UserSecurity.Models.NavigationMenuType>;
-    foreach(var x in prs)
+    foreach (var x in prs)
     {
         if (x.Id == Model.ParentId)
         {
@@ -37,75 +37,76 @@
     }
 }
 
-    <div class="col-lg-12 grid-margin stretch-card">
-        <div class="card">
-            <div class="card-body">
-                <h4 class="card-title">Edit Menu Item</h4>
-                <div class="table-responsive">
+<div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Edit Menu Item</h4>
+            <div class="table-responsive">
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <form asp-action="EditMenu">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="ClientName" />
                     <div asp-validation-summary="All" class="text-danger"></div>
-                    <form asp-action="EditMenu">
-                        <input type="hidden" asp-for="Id" />
-                        <div asp-validation-summary="All" class="text-danger"></div>
-                       <div class="container">
-                           <div class="row">
-                               <div class="col-md-6">
-                                   <div class="form-group">
-                                       <label class="control-label">Display Name</label>
-                                       <input asp-for="DisplayName" class="form-control" />
-                                       <span asp-validation-for="DisplayName" class="text-danger"></span>
-                                   </div>
-                                   <div class="form-group">
-                                       <label class="control-label">Font awesome Icon</label>
-                                       <input asp-for="MaterialIcon" class="form-control" />
-                                       <span asp-validation-for="MaterialIcon" class="text-danger"></span>
-                                   </div>
-                                   <div class="form-group">
-                                       <label asp-for="Link" class="control-label"></label>
-                                       <input asp-for="Link" class="form-control" />
-                                       <span asp-validation-for="Link" class="text-danger"></span>
-                                   </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="control-label">Display Name</label>
+                                    <input asp-for="DisplayName" class="form-control" />
+                                    <span asp-validation-for="DisplayName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">Font awesome Icon</label>
+                                    <input asp-for="MaterialIcon" class="form-control" />
+                                    <span asp-validation-for="MaterialIcon" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Link" class="control-label"></label>
+                                    <input asp-for="Link" class="form-control" />
+                                    <span asp-validation-for="Link" class="text-danger"></span>
+                                </div>
 
-                                   <div class="form-group">
-                                       <label asp-for="Sequence" class="control-label"></label>
-                                       <input asp-for="Sequence" class="form-control" />
-                                       <span asp-validation-for="Sequence" class="text-danger"></span>
-                                   </div>
+                                <div class="form-group">
+                                    <label asp-for="Sequence" class="control-label"></label>
+                                    <input asp-for="Sequence" class="form-control" />
+                                    <span asp-validation-for="Sequence" class="text-danger"></span>
+                                </div>
 
-                                   <div class="form-group">
-                                       <input type="submit" value="Edit" class="btn btn-warning" />
-                                       <a class="btn btn-info" asp-action="Index">Back to List</a>
-                                   </div>
-                               </div>
-                               <div class="col-md-6">
-                                   <div class="form-group">
-                                       <div class="form-check">
-                                           <label class="form-check-label">
-                                               <input asp-for="IsNested" /> Having Child
-                                               <i class="input-helper"></i>
-                                           </label>
-                                       </div>
-                                   </div>
-                                   <div class="form-group">
-                                       <label>Select Parent</label>
-                                       <select asp-for="ParentId" asp-items="parents" class="form-control select2"
-                                               data-placeholder="Select parent" id="select-parent"
-                                               style="width: 100%;color:black"></select>
-                                       <span asp-validation-for="ParentId" class="text-danger"></span>
-                                   </div>
+                                <div class="form-group">
+                                    <input type="submit" value="Edit" class="btn btn-warning" />
+                                    <a class="btn btn-info" asp-route-clientName="@Model.ClientName" asp-action="SettingClient" asp-controller="Client">Back to List</a>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="form-check">
+                                        <label class="form-check-label">
+                                            <input asp-for="IsNested" /> Having Child
+                                            <i class="input-helper"></i>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>Select Parent</label>
+                                    <select asp-for="ParentId" asp-items="parents" class="form-control select2"
+                                            data-placeholder="Select parent" id="select-parent"
+                                            style="width: 100%;color:black"></select>
+                                    <span asp-validation-for="ParentId" class="text-danger"></span>
+                                </div>
 
-                                   <div class="form-group">
-                                       <label>Select Roles</label>
-                                       <select name="SelectedRoles" asp-items="roles" class="form-control select2"
-                                               id="select-role" multiple="multiple"
-                                               style="width: 100%;color:black"></select>
-                                   </div>
-                               </div>
-                           </div>
-                       </div>
-                       
-                    </form>
-                </div>
+                                <div class="form-group">
+                                    <label>Select Roles</label>
+                                    <select name="SelectedRoles" asp-items="roles" class="form-control select2"
+                                            id="select-role" multiple="multiple"
+                                            style="width: 100%;color:black"></select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
             </div>
         </div>
     </div>
+</div>
 

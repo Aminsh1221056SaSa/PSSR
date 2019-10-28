@@ -3,10 +3,11 @@ using BskaGenericCoreLib;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Web.Http;
 using PSSR.API.Helper;
+using PSSR.Common.CommonModels.Dtos;
+using PSSR.Common.WorkPackageSteps;
 using PSSR.DataLayer.EfClasses.Management;
 using PSSR.DataLayer.EfCode;
 using PSSR.Logic.WorkPackageSteps;
-using PSSR.ServiceLayer.Utils;
 using PSSR.ServiceLayer.WorkPackageSteps;
 using PSSR.ServiceLayer.WorkPackageSteps.Concrete;
 using System;
@@ -16,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace PSSR.API.Controllers.GlobalData
 {
-    [ApiVersion("1.0")]
+    [ApiVersion("2.0")]
     public class WorkPackageStepController : BaseAdminController
     {
         private readonly EfCoreContext _context;

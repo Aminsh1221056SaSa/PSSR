@@ -1,4 +1,5 @@
-﻿using PSSR.ServiceLayer.ContractorServices.Concrete;
+﻿using PSSR.Common.ContractorServices;
+using PSSR.ServiceLayer.ContractorServices.Concrete;
 using System.Collections.Generic;
 
 namespace PSSR.ServiceLayer.ContractorServices
